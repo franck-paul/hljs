@@ -1,0 +1,36 @@
+pre.hljs-wrapper, pre.hljs {
+  font-size: 1em;
+}
+pre.hljs-wrapper {
+  padding: 0;
+}
+pre.hljs, pre.hljs code, code.hljs {
+  padding:  0 .5em;
+  white-space: pre;
+}
+pre.hljs code {
+  background-color: inherit;
+  color: inherit;
+  font-size: 1em;
+}
+pre code.hljs {
+  font-size: 1em;
+}
+
+/* Line numbers */
+pre .hljs-line-number {
+  display: block;
+  float: left;
+  margin: 0 1em 0 -1em;
+  border-right: 1px solid;
+  text-align: right;
+  opacity: .6;
+}
+pre .hljs-line-number span {
+  display: block;
+  padding: 0 .5em 0 1em;
+}
+pre .hljs-cl {
+  display: block;
+  clear: both;
+}
