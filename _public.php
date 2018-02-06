@@ -41,10 +41,9 @@ class hljsPublicBehaviors
                     $css = $core->blog->getPF('hljs/js/lib/css/' . $theme . '.css');
                 }
             }
-            if (!$core->blog->settings->hljs->hide_gutter) {
-                echo dcUtils::cssLoad($core->blog->getPF('hljs/css/public.css'));
-            }
-            echo dcUtils::cssLoad($css);
+            echo
+                dcUtils::cssLoad($core->blog->getPF('hljs/css/public.css')).
+                dcUtils::cssLoad($css);
         }
     }
 

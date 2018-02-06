@@ -1,9 +1,9 @@
 // Set defaults
 var hljs_path = hljs_path || ''; // Path URL of js
 var hljs_mode = hljs_mode || ''; // '' → std, 'mini', 'common', 'full'
-var hljs_show_line = hljs_show_line || true; // Show/Hide line numbers
+var hljs_show_line = hljs_show_line && true; // Show/Hide line numbers
 var hljs_use_ww = hljs_use_ww || false; // Use or not web workers
-var hljs_yash = hljs_yash || true; // Yash compatibility
+var hljs_yash = hljs_yash && true; // Yash compatibility
 
 // Test browser support of web workers
 var hljs_ww = !!window.Worker;
@@ -34,14 +34,13 @@ addEventListener('load', function() {
 
     // Get DOM element
     var elt = $elt[0];
-    // Get DOM parent of element
-//    var $wrp = (elt.tagName == 'CODE' ? $elt.parent() : $elt);
 
     // Utility function to display line numbers
     var showLineNumber = function(e) {
-      e.innerHTML = '<span class="hljs-line-number"></span>' +
-        (e.tagName == 'CODE' ? '' : '\n') +
-        e.innerHTML + '<span class="hljs-cl"></span>';
+      e.innerHTML =
+        '<span class="hljs-line-number"></span>' +
+        '\n' + e.innerHTML + '\n' +
+        '<span class="hljs-cl"></span>';
       var num = e.innerHTML.split(/\n/).length;
       for (var j = 0; j < num; j++) {
         var line_num = e.getElementsByTagName('span')[0];
@@ -52,10 +51,12 @@ addEventListener('load', function() {
     // Ensure that hljs class is set
     $elt.addClass('hljs');
     // Add wrapper class to parent
-//    $wrp.addClass('hljs-wrapper');
     if (elt.tagName == 'CODE') {
       $elt.parent().addClass('hljs-wrapper');
     }
+
+    // Trim content from newlines
+    elt.textContent = elt.textContent.trim();
 
     // Run engine
     if (hljs_ww && hljs_use_ww) {
@@ -77,7 +78,7 @@ addEventListener('load', function() {
         }
       }
       // Create web worker
-      var worker = new Worker(hljs_path + 'js/worker.js');
+      var worker = new Worker(hljs_path + 'worker.js');
       // Cope with web worker returned message
       worker.onmessage = function(event) {
         // Web worker send result

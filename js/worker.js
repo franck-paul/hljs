@@ -4,7 +4,7 @@ self.onmessage = function(event) {
   var syntax = event.data[3] || ''; // Syntax if specified in block
 
   // Load highlight.js script → loaded in hljs object
-  self.importScripts(path + 'lib/js/highlight' + mode + '.pack.js');
+  self.importScripts(path + 'lib/js/highlight' + (mode ? '-' + mode : '') + '.pack.js');
 
   // Configure highlight.js script
   self.hljs.configure({
@@ -21,6 +21,6 @@ self.onmessage = function(event) {
   // Return language detected (or set) and result
   self.postMessage({
     language: result.language, // Language detected
-    value: result.value // HTML Result
+    result: result.value // HTML Result
   });
 }

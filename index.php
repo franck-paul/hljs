@@ -164,8 +164,41 @@ foreach ($themes_list as $theme_id) {
     </p>
 
     <h3><?php echo __('Presentation'); ?></h3>
-    <p class="field"><label for="theme" class="classic"><?php echo __('Theme:'); ?> </label>
-      <?php echo form::combo('theme', $combo_theme, $theme); ?>
+    <div class="two-cols clearfix">
+      <div class="col">
+        <p class="field"><label for="theme" class="classic"><?php echo __('Theme:'); ?> </label>
+          <?php echo form::combo('theme', $combo_theme, $theme); ?>
+        </p>
+        <p class="field"><label for="mode" class="classic"><?php echo __('Set of languages:'); ?> </label>
+          <?php echo form::combo('mode', $combo_mode, $mode); ?>
+        </p>
+      </div>
+      <div class="col">
+<pre><code id="hljs-sample">function findSequence(goal) {
+  function find(start, history) {
+    if (start == goal)
+      return history;
+    else if (start > goal)
+      return null;
+    else
+      return find(start + 5, "(" + history + " + 5)") ||
+             find(start * 3, "(" + history + " * 3)");
+  }
+  return find(1, "1");
+}</code></pre>
+      </div>
+    </div>
+    <h3><?php echo __('Options'); ?></h3>
+    <p>
+      <?php echo form::checkbox('hide_gutter', 1, $hide_gutter); ?>
+      <label class="classic" for="hide_gutter">&nbsp;<?php echo __('Hide gutter with line numbers'); ?></label>
+    </p>
+    <p>
+      <?php echo form::checkbox('web_worker', 1, $web_worker); ?>
+      <label class="classic" for="web_worker">&nbsp;<?php echo __('Use web workers'); ?></label>
+    </p>
+    <p class="info">
+      <?php echo __('Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory.'); ?>
     </p>
     <p class="field">
       <label for="custom_css" class="classic"><?php echo __('Use custom CSS:'); ?> </label>
@@ -175,34 +208,20 @@ foreach ($themes_list as $theme_id) {
       <?php echo __('You can use a custom CSS by providing its location.'); ?><br />
       <?php echo __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'); ?>
     </p>
-    <p>
-      <?php echo form::checkbox('hide_gutter', 1, $hide_gutter); ?>
-      <label class="classic" for="hide_gutter">&nbsp;<?php echo __('Hide gutter with line numbers'); ?></label>
-    </p>
-    <h3><?php echo __('Options'); ?></h3>
-    <p class="field"><label for="mode" class="classic"><?php echo __('Set of languages:'); ?> </label>
-      <?php echo form::combo('mode', $combo_mode, $mode); ?>
-    </p>
-    <p>
-      <?php echo form::checkbox('web_worker', 1, $web_worker); ?>
-      <label class="classic" for="web_worker">&nbsp;<?php echo __('Use web workers'); ?></label>
-    </p>
-    <p class="info">
-      <?php echo __('Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory.'); ?>
-    </p>
+    <h3><?php echo __('Compatibiliy'); ?></h3>
     <p>
       <?php echo form::checkbox('yash', 1, $yash); ?>
       <label class="classic" for="yash">&nbsp;<?php echo __('Yash compatibility mode'); ?></label>
     </p>
     <p class="info">
-      <?php echo __('Will be applied on future edition of posts containing YASH macros (///yash …///).'); ?><br /><?php echo __('All YASH languages is not supported by Code highlight (see documentation).'); ?>
+      <?php echo __('Will be applied on future edition of posts containing YASH macros (///yash …///).'); ?><br /><?php echo __('Some of YASH languages are not supported by Code highlight (see documentation).'); ?>
     </p>
     <p>
       <?php echo form::checkbox('syntaxehl', 1, $syntaxehl); ?>
       <label class="classic" for="syntaxehl">&nbsp;<?php echo __('SyntaxeHL compatibility mode'); ?></label>
     </p>
     <p class="info">
-      <?php echo __('Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///).'); ?><br /><?php echo __('All SyntaxeHL languages is not supported by Code highlight (see documentation).'); ?>
+      <?php echo __('Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///).'); ?><br /><?php echo __('All SyntaxeHL languages are not supported by Code highlight (see documentation).'); ?>
     </p>
     <p><input type="hidden" name="p" value="hljs" />
       <?php echo $core->formNonce(); ?>

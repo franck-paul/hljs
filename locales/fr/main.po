@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 18:59+0100\n"
+"POT-Creation-Date: 2018-02-06 19:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,3 +24,158 @@ msgstr "highlight.js pour Dotclear"
 
 msgid "Highlighted Code"
 msgstr "Coloration syntaxique"
+
+msgid "Plain Text"
+msgstr ""
+
+msgid "AppleScript"
+msgstr ""
+
+msgid "ActionScript3"
+msgstr ""
+
+msgid "Bash/shell"
+msgstr ""
+
+msgid "ColdFusion"
+msgstr ""
+
+msgid "C#"
+msgstr ""
+
+msgid "C/C++"
+msgstr ""
+
+msgid "CSS"
+msgstr ""
+
+msgid "Delphi"
+msgstr ""
+
+msgid "Diff/Patch"
+msgstr ""
+
+msgid "Erlang"
+msgstr ""
+
+msgid "Groovy"
+msgstr ""
+
+msgid "Haxe"
+msgstr ""
+
+msgid "Javascript/JSON"
+msgstr ""
+
+msgid "Java"
+msgstr ""
+
+msgid "JavaFX"
+msgstr ""
+
+msgid "Perl"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "PowerShell"
+msgstr ""
+
+msgid "Python"
+msgstr ""
+
+msgid "Ruby"
+msgstr ""
+
+msgid "SASS"
+msgstr ""
+
+msgid "Scala"
+msgstr ""
+
+msgid "SQL"
+msgstr ""
+
+msgid "Tap"
+msgstr ""
+
+msgid "TypeScript"
+msgstr ""
+
+msgid "Visual Basic"
+msgstr ""
+
+msgid "XML/XSLT/XHTML/HTML"
+msgstr ""
+
+msgid "Yaml"
+msgstr ""
+
+#, fuzzy
+msgid "Code highlight - Syntax Selector"
+msgstr "Coloration syntaxique - Sélecteur de syntaxe"
+
+msgid "Select the primary syntax of your code snippet."
+msgstr "Sélectionnez la syntaxe principale de votre extrait de code."
+
+msgid "Default (46 languages, 86 Kb)"
+msgstr "Défaut (46 syntaxes, 86 Ko)"
+
+msgid "Minimum (23 languages, 45 Kb)"
+msgstr "Minimum (23 syntaxes, 45 Ko)"
+
+msgid "Common (92 languages, 240 Kb)"
+msgstr "Commun (92 syntaxes, 240 Kb)"
+
+msgid "Full (176 languages, 515 Kb)"
+msgstr "Complet (176 syntaxes, 515 Kb)"
+
+msgid "Enable Code highlight"
+msgstr "Activer la coloration syntaxique du code"
+
+msgid "Presentation"
+msgstr "Présentation"
+
+msgid "Set of languages:"
+msgstr "Jeu de syntaxes"
+
+msgid "Hide gutter with line numbers"
+msgstr "Masquer la colonne des numéros de ligne"
+
+msgid "Use custom CSS:"
+msgstr "CSS personnalisée :"
+
+msgid "You can use a custom CSS by providing its location."
+msgstr "Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
+
+msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
+msgstr "Une adresse commençant par un / est considérée comme absolue, sinon elle est traitée comme relative à l'adresse du thème actuellement en usage sur le blog."
+
+msgid "Use web workers"
+msgstr "Utiliser les 'web workers'"
+
+msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
+msgstr "Utiliser les 'web workers' si le navigateur le supporte ce qui fournit un traitement acceléré des codes mais peut consommer beaucoup plus de mémoire."
+
+#, fuzzy
+msgid "Compatibiliy"
+msgstr "Modes de compatibilité"
+
+msgid "Yash compatibility mode"
+msgstr "Activer la compatibilité avec Yash"
+
+msgid "Some of YASH languages are not supported by Code highlight (see documentation)."
+msgstr "Certains des langages proposés par Yash ne sont pas supportés (voir la documentation)."
+
+msgid "Will be applied on future edition of posts containing YASH macros (///yash …///)."
+msgstr "Sera appliqué aux prochaines éditions des billets contenant des macros SyntaxeHL (///yash …///)."
+
+msgid "SyntaxeHL compatibility mode"
+msgstr "Activer la compatibilité avec SyntaxeHL"
+
+msgid "All SyntaxeHL languages are not supported by Code highlight (see documentation)."
+msgstr "Tous les langages proposés par SyntaxeHL ne sont pas supportés (voir la documentation)."
+
+msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
+msgstr "Sera appliqué aux prochaines éditions des billets contenant des macros SyntaxeHL (///[langage]…///)."
