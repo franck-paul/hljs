@@ -12,6 +12,8 @@
 
 if (!defined('DC_CONTEXT_ADMIN')) {exit;}
 
+$plugin_version = $core->getVersion('hljs');
+
 // Getting current parameters if any (get global parameters if not)
 $core->blog->settings->addNamespace('hljs');
 $active      = (boolean) $core->blog->settings->hljs->active;
@@ -25,53 +27,32 @@ $syntaxehl   = (boolean) $core->blog->settings->hljs->syntaxehl;
 
 if (!empty($_REQUEST['popup'])) {
     $hljs_brushes = array(
-        'plain'       => __('Plain Text'),
-        'applescript' => __('AppleScript'),
-        'as3'         => __('ActionScript3'),
-        'bash'        => __('Bash/shell'),
-        'cf'          => __('ColdFusion'),
-        'csharp'      => __('C#'),
-        'cpp'         => __('C/C++'),
-        'css'         => __('CSS'),
-        'delphi'      => __('Delphi'),
-        'diff'        => __('Diff/Patch'),
-        'erl'         => __('Erlang'),
-        'groovy'      => __('Groovy'),
-        'haxe'        => __('Haxe'),
-        'js'          => __('Javascript/JSON'),
-        'java'        => __('Java'),
-        'jfx'         => __('JavaFX'),
-        'pl'          => __('Perl'),
-        'php'         => __('PHP'),
-        'ps'          => __('PowerShell'),
-        'python'      => __('Python'),
-        'ruby'        => __('Ruby'),
-        'sass'        => __('SASS'),
-        'scala'       => __('Scala'),
-        'sql'         => __('SQL'),
-        'tap'         => __('Tap'),
-        'ts'          => __('TypeScript'),
-        'vb'          => __('Visual Basic'),
-        'xml'         => __('XML/XSLT/XHTML/HTML'),
-        'yaml'        => __('Yaml')
+        __('Automatic')  => '',
+        __('Plain Text') => 'plain',
+        // Index = label
+        // Value = language code
     );
 
     echo
     '<html>' .
-    '<head>' .
-    '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
-    dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $core->getVersion('hljs')) .
-    '</head>' .
-    '<body>' .
-    '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
-    '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
-    '<p><label>' . __('Select the primary syntax of your code snippet.') .
-    form::combo('syntax', array_flip($hljs_brushes)) . '</label></p>' .
-    '<p><button id="hljs-cancel">' . __('Cancel') . '</button> - ' .
-    '<button id="hljs-ok"><strong>' . __('Ok') . '</strong></button></p>' .
+      '<head>' .
+        '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
+        '<script>'.
+          'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";'.
+          'var hljs_mode = "' . $mode . '";'.
+        '</script>'.
+        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version) .
+      '</head>' .
+      '<body>' .
+        '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
+        '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
+          '<p><label>' . __('Select the primary syntax of your code snippet:') . ' '.
+            form::combo('syntax', $hljs_brushes) . '</label></p>' .
+          '<p><button id="hljs-cancel">' . __('Cancel') . '</button> - ' .
+            '<button id="hljs-ok"><strong>' . __('Ok') . '</strong></button></p>' .
         '</form>' .
-        '</body>' .
-        '</html>';
+      '</body>' .
+    '</html>';
     return;
 }
 
@@ -189,25 +170,25 @@ foreach ($themes_list as $theme_id) {
   return find(1, "1");
 }</code></pre>
         <?php
-echo dcPage::cssLoad(dcPage::getPF('hljs/css/public.css'));
-echo dcPage::cssLoad(dcPage::getPF('hljs/css/admin.css'));
-echo dcPage::cssLoad(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css'));
+echo dcPage::cssLoad(dcPage::getPF('hljs/css/public.css', $plugin_version));
+echo dcPage::cssLoad(dcPage::getPF('hljs/css/admin.css', $plugin_version));
+echo dcPage::cssLoad(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css', $plugin_version));
 ?>
         <script>
           <?php
-          echo 'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";';
-          echo 'var hljs_mode = "' . $mode . '";';
-          echo 'var hljs_current_mode = hljs_mode;';
-          echo 'var hljs_list = [];';
-          echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
-          echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
-          echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
-          echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
-          echo 'var hljs_previous_theme = hljs_theme;';
-          ?>
+echo 'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";';
+echo 'var hljs_mode = "' . $mode . '";';
+echo 'var hljs_current_mode = hljs_mode;';
+echo 'var hljs_list = [];';
+echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
+echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
+echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
+echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
+echo 'var hljs_previous_theme = hljs_theme;';
+?>
         </script>
-        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/public.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/admin.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/public.js', $plugin_version); ?>"></script>
+        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/admin.js', $plugin_version); ?>"></script>
       </div>
     </div>
     <h3><?php echo __('Options'); ?></h3>
