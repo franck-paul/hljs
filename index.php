@@ -27,10 +27,10 @@ $syntaxehl   = (boolean) $core->blog->settings->hljs->syntaxehl;
 
 if (!empty($_REQUEST['popup'])) {
     $hljs_brushes = array(
-        __('Automatic')  => '',
-        __('Plain Text') => 'plain',
         // Index = label
         // Value = language code
+        __('Automatic')  => '',
+        __('Plain Text') => 'plain',
     );
 
     echo

@@ -8,6 +8,7 @@ var hljs_yash = hljs_yash && true; // Yash compatibility
 // Test browser support of web workers
 var hljs_ww = !!window.Worker;
 
+// highlight.js script loader
 var hljsLoad = function() {
   if (!hljs_ww || !hljs_use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
@@ -21,6 +22,7 @@ var hljsLoad = function() {
   }
 }
 
+// highlight.js script runner
 var hljsRun = function() {
   if (!hljs_ww || !hljs_use_ww) {
     // Configure highlight.js script
