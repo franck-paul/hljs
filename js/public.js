@@ -8,19 +8,20 @@ var hljs_yash = hljs_yash && true; // Yash compatibility
 // Test browser support of web workers
 var hljs_ww = !!window.Worker;
 
-if (!hljs_ww || !hljs_use_ww) {
-  // Load highlight[-mode].js script → loaded in hljs object
-  var hljs_sc = document.createElement('script');
-  hljs_sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
-  hljs_sc.type = 'text/javascript';
-  if (typeof hljs_sc['async'] !== 'undefined') {
-    hljs_sc.async = true;
+var hljsLoad = function() {
+  if (!hljs_ww || !hljs_use_ww) {
+    // Load highlight[-mode].js script → loaded in hljs object
+    var hljs_sc = document.createElement('script');
+    hljs_sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
+    hljs_sc.type = 'text/javascript';
+    if (typeof hljs_sc['async'] !== 'undefined') {
+      hljs_sc.async = true;
+    }
+    document.getElementsByTagName('head')[0].appendChild(hljs_sc);
   }
-  document.getElementsByTagName('head')[0].appendChild(hljs_sc);
 }
 
-addEventListener('load', function() {
-
+var hljsRun = function() {
   if (!hljs_ww || !hljs_use_ww) {
     // Configure highlight.js script
     hljs.configure({
@@ -117,4 +118,9 @@ addEventListener('load', function() {
       }
     }
   });
+};
+
+hljsLoad();
+addEventListener('load', function() {
+  hljsRun();
 })
