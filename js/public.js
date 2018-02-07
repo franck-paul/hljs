@@ -8,6 +8,13 @@ var hljs_yash = hljs_yash && true; // Yash compatibility
 // Test browser support of web workers
 var hljs_ww = !!window.Worker;
 
+// Utility function: hljsAddClass()
+function hljsAddClass(element, classname) {
+  var currentClassList = (element.className || '').split(/\s+/);
+  currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
+  element.className = currentClassList.join(' ').trim();
+}
+
 // highlight.js script loader
 var hljsLoad = function() {
   if (!hljs_ww || !hljs_use_ww) {
@@ -32,11 +39,9 @@ var hljsRun = function() {
   }
 
   var sel = 'pre code' + (hljs_yash ? ', pre[class^="brush:"]' : '');
-  $(sel).each(function(i, block) {
-    var $elt = $(this);
+  var blocks = document.querySelectorAll(sel);
 
-    // Get DOM element
-    var elt = $elt[0];
+  blocks.forEach(function(block) {
 
     // Utility function to display line numbers
     var showLineNumber = function(e) {
@@ -52,20 +57,20 @@ var hljsRun = function() {
     };
 
     // Ensure that hljs class is set
-    $elt.addClass('hljs');
+    hljsAddClass(block, 'hljs');
     // Add wrapper class to parent
-    if (elt.tagName == 'CODE') {
-      $elt.parent().addClass('hljs-wrapper');
+    if (block.tagName == 'CODE') {
+      hljsAddClass(block.parentNode, 'hljs-wrapper');
     } else {
-      $elt.addClass('hljs-wrapper');
+      hljsAddClass(block, 'hljs-wrapper');
     }
     // Add no gutter class if necessary
     if (!hljs_show_line) {
-      $elt.addClass('hljs-no-gutter');
+      hljsAddClass(block, 'hljs-no-gutter');
     }
 
     // Trim content from newlines
-    elt.textContent = elt.textContent.trim();
+    block.textContent = block.textContent.trim();
 
     // Run engine
     if (hljs_ww && hljs_use_ww) {
@@ -91,14 +96,14 @@ var hljsRun = function() {
       // Cope with web worker returned message
       worker.onmessage = function(event) {
         // Web worker send result
-        elt.innerHTML = event.data.result;
-        $elt.addClass(event.data.language);
+        block.innerHTML = event.data.result;
+        hljsAddClass(block, event.data.language);
         if (hljs_show_line) {
-          showLineNumber(elt);
+          showLineNumber(block);
         }
       }
       // Run web worker
-      worker.postMessage([elt.textContent, hljs_path, hljs_mode, syntax]);
+      worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
     } else {
       // If YASH, keep brush if not plain or txt:
       // - Get syntax in <pre class="brush:syntax">
@@ -117,12 +122,12 @@ var hljsRun = function() {
           }
         }
         // Set class : will be used by highlight.js
-        $elt.addClass(syntax);
+        hljsAddClass(block, syntax);
       }
       // Run highlight.js
       hljs.highlightBlock(block);
       if (hljs_show_line) {
-        showLineNumber(elt);
+        showLineNumber(block);
       }
     }
   });
