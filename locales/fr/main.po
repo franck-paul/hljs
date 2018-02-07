@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-06 19:08+0100\n"
+"POT-Creation-Date: 2018-02-07 07:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,8 +140,17 @@ msgstr "Présentation"
 msgid "Set of languages:"
 msgstr "Jeu de syntaxes"
 
+msgid "List of languages:"
+msgstr "Liste des syntaxes :"
+
 msgid "Hide gutter with line numbers"
 msgstr "Masquer la colonne des numéros de ligne"
+
+msgid "Use web workers"
+msgstr "Utiliser les 'web workers'"
+
+msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
+msgstr "Utiliser les 'web workers' si le navigateur le supporte ce qui fournit un traitement acceléré des codes mais peut consommer beaucoup plus de mémoire."
 
 msgid "Use custom CSS:"
 msgstr "CSS personnalisée :"
@@ -152,13 +161,6 @@ msgstr "Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
 msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
 msgstr "Une adresse commençant par un / est considérée comme absolue, sinon elle est traitée comme relative à l'adresse du thème actuellement en usage sur le blog."
 
-msgid "Use web workers"
-msgstr "Utiliser les 'web workers'"
-
-msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
-msgstr "Utiliser les 'web workers' si le navigateur le supporte ce qui fournit un traitement acceléré des codes mais peut consommer beaucoup plus de mémoire."
-
-#, fuzzy
 msgid "Compatibiliy"
 msgstr "Modes de compatibilité"
 

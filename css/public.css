@@ -1,11 +1,8 @@
-pre.hljs-wrapper, pre.hljs {
-  font-size: 1em;
-}
 pre.hljs-wrapper {
   padding: 0;
 }
 pre.hljs, pre.hljs code, code.hljs {
-  padding:  0 .5em;
+  padding: 0 .5em;
   white-space: pre;
 }
 pre.hljs code {
@@ -16,7 +13,10 @@ pre.hljs code {
 pre code.hljs {
   font-size: 1em;
 }
-
+/* No line numbers */
+pre.hljs-no-gutter, code.hljs-no-gutter {
+    padding: .5em;
+}
 /* Line numbers */
 pre .hljs-line-number {
   display: block;

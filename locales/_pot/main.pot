@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-06 19:08+0100\n"
+"POT-Creation-Date: 2018-02-07 07:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,58 +177,62 @@ msgstr ""
 msgid "Presentation"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:170
+#: ../hg-plugins/hljs/index.php:172
 msgid "Set of languages:"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:176
+#: ../hg-plugins/hljs/index.php:175
+msgid "List of languages:"
+msgstr ""
+
+#: ../hg-plugins/hljs/index.php:222
 msgid "Hide gutter with line numbers"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:179
-msgid "Use custom CSS:"
-msgstr ""
-
-#: ../hg-plugins/hljs/index.php:183
-msgid "You can use a custom CSS by providing its location."
-msgstr ""
-
-#: ../hg-plugins/hljs/index.php:184
-msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
-msgstr ""
-
-#: ../hg-plugins/hljs/index.php:188
+#: ../hg-plugins/hljs/index.php:226
 msgid "Use web workers"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:191
+#: ../hg-plugins/hljs/index.php:229
 msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:193
+#: ../hg-plugins/hljs/index.php:232
+msgid "Use custom CSS:"
+msgstr ""
+
+#: ../hg-plugins/hljs/index.php:236
+msgid "You can use a custom CSS by providing its location."
+msgstr ""
+
+#: ../hg-plugins/hljs/index.php:237
+msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
+msgstr ""
+
+#: ../hg-plugins/hljs/index.php:239
 msgid "Compatibiliy"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:196
+#: ../hg-plugins/hljs/index.php:242
 msgid "Yash compatibility mode"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:199
+#: ../hg-plugins/hljs/index.php:245
 msgid "Some of YASH languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:199
+#: ../hg-plugins/hljs/index.php:245
 msgid "Will be applied on future edition of posts containing YASH macros (///yash …///)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:203
+#: ../hg-plugins/hljs/index.php:249
 msgid "SyntaxeHL compatibility mode"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:206
+#: ../hg-plugins/hljs/index.php:252
 msgid "All SyntaxeHL languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:206
+#: ../hg-plugins/hljs/index.php:252
 msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
 msgstr ""

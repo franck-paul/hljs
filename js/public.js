@@ -54,6 +54,12 @@ var hljsRun = function() {
     // Add wrapper class to parent
     if (elt.tagName == 'CODE') {
       $elt.parent().addClass('hljs-wrapper');
+    } else {
+      $elt.addClass('hljs-wrapper');
+    }
+    // Add no gutter class if necessary
+    if (!hljs_show_line) {
+      $elt.addClass('hljs-no-gutter');
     }
 
     // Trim content from newlines

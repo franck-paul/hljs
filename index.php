@@ -123,8 +123,8 @@ echo dcPage::breadcrumb(
 echo dcPage::notices();
 
 $combo_mode = array(
-    __('Default (46 languages, 86 Kb)') => '',
     __('Minimum (23 languages, 45 Kb)') => 'min',
+    __('Default (46 languages, 86 Kb)') => '',
     __('Common (92 languages, 240 Kb)') => 'common',
     __('Full (176 languages, 515 Kb)')  => 'full'
 );
@@ -170,7 +170,9 @@ foreach ($themes_list as $theme_id) {
           <?php echo form::combo('theme', $combo_theme, $theme, '', '', false, 'onchange="selectTheme()"'); ?>
         </p>
         <p class="field"><label for="mode" class="classic"><?php echo __('Set of languages:'); ?> </label>
-          <?php echo form::combo('mode', $combo_mode, $mode); ?>
+          <?php echo form::combo('mode', $combo_mode, $mode, '', '', false, 'onchange="selectMode()"'); ?>
+        </p>
+        <p class="info"><?php echo __('List of languages:'); ?><br /><span id="syntaxes"></span>
         </p>
       </div>
       <div class="col">
@@ -188,30 +190,24 @@ foreach ($themes_list as $theme_id) {
 }</code></pre>
         <?php
 echo dcPage::cssLoad(dcPage::getPF('hljs/css/public.css'));
+echo dcPage::cssLoad(dcPage::getPF('hljs/css/admin.css'));
 echo dcPage::cssLoad(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css'));
 ?>
         <script>
           <?php
-echo 'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";';
-echo 'var hljs_mode = "' . $mode . '";';
-echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
-echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
-echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
-echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
-echo 'var hljs_previous_theme = hljs_theme;';
-?>
+          echo 'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";';
+          echo 'var hljs_mode = "' . $mode . '";';
+          echo 'var hljs_current_mode = hljs_mode;';
+          echo 'var hljs_list = [];';
+          echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
+          echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
+          echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
+          echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
+          echo 'var hljs_previous_theme = hljs_theme;';
+          ?>
         </script>
         <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/public.js'); ?>"></script>
-        <script>
-          function selectTheme() {
-            var input = document.getElementById('theme');
-            var theme = input.options[input.selectedIndex].value;
-            if (theme == '') { theme = 'default' };
-            var $css = $('link[href^="' + hljs_path + 'lib%2Fcss%2F' + hljs_previous_theme + '.css"]');
-            $css.attr('href', hljs_path + 'lib%2Fcss%2F' + theme + '.css');
-            hljs_previous_theme = theme;
-          }
-        </script>
+        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/admin.js'); ?>"></script>
       </div>
     </div>
     <h3><?php echo __('Options'); ?></h3>
@@ -255,6 +251,5 @@ echo 'var hljs_previous_theme = hljs_theme;';
     </p>
   </form>
 </div>
-
 </body>
 </html>
