@@ -9,7 +9,7 @@ This plugin use the [highlight.js script](https://highlightjs.org/) from Ivan Sa
 
 It supports up to 176 [syntaxes](/user-guide/usage#available-syntaxes) and provides 79 different [themes](/user-guide/settings#presentation).
 
-!!! tip
+!!! info
     The plugin **do not depends on JQuery** to be used on public side on the blog.
 
 ## Example
@@ -65,6 +65,6 @@ Or directly from the administration plugins page of Dotclear
 
 The plugin **must** be activated before being used on your blog[^1]. See [user guide](user-guide/usage) for more information.
 
-[^1]: Go to the main page of the YASH plugin to activated it (Blog section of the Dotclear admin menu).
+[^1]: Go to the main page of the HLJS plugin to activated it (Blog section of the Dotclear admin menu).
 
 [ot-dl]: https://open-time.net/post/2013/02/08/Plugin-hljs-01-pour-Dotclear
