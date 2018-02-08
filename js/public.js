@@ -15,6 +15,15 @@ function hljsAddClass(element, classname) {
   element.className = currentClassList.join(' ').trim();
 }
 
+// Utility function: hljsDataLanguage()
+function hljsDataLanguage(element, syntax) {
+  if (syntax !== undefined && syntax !== 'undefined' &&
+    syntax !== 'plain' && syntax !== 'txt' && syntax !== 'txt') {
+    element.dataset.language = syntax;
+  }
+  return element.dataset.language;
+}
+
 // highlight.js script loader
 var hljsLoad = function() {
   if (!hljs_ww || !hljs_use_ww) {
@@ -97,7 +106,9 @@ var hljsRun = function() {
       worker.onmessage = function(event) {
         // Web worker send result
         block.innerHTML = event.data.result;
-        hljsAddClass(block, event.data.language);
+        var syntax = event.data.language;
+        hljsAddClass(block, syntax);
+        hljsDataLanguage(block, syntax);
         if (hljs_show_line) {
           showLineNumber(block);
         }
@@ -117,17 +128,37 @@ var hljsRun = function() {
         if (brush && brush.length == 2) {
           if (brush[1] != 'plain' && brush[1] != 'txt') {
             if (hljs.getLanguage(brush[1])) {
-              syntax = 'language-' + brush[1];
+              syntax = brush[1];
             }
           }
         }
         // Set class : will be used by highlight.js
         hljsAddClass(block, syntax);
+        hljsDataLanguage(block, syntax);
+      } else {
+        var cls = block.className;
+        var brush = cls.match(/\blanguage-(\w*)\b/);
+        if (brush && brush.length == 2) {
+          if (brush[1] != 'plain' && brush[1] != 'text') {
+            if (hljs.getLanguage(brush[1])) {
+              syntax = brush[1];
+            }
+          }
+        }
+        hljsDataLanguage(block, syntax);
       }
       // Run highlight.js
       hljs.highlightBlock(block);
       if (hljs_show_line) {
         showLineNumber(block);
+      }
+      if (hljsDataLanguage(block) === undefined) {
+        var cls = block.className.split(' ');
+        cls.forEach(function(syntax) {
+          if (hljs.getLanguage(syntax)) {
+            hljsDataLanguage(block, syntax);
+          }
+        });
       }
     }
   });
