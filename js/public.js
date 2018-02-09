@@ -50,7 +50,15 @@ var hljsRun = function() {
     });
   }
 
-  var sel = 'pre code' + (hljs_yash ? ', pre[class^="brush:"]' : '');
+  if (hljs_yash) {
+    // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
+    var yb = document.querySelectorAll('pre[class^="brush:"]');
+    yb.forEach(function(block) {
+      block.innerHTML = '<code class="' + block.className + '">' + block.innerHTML.trim() + '</code>';
+    });
+  }
+
+  var sel = 'pre code';
   var blocks = document.querySelectorAll(sel);
 
   blocks.forEach(function(block) {
@@ -71,11 +79,7 @@ var hljsRun = function() {
     // Ensure that hljs class is set
     hljsAddClass(block, 'hljs');
     // Add wrapper class to parent
-    if (block.tagName == 'CODE') {
-      hljsAddClass(block.parentNode, 'hljs-wrapper');
-    } else {
-      hljsAddClass(block, 'hljs-wrapper');
-    }
+    hljsAddClass(block.parentNode, 'hljs-wrapper');
     // Add no gutter class if necessary
     if (!hljs_show_line) {
       hljsAddClass(block, 'hljs-no-gutter');
@@ -89,12 +93,11 @@ var hljsRun = function() {
       // Get specified syntax if any
       var cls = block.className;
       var syntax = '';
-      if (block.tagName == 'CODE') {
-        // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
-        var brush = cls.match(/\blanguage\-(\w*)\b/);
-      } else {
+      // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
+      var brush = cls.match(/\blanguage\-(\w*)\b/);
+      if ((hljs_yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
-        var brush = cls.match(/\bbrush\:(\w*)\b/);
+        brush = cls.match(/\bbrush\:(\w*)\b/);
       }
       if (brush && brush.length == 2) {
         if (brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text') {
@@ -103,6 +106,7 @@ var hljsRun = function() {
           syntax = brush[1];
         }
       }
+
       // Create web worker
       var worker = new Worker(hljs_path + 'worker.js');
       // Cope with web worker returned message
@@ -120,36 +124,33 @@ var hljsRun = function() {
       worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
     } else {
       // If YASH, keep brush if not plain or txt:
-      // - Get syntax in <pre class="brush:syntax">
+      // - Get syntax in <code class="brush:syntax">
       // - Test if not plain/txt and if it is supported by highlight.js and
       //     - if yes set class="language-syntax" to block
       //     - if no set class="hljs plain" to block
-      if (block.tagName == 'PRE') {
-        var cls = block.className;
-        var brush = cls.match(/\bbrush\:(\w*)\b/);
-        var syntax = 'plain';
+      var cls = block.className;
+      var syntax = 'plain';
+      var brush = cls.match(/\blanguage-(\w*)\b/);
+      var yash = false;
+      if ((hljs_yash) && (!brush || brush.length !== 2)) {
+        // Yash mode (<pre brush:<syntax>…</pre>)
+        brush = cls.match(/\bbrush\:(\w*)\b/);
         if (brush && brush.length == 2) {
-          if (brush[1] != 'plain' && brush[1] != 'txt') {
-            if (hljs.getLanguage(brush[1])) {
-              syntax = brush[1];
-            }
-          }
+          yash = true;
         }
-        // Set class : will be used by highlight.js
-        hljsAddClass(block, syntax);
-        hljsDataLanguage(block, syntax);
-      } else {
-        var cls = block.className;
-        var brush = cls.match(/\blanguage-(\w*)\b/);
-        if (brush && brush.length == 2) {
-          if (brush[1] != 'plain' && brush[1] != 'text') {
-            if (hljs.getLanguage(brush[1])) {
-              syntax = brush[1];
-            }
-          }
-        }
-        hljsDataLanguage(block, syntax);
       }
+      if (brush && brush.length == 2) {
+        if (brush[1] != 'plain' && brush[1] != 'txt') {
+          if (hljs.getLanguage(brush[1])) {
+            syntax = brush[1];
+          }
+        }
+      }
+      // Set class : will be used by highlight.js
+      if (yash) {
+        hljsAddClass(block, syntax);
+      }
+      hljsDataLanguage(block, syntax);
       // Run highlight.js
       hljs.highlightBlock(block);
       if (hljs_show_line) {

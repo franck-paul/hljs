@@ -1,16 +1,9 @@
 pre.hljs-wrapper {
   padding: 0;
 }
-pre.hljs, pre.hljs code, code.hljs {
+pre code.hljs {
   padding: 0 .5em;
   white-space: pre;
-}
-pre.hljs code {
-  background-color: inherit;
-  color: inherit;
-  font-size: 1em;
-}
-pre code.hljs {
   font-size: 1em;
 }
 /* Syntax badge */
@@ -28,7 +21,7 @@ pre code.hljs {
   background-color: #d54e21;
 }
 /* No line numbers */
-pre.hljs-no-gutter, code.hljs-no-gutter {
+code.hljs-no-gutter {
   padding: .5em;
 }
 /* Line numbers */
