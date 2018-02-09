@@ -57,6 +57,7 @@ class hljsPublicBehaviors
             dcUtils::jsVar('hljs_path', $core->blog->getPF('hljs/js/')) .
             dcUtils::jsVar('hljs_mode', ($core->blog->settings->hljs->mode ?: '')) .
             dcUtils::jsVar('hljs_show_line', ($core->blog->settings->hljs->hide_gutter ? 0 : 1)) .
+            dcUtils::jsVar('hljs_badge', ($core->blog->settings->hljs->badge ? 1 : 0)) .
             dcUtils::jsVar('hljs_use_ww', ($core->blog->settings->hljs->web_worker ? 1 : 0)) .
             dcUtils::jsVar('hljs_yash', ($core->blog->settings->hljs->yash ? 1 : 0)) .
             dcUtils::jsLoad($core->blog->getPF('hljs/js/public.js'));

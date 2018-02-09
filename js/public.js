@@ -2,6 +2,7 @@
 var hljs_path = hljs_path || ''; // Path URL of js
 var hljs_mode = hljs_mode || ''; // '' → std, 'mini', 'common', 'full'
 var hljs_show_line = hljs_show_line && true; // Show/Hide line numbers
+var hljs_badge = hljs_badge || false; // Use or not web workers
 var hljs_use_ww = hljs_use_ww || false; // Use or not web workers
 var hljs_yash = hljs_yash && true; // Yash compatibility
 
@@ -17,9 +18,11 @@ function hljsAddClass(element, classname) {
 
 // Utility function: hljsDataLanguage()
 function hljsDataLanguage(element, syntax) {
-  if (syntax !== undefined && syntax !== 'undefined' &&
-    syntax !== 'plain' && syntax !== 'txt' && syntax !== 'txt') {
-    element.dataset.language = syntax;
+  if (hljs_badge) {
+    if (syntax !== undefined && syntax !== 'undefined' &&
+      syntax !== 'plain' && syntax !== 'txt' && syntax !== 'txt') {
+      element.dataset.language = syntax;
+    }
   }
   return element.dataset.language;
 }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 11:05+0100\n"
+"POT-Creation-Date: 2018-02-09 09:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../hg-plugins/hljs/_admin.php:16 ../hg-plugins/hljs/index.php:94
-#: ../hg-plugins/hljs/index.php:102
+#: ../hg-plugins/hljs/_admin.php:16 ../hg-plugins/hljs/index.php:93
+#: ../hg-plugins/hljs/index.php:101
 msgid "Code highlight"
 msgstr ""
 
@@ -29,51 +29,51 @@ msgstr ""
 msgid "Highlighted Code"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:30
+#: ../hg-plugins/hljs/index.php:33
 msgid "Automatic"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:31
+#: ../hg-plugins/hljs/index.php:34
 msgid "Plain Text"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:39 ../hg-plugins/hljs/index.php:47
+#: ../hg-plugins/hljs/index.php:39 ../hg-plugins/hljs/index.php:46
 msgid "Code highlight - Syntax Selector"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:49
+#: ../hg-plugins/hljs/index.php:48
 msgid "Select the primary syntax of your code snippet:"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:107
+#: ../hg-plugins/hljs/index.php:106
 msgid "Minimum (23 languages, 45 Kb)"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:108
+#: ../hg-plugins/hljs/index.php:107
 msgid "Default (46 languages, 86 Kb)"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:109
+#: ../hg-plugins/hljs/index.php:108
 msgid "Common (92 languages, 240 Kb)"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:110
+#: ../hg-plugins/hljs/index.php:109
 msgid "Full (176 languages, 515 Kb)"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:144
+#: ../hg-plugins/hljs/index.php:143
 msgid "Enable Code highlight"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:147
+#: ../hg-plugins/hljs/index.php:146
 msgid "Presentation"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:153
+#: ../hg-plugins/hljs/index.php:152
 msgid "Set of languages:"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:156
+#: ../hg-plugins/hljs/index.php:155
 msgid "List of languages:"
 msgstr ""
 
@@ -82,49 +82,53 @@ msgid "Hide gutter with line numbers"
 msgstr ""
 
 #: ../hg-plugins/hljs/index.php:201
+msgid "Show syntax badge"
+msgstr ""
+
+#: ../hg-plugins/hljs/index.php:205
 msgid "Use web workers"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:204
+#: ../hg-plugins/hljs/index.php:208
 msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:207
+#: ../hg-plugins/hljs/index.php:211
 msgid "Use custom CSS:"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:211
+#: ../hg-plugins/hljs/index.php:215
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:212
+#: ../hg-plugins/hljs/index.php:216
 msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:214
+#: ../hg-plugins/hljs/index.php:218
 msgid "Compatibiliy"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:217
+#: ../hg-plugins/hljs/index.php:221
 msgid "Yash compatibility mode"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:220
+#: ../hg-plugins/hljs/index.php:224
 msgid "Some of YASH languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:220
+#: ../hg-plugins/hljs/index.php:224
 msgid "Will be applied on future edition of posts containing YASH macros (///yash …///)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:224
+#: ../hg-plugins/hljs/index.php:228
 msgid "SyntaxeHL compatibility mode"
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:227
+#: ../hg-plugins/hljs/index.php:231
 msgid "All SyntaxeHL languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../hg-plugins/hljs/index.php:227
+#: ../hg-plugins/hljs/index.php:231
 msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
 msgstr ""

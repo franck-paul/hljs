@@ -24,35 +24,32 @@ $hide_gutter = (boolean) $core->blog->settings->hljs->hide_gutter;
 $web_worker  = (boolean) $core->blog->settings->hljs->web_worker;
 $yash        = (boolean) $core->blog->settings->hljs->yash;
 $syntaxehl   = (boolean) $core->blog->settings->hljs->syntaxehl;
+$badge       = (boolean) $core->blog->settings->hljs->badge;
 
 if (!empty($_REQUEST['popup'])) {
     $hljs_brushes = array(
         // Index = label
         // Value = language code
         __('Automatic')  => '',
-        __('Plain Text') => 'plain',
+        __('Plain Text') => 'plain'
     );
 
     echo
-    '<html>' .
-      '<head>' .
-        '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
-        '<script>'.
-          'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";'.
-          'var hljs_mode = "' . $mode . '";'.
-        '</script>'.
-        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version) .
-      '</head>' .
-      '<body>' .
-        '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
-        '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
-          '<p><label>' . __('Select the primary syntax of your code snippet:') . ' '.
-            form::combo('syntax', $hljs_brushes) . '</label></p>' .
-          '<p><button id="hljs-cancel">' . __('Cancel') . '</button> - ' .
-            '<button id="hljs-ok"><strong>' . __('Ok') . '</strong></button></p>' .
-        '</form>' .
-      '</body>' .
-    '</html>';
+      '<html><head>' .
+      '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
+      '<script>' .
+      'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
+      'var hljs_mode = "' . $mode . '";' .
+      '</script>' .
+      dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version) .
+      '</head><body>' .
+      '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
+      '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
+      '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
+      form::combo('syntax', $hljs_brushes) . '</label></p>' .
+      '<p><button id="hljs-cancel">' . __('Cancel') . '</button> - ' .
+      '<button id="hljs-ok"><strong>' . __('Ok') . '</strong></button></p>' .
+      '</form></body></html>';
     return;
 }
 
@@ -70,6 +67,7 @@ if (!empty($_POST['saveconfig'])) {
         $web_worker  = (empty($_POST['web_worker'])) ? false : true;
         $yash        = (empty($_POST['yash'])) ? false : true;
         $syntaxehl   = (empty($_POST['syntaxehl'])) ? false : true;
+        $badge       = (empty($_POST['badge'])) ? false : true;
 
         $core->blog->settings->hljs->put('active', $active, 'boolean');
         $core->blog->settings->hljs->put('mode', $mode, 'mode');
@@ -79,6 +77,7 @@ if (!empty($_POST['saveconfig'])) {
         $core->blog->settings->hljs->put('web_worker', $web_worker, 'boolean');
         $core->blog->settings->hljs->put('yash', $yash, 'boolean');
         $core->blog->settings->hljs->put('syntaxehl', $syntaxehl, 'boolean');
+        $core->blog->settings->hljs->put('badge', $badge, 'boolean');
 
         $core->blog->triggerBlog();
 
@@ -181,6 +180,7 @@ echo 'var hljs_mode = "' . $mode . '";';
 echo 'var hljs_current_mode = hljs_mode;';
 echo 'var hljs_list = [];';
 echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
+echo 'var hljs_badge = ' . ($badge ? '1' : '0') . ';';
 echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
 echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
 echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
@@ -195,6 +195,10 @@ echo 'var hljs_previous_theme = hljs_theme;';
     <p>
       <?php echo form::checkbox('hide_gutter', 1, $hide_gutter); ?>
       <label class="classic" for="hide_gutter">&nbsp;<?php echo __('Hide gutter with line numbers'); ?></label>
+    </p>
+    <p>
+      <?php echo form::checkbox('badge', 1, $badge); ?>
+      <label class="classic" for="badge">&nbsp;<?php echo __('Show syntax badge'); ?></label>
     </p>
     <p>
       <?php echo form::checkbox('web_worker', 1, $web_worker); ?>

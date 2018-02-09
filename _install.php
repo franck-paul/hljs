@@ -28,6 +28,7 @@ try
     $core->blog->settings->hljs->put('web_worker', false, 'boolean', '', false, true);
     $core->blog->settings->hljs->put('yash', true, 'boolean', '', false, true);
     $core->blog->settings->hljs->put('syntaxehl', false, 'boolean', '', false, true);
+    $core->blog->settings->hljs->put('badge', false, 'boolean', '', false, true);
 
     $core->setVersion('hljs', $new_version);
 

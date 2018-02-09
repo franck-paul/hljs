@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 11:05+0100\n"
+"POT-Creation-Date: 2018-02-09 09:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,9 @@ msgstr "Liste des syntaxes :"
 
 msgid "Hide gutter with line numbers"
 msgstr "Masquer la colonne des numéros de ligne"
+
+msgid "Show syntax badge"
+msgstr "Affiche le badge avec la syntaxe"
 
 msgid "Use web workers"
 msgstr "Utiliser les 'web workers'"
