@@ -28,6 +28,8 @@ Options
 
 You can **hide the gutter** containing the line-numbers of the rendered code by the plugin.
 
+You can display a **badge with the language** (specified or detected) of your code fragment.
+
 You may use **web workers** to provide parallel processing of your code samples (may be useful with big code samples on page). Enable this mode may consume a **lot more memory** in browser's client.
 
 You may also provide a **user-defined CSS** URL to be used rather than the selected one. The URL beginning with a ```/``` is assumed to be **absolute** else it will be relative to the theme URL used for the blog.
