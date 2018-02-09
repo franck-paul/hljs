@@ -16,7 +16,7 @@ It supports up to 176 [syntaxes](/user-guide/usage#available-syntaxes) and provi
 
 The following CSS code:
 
-```
+``` css
 html {
   font-size: 62.5%; }
 

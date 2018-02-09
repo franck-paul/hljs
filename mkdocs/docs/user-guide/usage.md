@@ -11,7 +11,7 @@ In order to specify codes to be rendered by HLJS you have to use the following s
 
 In **Wiki** mode:
 
-```
+``` hl_lines="1"
 ///hljs [language_code]
 ...
 ///
@@ -19,7 +19,7 @@ In **Wiki** mode:
 
 In **HTML** (source) or **Markdown** modes:
 
-```html
+``` html hl_lines="1"
 <pre><code [class="language-{language_code}"]>
 ...
 </code></pre>
@@ -32,7 +32,7 @@ Replacing ```language_code``` by one of the [following syntaxes](#available-synt
 
 Exemple with this Javascript code:
 
-```
+``` js hl_lines="1"
 ///hljs js
 function findSequence(goal) {
   function find(start, history) {
