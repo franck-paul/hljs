@@ -1,9 +1,10 @@
-pre.hljs-wrapper {
+.hljs-wrapper {
   padding: 0;
 }
-pre code.hljs {
+.hljs {
   padding: 0 .5em;
   white-space: pre;
+  word-wrap: normal !important;
   font-size: 1em;
 }
 /* Syntax badge */
@@ -21,11 +22,11 @@ pre code.hljs {
   background-color: #d54e21;
 }
 /* No line numbers */
-code.hljs-no-gutter {
+.hljs-no-gutter {
   padding: .5em;
 }
 /* Line numbers */
-pre .hljs-line-number {
+.hljs-line-number {
   display: block;
   float: left;
   margin: 0 1em 0 -1em;
@@ -33,11 +34,11 @@ pre .hljs-line-number {
   text-align: right;
   opacity: .6;
 }
-pre .hljs-line-number span {
+.hljs-line-number span {
   display: block;
   padding: 0 .5em 0 1em;
 }
-pre .hljs-cl {
+.hljs-cl {
   display: block;
   clear: both;
 }
