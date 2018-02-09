@@ -13,9 +13,23 @@ pre.hljs code {
 pre code.hljs {
   font-size: 1em;
 }
+/* Syntax badge */
+.hljs-wrapper {
+  position: relative;
+}
+.hljs[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: smaller;
+  padding: .1em .6em .1em .6em;
+  color: #ffF;
+  background-color: #d54e21;
+}
 /* No line numbers */
 pre.hljs-no-gutter, code.hljs-no-gutter {
-    padding: .5em;
+  padding: .5em;
 }
 /* Line numbers */
 pre .hljs-line-number {
