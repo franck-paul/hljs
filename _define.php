@@ -16,7 +16,7 @@ $this->registerModule(
     "Code highlight",            // Name
     "highlight.js for Dotclear", // Description
     "Franck Paul",               // Author
-    '0.2',                       // Version
+    '0.2.1',                     // Version
     array(
         'requires'    => array(array('core', '2.13')),
         'permissions' => 'contentadmin',
