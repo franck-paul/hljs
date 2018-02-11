@@ -43,13 +43,6 @@ var hljsLoad = function() {
 
 // highlight.js script runner
 var hljsRun = function() {
-  if (!hljs_ww || !hljs_use_ww) {
-    // Configure highlight.js script
-    hljs.configure({
-      tabReplace: '  '
-    });
-  }
-
   if (hljs_yash) {
     // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
     var yb = document.querySelectorAll('pre[class^="brush:"]');
@@ -151,6 +144,10 @@ var hljsRun = function() {
         hljsAddClass(block, syntax);
       }
       hljsDataLanguage(block, syntax);
+      // Configure highlight.js script
+      hljs.configure({
+        tabReplace: '  '
+      });
       // Run highlight.js
       hljs.highlightBlock(block);
       if (hljs_show_line) {
