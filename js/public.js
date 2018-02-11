@@ -41,6 +41,20 @@ var hljsLoad = function() {
   }
 }
 
+// highlight.js extensions script loader
+var hljsLoadExtensions = function() {
+  if (!hljs_ww || !hljs_use_ww) {
+    // Load highlight[-mode].js script → loaded in hljs object
+    var hljs_sc = document.createElement('script');
+    hljs_sc.src = hljs_path + 'lib/js/cbtpl.js'; // URL
+    hljs_sc.type = 'text/javascript';
+    if (typeof hljs_sc['async'] !== 'undefined') {
+      hljs_sc.async = true;
+    }
+    document.getElementsByTagName('head')[0].appendChild(hljs_sc);
+  }
+}
+
 // highlight.js script runner
 var hljsRun = function() {
   if (hljs_yash) {
@@ -116,6 +130,9 @@ var hljsRun = function() {
       // Run web worker
       worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
     } else {
+      // Add extensions
+      hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
+
       // If YASH, keep brush if not plain or txt:
       // - Get syntax in <code class="brush:syntax">
       // - Test if not plain/txt and if it is supported by highlight.js and
@@ -166,6 +183,7 @@ var hljsRun = function() {
 };
 
 hljsLoad();
+hljsLoadExtensions();
 addEventListener('load', function() {
   hljsRun();
 })
