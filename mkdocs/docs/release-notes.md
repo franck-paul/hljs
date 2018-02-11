@@ -1,3 +1,9 @@
+[0.2.1 - 2018-02-11](https://open-time.net/post/2018/02/11/Plugin-hljs-021-pour-Dotclear)
+================
+
+ * Bugfix: Force word-wrap: normal in any case
+ * Simplify public CSS
+
 [0.2 - 2018-02-09](https://open-time.net/post/2018/02/09/Plugin-hljs-02-pour-Dotclear)
 ================
 
