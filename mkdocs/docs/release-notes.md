@@ -2,6 +2,7 @@
 ================
 
  * Bugfix: Force word-wrap: normal in any case
+ * Bugfix: Tab replacement not effective in standard mode (vs web workers mode)
  * Simplify public CSS
 
 [0.2 - 2018-02-09](https://open-time.net/post/2018/02/09/Plugin-hljs-02-pour-Dotclear)
