@@ -27,6 +27,15 @@ class hljsBehaviors
             "</script>\n";
     }
 
+    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins, $context = '')
+    {
+        $extraPlugins[] = array(
+            'name'   => 'hljs',
+            'button' => 'hljs',
+            'url'    => DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/'
+        );
+    }
+
     public static function coreInitWikiPost($wiki2xhtml)
     {
         global $core;

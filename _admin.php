@@ -22,3 +22,4 @@ $_menu['Blog']->addItem(__('Syntax highlighting'),
     $core->auth->check('contentadmin', $core->blog->id));
 
 $core->addBehavior('adminPostEditor', array('hljsBehaviors', 'adminPostEditor'));
+$core->addBehavior('ckeditorExtraPlugins', array('hljsBehaviors', 'ckeditorExtraPlugins'));
