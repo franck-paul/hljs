@@ -24,10 +24,13 @@ self.onmessage = function(event) {
   }
   // Fix Markup as it is not done internally when using highlightAuto()
   result.value = self.hljs.fixMarkup(result.value);
+  if (syntax == '' && result.language !== undefined && result.language !== '') {
+    syntax = result.language;
+  }
 
   // Return language detected (or set) and result
   self.postMessage({
-    language: result.language, // Language detected
+    language: syntax, // Language detected or specified
     result: result.value // HTML Result
   });
 }
