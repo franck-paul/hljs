@@ -1,13 +1,13 @@
 # HLJS: Syntax highlighter plugin for Dotclear 2
 
 !!! tip "Current release"
-    [0.2.1 — 2018-02-11][ot-dl] (Dotclear 2.13+)
+    [0.3 — 2018-02-12][ot-dl] (Dotclear 2.13+)
 
 ![](img/icon-big.png)
 
 This plugin use the [highlight.js script](https://highlightjs.org/) from Ivan Sagalaev (and contributors) to render code blocks in posts and pages with syntax highlighting.
 
-It supports up to 176 [syntaxes](/user-guide/usage#available-syntaxes) and provides 79 different [themes](/user-guide/settings#presentation).
+It supports up to 177 [syntaxes](/user-guide/usage#available-syntaxes) and provides 79 different [themes](/user-guide/settings#presentation).
 
 !!! info
     The plugin **do not depends on JQuery** to be used on public side on the blog.
@@ -67,4 +67,4 @@ The plugin **must** be activated before being used on your blog[^1]. See [user g
 
 [^1]: Go to the main page of the HLJS plugin to activated it (Blog section of the Dotclear admin menu).
 
-[ot-dl]: https://open-time.net/post/2018/02/11/Plugin-hljs-021-pour-Dotclear
+[ot-dl]: https://open-time.net/post/2018/02/12/Plugin-hljs-03-pour-Dotclear
