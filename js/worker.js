@@ -22,6 +22,8 @@ self.onmessage = function(event) {
   } else {
     var result = self.hljs.highlightAuto(event.data[0], [syntax]);
   }
+  // Fix Markup as it is not done internally when using highlightAuto()
+  result.value = self.hljs.fixMarkup(result.value);
 
   // Return language detected (or set) and result
   self.postMessage({
