@@ -130,7 +130,7 @@ var hljsRun = function() {
       // Run web worker
       worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
     } else {
-      // Add extensions
+      // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
 
       // If YASH, keep brush if not plain or txt:

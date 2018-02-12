@@ -7,6 +7,7 @@ Category: template
 */
 var hljsExtentCbtpl = function(hljs) {
   return {
+    aliases: ['dctpl'],
     cI: false,
     sL: 'xml',
     c: [
