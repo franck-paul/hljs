@@ -5,7 +5,6 @@ Author: Franck Paul <carnet.franck.paul@gmail.com>
 Description: Clearbricks templates (used by Dotclear)
 Category: template
 */
-
 var hljsExtentCbtpl = function(hljs) {
   return {
     cI: false,
@@ -24,7 +23,7 @@ var hljsExtentCbtpl = function(hljs) {
       },
       {
         cN: 'template-variable',
-        b: /\{\{tpl:/, end: /\}\}/,
+        b: /\{\{tpl:/, e: /\}\}/,
         r: 10
       }
     ]
