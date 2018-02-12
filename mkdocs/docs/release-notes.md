@@ -1,3 +1,21 @@
+[0.3.1 - 2018-02-13](https://open-time.net/post/2018/02/13/Plugin-hljs-31-pour-Dotclear)
+================
+
+* Bugfix: returned syntax (in web workers mode) may be undefined
+
+[0.3 - 2018-02-12](https://open-time.net/post/2018/02/12/Plugin-hljs-3-pour-Dotclear)
+================
+
+* Bugfix: Tab replacement was not effective too in web workers mode
+* Add Clearbricks/Dotclear template syntax (cbtpl/dctpl)
+
+[0.2.1 - 2018-02-11](https://open-time.net/post/2018/02/11/Plugin-hljs-021-pour-Dotclear)
+================
+
+ * Bugfix: Force word-wrap: normal in any case
+ * Bugfix: Tab replacement not effective in standard mode (vs web workers mode)
+ * Simplify public CSS
+
 [0.2 - 2018-02-09](https://open-time.net/post/2018/02/09/Plugin-hljs-02-pour-Dotclear)
 ================
 

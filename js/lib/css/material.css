@@ -38,8 +38,7 @@
   color: rgb(255,235,149);
 }
 
-.hljs-variable,
-.hljs-template-variable {
+.hljs-variable {
   color: rgb(178,204,214);
 }
 
@@ -51,9 +50,16 @@
   color: rgb(112,214,255);
 }
 
-.hljs-tag,
-.hljs-template-tag {
+.hljs-tag {
   color: #abb2bf;
+}
+
+.hljs-template-tag {
+  color: #efd540;
+}
+
+.hljs-template-variable {
+  color: #82b1ff;
 }
 
 .hljs-name {

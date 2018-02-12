@@ -5,6 +5,11 @@ self.onmessage = function(event) {
 
   // Load highlight.js script → loaded in hljs object
   self.importScripts(path + 'lib/js/highlight' + (mode ? '-' + mode : '') + '.pack.js');
+  // Load highlight.js extensions
+  self.importScripts(path + 'lib/js/cbtpl.js');
+
+  // Register extensions
+  self.hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
 
   // Configure highlight.js script
   self.hljs.configure({
@@ -17,10 +22,15 @@ self.onmessage = function(event) {
   } else {
     var result = self.hljs.highlightAuto(event.data[0], [syntax]);
   }
+  // Fix Markup as it is not done internally when using highlightAuto()
+  result.value = self.hljs.fixMarkup(result.value);
+  if (syntax == '' && result.language !== undefined && result.language !== '') {
+    syntax = result.language;
+  }
 
   // Return language detected (or set) and result
   self.postMessage({
-    language: result.language, // Language detected
+    language: syntax, // Language detected or specified
     result: result.value // HTML Result
   });
 }

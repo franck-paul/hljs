@@ -85,6 +85,7 @@ Min, Std and Com columns design respectively the Minimum, Standard and Commun La
 | -   | -   | -   | brainfuck, bf                                                | Brainfuck                            |
 | -   | -   | -   | cal                                                          | C/AL                                 |
 | -   | -   | -   | capnproto, capnp                                             | Cap’n Proto                          |
+| x   | x   | x   | cbtpl, dctpl                                                 | Clearbricks/Dotclear template        |
 | -   | -   | -   | ceylon                                                       | Ceylon                               |
 | -   | -   | -   | clean, clean, icl, dcl                                       | Clean                                |
 | -   | -   | x   | clojure, clj                                                 | Clojure                              |

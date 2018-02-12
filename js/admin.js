@@ -4,36 +4,46 @@ function listLanguages(init) {
   sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
   sc.type = 'text/javascript';
   sc.onload = function() {
-    var ll = hljs.listLanguages().sort();
-    if (!init) {
-      // Show diff between current choosen list and the selected one
-      var full = ll.concat(hljs_list.filter(function (item) {
-          return ll.indexOf(item) < 0;
-      }));
-      var list = '';
-      full = full.sort();
-      full.forEach(function(e) {
-        if (list !== '') {
-          list = list + ', ';
-        }
-        if (!hljs_list.includes(e)) {
-          // Language added
-          list = list + '<ins>' + e + '</ins>';
-        } else if (!ll.includes(e)) {
-          // Language removed
-          list = list + '<del>' + e + '</del>';
-        } else {
-          list = list + e;
-        }
-      })
-    } else {
-      var list = ll.join(", ");
-    }
-    document.getElementById("syntaxes").innerHTML = (list ? '<br />' + list : '');
-    if (init) {
-      // Store current list choosen
-      hljs_list = ll;
-    }
+    // Load extension
+    var sce = document.createElement('script');
+    sce.src = hljs_path + 'lib/js/cbtpl.js'; // URL
+    sce.type = 'text/javascript';
+    sce.onload = function() {
+      // Register extensions
+      hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
+      // Get languages list
+      var ll = hljs.listLanguages().sort();
+      if (!init) {
+        // Show diff between current choosen list and the selected one
+        var full = ll.concat(hljs_list.filter(function (item) {
+            return ll.indexOf(item) < 0;
+        }));
+        var list = '';
+        full = full.sort();
+        full.forEach(function(e) {
+          if (list !== '') {
+            list = list + ', ';
+          }
+          if (!hljs_list.includes(e)) {
+            // Language added
+            list = list + '<ins>' + e + '</ins>';
+          } else if (!ll.includes(e)) {
+            // Language removed
+            list = list + '<del>' + e + '</del>';
+          } else {
+            list = list + e;
+          }
+        })
+      } else {
+        var list = ll.join(", ");
+      }
+      document.getElementById("syntaxes").innerHTML = (list ? '<br />' + list : '');
+      if (init) {
+        // Store current list choosen
+        hljs_list = ll;
+      }
+    };
+    document.getElementsByTagName('head')[0].appendChild(sce);
   };
   document.getElementsByTagName('head')[0].appendChild(sc);
 }
