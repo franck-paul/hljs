@@ -1,3 +1,8 @@
+[0.3.1 - 2018-02-13](https://open-time.net/post/2018/02/13/Plugin-hljs-31-pour-Dotclear)
+================
+
+* Bugfix: returned syntax (in web workers mode) may be undefined
+
 [0.3 - 2018-02-12](https://open-time.net/post/2018/02/12/Plugin-hljs-3-pour-Dotclear)
 ================
 
