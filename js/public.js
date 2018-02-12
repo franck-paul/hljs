@@ -20,7 +20,7 @@ function hljsAddClass(element, classname) {
 function hljsDataLanguage(element, syntax) {
   if (hljs_badge) {
     if (syntax !== undefined && syntax !== 'undefined' &&
-      syntax !== 'plain' && syntax !== 'txt' && syntax !== 'txt') {
+      syntax !== 'plain' && syntax !== 'txt' && syntax !== 'text') {
       element.dataset.language = syntax;
     }
   }
@@ -150,7 +150,7 @@ var hljsRun = function() {
         }
       }
       if (brush && brush.length == 2) {
-        if (brush[1] != 'plain' && brush[1] != 'txt') {
+        if (brush[1] != 'plain' && brush[1] != 'txt' && brush[1] != 'text') {
           if (hljs.getLanguage(brush[1])) {
             syntax = brush[1];
           }
