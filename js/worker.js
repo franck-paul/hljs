@@ -5,6 +5,11 @@ self.onmessage = function(event) {
 
   // Load highlight.js script → loaded in hljs object
   self.importScripts(path + 'lib/js/highlight' + (mode ? '-' + mode : '') + '.pack.js');
+  // Load highlight.js extensions
+  self.importScripts(path + 'lib/js/cbtpl.js');
+
+  // Register extensions
+  self.hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
 
   // Configure highlight.js script
   self.hljs.configure({
