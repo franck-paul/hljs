@@ -41,21 +41,25 @@ if (!empty($_REQUEST['popup'])) {
       'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
       'var hljs_mode = "' . $mode . '";' .
       '</script>';
+    echo dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
       echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
     } else {
       echo
-        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
+        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_leg.js')), $plugin_version);
     }
     echo
       '</head><body>' .
       '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
       '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
       '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
-      form::combo('syntax', $hljs_brushes) . '</label></p>' .
-      '<p><button id="hljs-cancel">' . __('Cancel') . '</button> - ' .
-      '<button id="hljs-ok"><strong>' . __('Ok') . '</strong></button></p>' .
+      form::combo('syntax', $hljs_brushes, '', '', '', false, 'autofocus') . '</label></p>' .
+      '<p>' .
+      '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
+      ' ' .
+      '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
+      '</p>' .
       '</form></body></html>';
     return;
 }

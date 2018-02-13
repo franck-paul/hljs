@@ -1,27 +1,19 @@
 $(function() {
-  // Cancel button fired
-  $('#hljs-cancel').click(function() {
-    window.close();
-    return false;
-  });
-
-  // Ok button fired
-  $('#hljs-ok').click(function() {
-    sendClose();
-    window.close();
-    return false;
-  });
-
-  function sendClose() {
-    var insert_form = $('#hljs-form').get(0);
-    if (insert_form == undefined) {
-      return;
+  $('#hljs-form').keyup(function(e) {
+    // Cope with Escape key anyway in form
+    if (e.which == 27) {
+      e.preventDefault();
+      $('#hljs-cancel').trigger('click');
     }
-    var tb = window.opener.the_toolbar;
-    var data = tb.elements.hljs.data;
-    data.syntax = insert_form.syntax.value;
-    tb.elements.hljs.fncall[tb.mode].call(tb);
-  };
+  });
+
+  $('#hljs-ok, #syntax').keyup(function(e) {
+    // Cope with return key on syntax select or Ok button
+    if (e.which == 13) {
+      e.preventDefault();
+      $('#hljs-ok').trigger('click');
+    }
+  });
 
   // Populate language list combo
   var sc = document.createElement('script');
