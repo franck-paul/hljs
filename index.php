@@ -40,8 +40,15 @@ if (!empty($_REQUEST['popup'])) {
       '<script>' .
       'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
       'var hljs_mode = "' . $mode . '";' .
-      '</script>' .
-      dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version) .
+      '</script>';
+    if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
+      echo
+        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
+    } else {
+      echo
+        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
+    }
+    echo
       '</head><body>' .
       '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
       '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .

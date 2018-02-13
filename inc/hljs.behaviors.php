@@ -16,15 +16,24 @@ class hljsBehaviors
     {
         global $core;
 
-        if ($editor != 'dcLegacyEditor') {
-            return;
-        }
+        if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {return;}
 
-        return
-        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs')) .
-        '<script type="text/javascript">' . "\n" .
-        dcPage::jsVar('jsToolBar.prototype.elements.hljs.title', __('Highlighted Code')) .
-            "</script>\n";
+        if ($editor == 'dcLegacyEditor') {
+            return
+            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs')) .
+            '<script type="text/javascript">' . "\n" .
+            dcPage::jsVar('jsToolBar.prototype.elements.hljs.title', __('Highlighted Code')) .
+                "</script>\n";
+        } else {
+            $url = $core->adminurl->get('admin.plugin.hljs', array('popup' => 1, 'plugin_id' => 'dcCKEditor'), '&');
+            $url = urldecode($url);
+            return
+            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post_cke.js')), $core->getVersion('hljs')) .
+            '<script type="text/javascript">' . "\n" .
+            dcPage::jsVar('hljs_title', __('Highlighted Code')) .
+            dcPage::jsVar('hljs_popup_url', $url) .
+                "</script>\n";
+        }
     }
 
     public static function ckeditorExtraPlugins(ArrayObject $extraPlugins, $context = '')
