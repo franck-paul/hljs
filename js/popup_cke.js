@@ -19,15 +19,11 @@ $(function() {
     }
     var syntax = insert_form.syntax.value;
     var elt_code = new window.opener.CKEDITOR.dom.element('code');
-//    var elt_code = document.createElement('code');
     if (syntax != '') {
-//      elt_code.className = 'language-' + syntax;
       elt_code.addClass('language-' + syntax);
     }
-//    elt_code.textContent = selected_text;
     elt_code.appendText(selected_text);
     var elt_pre = new window.opener.CKEDITOR.dom.element('pre');
-//    var elt_pre = document.createElement('pre');
     elt_pre.append(elt_code);
     editor.insertElement(elt_pre);
     window.close();
