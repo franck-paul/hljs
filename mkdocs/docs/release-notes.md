@@ -1,3 +1,8 @@
+[0.4 - 2018-02-14](https://open-time.net/post/2018/02/14/Plugin-hljs-4-pour-Dotclear)
+================
+
+* Add CKEditor addon button to insert HLJS formatted code
+
 [0.3.1 - 2018-02-13](https://open-time.net/post/2018/02/13/Plugin-hljs-31-pour-Dotclear)
 ================
 

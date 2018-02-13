@@ -1,31 +1,35 @@
 $(function() {
   $('#hljs-cancel').click(function() {
+    // Do nothing
     window.close();
   });
 
   $('#hljs-ok').click(function(e) {
+    // Get option and format selection if any, or insert a sample one
     var insert_form = $('#hljs-form').get(0);
     if (insert_form == undefined) {
       return;
     }
     e.preventDefault();
     var editor_name = window.opener.$.getEditorName();
-    var editor = window.opener.CKEDITOR.instances[editor_name]
-    var selected_text = editor.getSelection().getSelectedText();
-    var replace = true;
-    if (selected_text == undefined || selected_text == '') {
-      selected_text = '';
-      replace = false;
-    }
+    var editor = window.opener.CKEDITOR.instances[editor_name];
+    var selected_text = editor.getSelection().getSelectedText() || '';
     var syntax = insert_form.syntax.value;
     var elt_code = new window.opener.CKEDITOR.dom.element('code');
     if (syntax != '') {
       elt_code.addClass('language-' + syntax);
     }
-    elt_code.appendText(selected_text);
+    if (selected_text == '') {
+      elt_code.appendText('code');
+    } else {
+      elt_code.appendText(selected_text);
+    }
     var elt_pre = new window.opener.CKEDITOR.dom.element('pre');
     elt_pre.append(elt_code);
     editor.insertElement(elt_pre);
+    if (selected_text == '') {
+      editor.getSelection().selectElement(elt_code);
+    }
     window.close();
   });
 

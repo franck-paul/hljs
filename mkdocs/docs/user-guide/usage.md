@@ -50,7 +50,7 @@ function findSequence(goal) {
 ```
 
 !!! tip
-    A toolbar button is available for dcLegacyEditor (wiki/markown and wysiwyg in source mode) to select syntax:  
+    A toolbar button is available for dcLegacyEditor (wiki/markown and wysiwyg in source mode), and also for dcCKEditor (xhtml in wysiwyg mode) to select syntax:  
 
     ![dcLegacyEditor button](../img/hljs-toolbar-button.jpg)
 
