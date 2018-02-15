@@ -1,19 +1,6 @@
 $(function() {
-  $('#hljs-form').keyup(function(e) {
-    // Cope with Escape key anyway in form
-    if (e.key == 'Escape') {
-      e.preventDefault();
-      $('#hljs-cancel').trigger('click');
-    }
-  });
-
-  $('#hljs-ok, #syntax').keyup(function(e) {
-    // Cope with return key on syntax select or Ok button
-    if (e.key == 'Enter') {
-      e.preventDefault();
-      $('#hljs-ok').trigger('click');
-    }
-  });
+  // Cope with enter key in popup
+  dotclear.enterKeyInForm('#hljs-form', '#hljs-ok', '#hljs-cancel');
 
   // Populate language list combo
   var sc = document.createElement('script');
