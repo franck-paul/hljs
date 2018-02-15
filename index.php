@@ -35,32 +35,32 @@ if (!empty($_REQUEST['popup'])) {
     );
 
     echo
-      '<html><head>' .
-      '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
-      '<script>' .
-      'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
-      'var hljs_mode = "' . $mode . '";' .
-      '</script>';
+    '<html><head>' .
+    '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
+    '<script>' .
+    'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
+        'var hljs_mode = "' . $mode . '";' .
+        '</script>';
     echo dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
-      echo
+        echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
     } else {
-      echo
+        echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_leg.js')), $plugin_version);
     }
     echo
-      '</head><body>' .
-      '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
-      '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
-      '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
-      form::combo('syntax', $hljs_brushes, '', '', '', false, 'autofocus') . '</label></p>' .
-      '<p>' .
-      '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
-      ' ' .
-      '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
-      '</p>' .
-      '</form></body></html>';
+    '</head><body>' .
+    '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
+    '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
+    '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
+    form::combo('syntax', $hljs_brushes, array('extra_html' => 'autofocus')) . '</label></p>' .
+    '<p>' .
+    '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
+    ' ' .
+    '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
+        '</p>' .
+        '</form></body></html>';
     return;
 }
 
@@ -158,10 +158,14 @@ foreach ($themes_list as $theme_id) {
     <div class="two-cols clearfix">
       <div class="col">
         <p class="field"><label for="theme" class="classic"><?php echo __('Theme:'); ?> </label>
-          <?php echo form::combo('theme', $combo_theme, $theme, '', '', false, 'onchange="selectTheme()"'); ?>
+          <?php echo form::combo('theme', $combo_theme, array(
+              'default'    => $theme,
+              'extra_html' => 'onchange="selectTheme()"')); ?>
         </p>
         <p class="field"><label for="mode" class="classic"><?php echo __('Set of languages:'); ?> </label>
-          <?php echo form::combo('mode', $combo_mode, $mode, '', '', false, 'onchange="selectMode()"'); ?>
+          <?php echo form::combo('mode', $combo_mode, array(
+              'default'    => $mode,
+              'extra_html' => 'onchange="selectMode()"')); ?>
         </p>
         <p class="info"><?php echo __('List of languages:'); ?><br /><span id="syntaxes"></span>
         </p>
