@@ -1,3 +1,5 @@
+/*global hljs, hljsExtentCbtpl */
+'use strict';
 // Set defaults
 var hljs_path = hljs_path || ''; // Path URL of js
 var hljs_mode = hljs_mode || ''; // '' → std, 'mini', 'common', 'full'
@@ -34,12 +36,12 @@ var hljsLoad = function() {
     var hljs_sc = document.createElement('script');
     hljs_sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
     hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc['async'] !== 'undefined') {
+    if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
     }
     document.getElementsByTagName('head')[0].appendChild(hljs_sc);
   }
-}
+};
 
 // highlight.js extensions script loader
 var hljsLoadExtensions = function() {
@@ -48,12 +50,12 @@ var hljsLoadExtensions = function() {
     var hljs_sc = document.createElement('script');
     hljs_sc.src = hljs_path + 'lib/js/cbtpl.js'; // URL
     hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc['async'] !== 'undefined') {
+    if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
     }
     document.getElementsByTagName('head')[0].appendChild(hljs_sc);
   }
-}
+};
 
 // highlight.js script runner
 var hljsRun = function() {
@@ -96,12 +98,14 @@ var hljsRun = function() {
     block.textContent = block.textContent.trim();
 
     // Run engine
+    var cls;
+    var syntax = '';
+    var brush;
     if (hljs_ww && hljs_use_ww) {
       // Get specified syntax if any
-      var cls = block.className;
-      var syntax = '';
+      cls = block.className;
       // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
-      var brush = cls.match(/\blanguage\-(\w*)\b/);
+      brush = cls.match(/\blanguage\-(\w*)\b/);
       if ((hljs_yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush\:(\w*)\b/);
@@ -126,7 +130,7 @@ var hljsRun = function() {
         if (hljs_show_line) {
           showLineNumber(block);
         }
-      }
+      };
       // Run web worker
       worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
     } else {
@@ -138,9 +142,9 @@ var hljsRun = function() {
       // - Test if not plain/txt and if it is supported by highlight.js and
       //     - if yes set class="language-syntax" to block
       //     - if no set class="hljs plain" to block
-      var cls = block.className;
-      var syntax = 'plain';
-      var brush = cls.match(/\blanguage-(\w*)\b/);
+      cls = block.className;
+      syntax = 'plain';
+      brush = cls.match(/\blanguage-(\w*)\b/);
       var yash = false;
       if ((hljs_yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
@@ -171,7 +175,7 @@ var hljsRun = function() {
         showLineNumber(block);
       }
       if (hljsDataLanguage(block) === undefined) {
-        var cls = block.className.split(' ');
+        cls = block.className.split(' ');
         cls.forEach(function(syntax) {
           if (hljs.getLanguage(syntax)) {
             hljsDataLanguage(block, syntax);
@@ -186,4 +190,4 @@ hljsLoad();
 hljsLoadExtensions();
 addEventListener('load', function() {
   hljsRun();
-})
+});

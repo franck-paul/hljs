@@ -1,3 +1,5 @@
+/*global jsToolBar */
+'use strict';
 jsToolBar.prototype.elements.hljsSpace = {type: 'space',
 	format: {
 		wysiwyg: true,
@@ -20,7 +22,7 @@ jsToolBar.prototype.elements.hljs = {
 		window.the_toolbar = this;
 		this.elements.hljs.data = {};
 
-		var p_win = window.open(this.elements.hljs.open_url,'dc_popup',
+		window.open(this.elements.hljs.open_url,'dc_popup',
 		'alwaysRaised=yes,dependent=yes,toolbar=yes,height=240,width=480,'+
 		'menubar=no,resizable=yes,scrollbars=yes,status=no');
 	}

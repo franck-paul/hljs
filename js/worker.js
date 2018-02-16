@@ -1,7 +1,10 @@
+/*global self, hljsExtentCbtpl */
+'use strict';
 self.onmessage = function(event) {
   var path = event.data[1] || ''; // Path URL of js
   var mode = event.data[2] || ''; // '' → std, 'mini', 'common', 'full'
   var syntax = event.data[3] || ''; // Syntax if specified in block
+  var result;
 
   // Load highlight.js script → loaded in hljs object
   self.importScripts(path + 'lib/js/highlight' + (mode ? '-' + mode : '') + '.pack.js');
@@ -18,9 +21,9 @@ self.onmessage = function(event) {
 
   // Run highlight.js
   if (syntax == '') {
-    var result = self.hljs.highlightAuto(event.data[0]);
+    result = self.hljs.highlightAuto(event.data[0]);
   } else {
-    var result = self.hljs.highlightAuto(event.data[0], [syntax]);
+    result = self.hljs.highlightAuto(event.data[0], [syntax]);
   }
   // Fix Markup as it is not done internally when using highlightAuto()
   result.value = self.hljs.fixMarkup(result.value);
@@ -33,4 +36,4 @@ self.onmessage = function(event) {
     language: syntax, // Language detected or specified
     result: result.value // HTML Result
   });
-}
+};

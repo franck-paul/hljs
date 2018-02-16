@@ -1,3 +1,6 @@
+/*global $, hljs, hljs_path, hljs_mode:true, hljs_current_mode:true, hljs_previous_theme:true, hljs_list:true, hljsExtentCbtpl */
+/*exported selectMode, selectTheme */
+'use strict';
 // Show list of languages
 function listLanguages(init) {
   var sc = document.createElement('script');
@@ -13,12 +16,12 @@ function listLanguages(init) {
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
       var ll = hljs.listLanguages().sort();
+      var list = '';
       if (!init) {
         // Show diff between current choosen list and the selected one
         var full = ll.concat(hljs_list.filter(function (item) {
             return ll.indexOf(item) < 0;
         }));
-        var list = '';
         full = full.sort();
         full.forEach(function(e) {
           if (list !== '') {
@@ -33,11 +36,11 @@ function listLanguages(init) {
           } else {
             list = list + e;
           }
-        })
+        });
       } else {
-        var list = ll.join(", ");
+        list = ll.join(', ');
       }
-      document.getElementById("syntaxes").innerHTML = (list ? '<br />' + list : '');
+      document.getElementById('syntaxes').innerHTML = (list ? '<br />' + list : '');
       if (init) {
         // Store current list choosen
         hljs_list = ll;
@@ -58,7 +61,7 @@ function selectMode() {
 function selectTheme() {
   var input = document.getElementById('theme');
   var theme = input.options[input.selectedIndex].value;
-  if (theme == '') { theme = 'default' };
+  if (theme == '') { theme = 'default'; }
   var $css = $('link[href^="' + hljs_path + 'lib%2Fcss%2F' + hljs_previous_theme + '.css"]');
   $css.attr('href', hljs_path + 'lib%2Fcss%2F' + theme + '.css');
   hljs_previous_theme = theme;

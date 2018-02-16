@@ -1,3 +1,5 @@
+/*global $, hljs, hljs_path, hljs_mode:true, hljsExtentCbtpl */
+'use strict';
 $(function() {
   $('#hljs-form').keyup(function(e) {
     // Cope with Escape key anyway in form
@@ -30,12 +32,13 @@ $(function() {
       // Get languages list
       var input = document.getElementById('syntax');
       var ll = hljs.listLanguages().sort();
-      var l = t = null;
+      var l = null;
+      var t = null;
       ll.forEach(function(e) {
         l = hljs.getLanguage(e);
         t = e;
         if (typeof l.aliases !== 'undefined') {
-          t = t + ', ' + l.aliases.join(", ");
+          t = t + ', ' + l.aliases.join(', ');
         }
         // Add new option to input combolist (value = e, label = t)
         var option = document.createElement('option');

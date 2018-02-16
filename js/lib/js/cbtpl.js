@@ -1,3 +1,5 @@
+/*exported hljsExtentCbtpl */
+'use strict';
 /*
 Language: cbtpl
 Requires: xml.js
@@ -14,12 +16,12 @@ var hljsExtentCbtpl = function(hljs) {
       hljs.C('<!-- #', '-->'),
       {
         cN: 'template-tag',
-        b: /\<tpl:/, e: /\>/,
+        b: /<tpl:/, e: /\>/,
         r: 10
       },
       {
         cN: 'template-tag',
-        b: /\<\/tpl:?/, e: /\>/,
+        b: /<\/tpl:?/, e: /\>/,
         r: 10
       },
       {
