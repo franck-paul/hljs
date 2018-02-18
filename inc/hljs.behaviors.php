@@ -28,7 +28,6 @@ class hljsBehaviors
             $url = $core->adminurl->get('admin.plugin.hljs', array('popup' => 1, 'plugin_id' => 'dcCKEditor'), '&');
             $url = urldecode($url);
             return
-            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $core->getVersion('hljs')) .
             '<script type="text/javascript">' . "\n" .
             dcPage::jsVar('hljs_title', __('Highlighted Code')) .
             dcPage::jsVar('hljs_popup_url', $url) .
