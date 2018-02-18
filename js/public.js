@@ -1,5 +1,6 @@
 /*global hljs, hljsExtentCbtpl */
 'use strict';
+
 // Set defaults
 var hljs_path = hljs_path || ''; // Path URL of js
 var hljs_mode = hljs_mode || ''; // '' → std, 'mini', 'common', 'full'

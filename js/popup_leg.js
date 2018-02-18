@@ -1,5 +1,6 @@
 /*global $ */
 'use strict';
+
 $(function() {
   // Cancel button fired
   $('#hljs-cancel').click(function() {

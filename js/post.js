@@ -1,5 +1,6 @@
 /*global jsToolBar */
 'use strict';
+
 jsToolBar.prototype.elements.hljsSpace = {type: 'space',
 	format: {
 		wysiwyg: true,

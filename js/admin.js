@@ -1,6 +1,7 @@
 /*global $, hljs, hljs_path, hljs_mode:true, hljs_current_mode:true, hljs_previous_theme:true, hljs_list:true, hljsExtentCbtpl */
 /*exported selectMode, selectTheme */
 'use strict';
+
 // Show list of languages
 function listLanguages(init) {
   var sc = document.createElement('script');

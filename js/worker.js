@@ -1,5 +1,6 @@
 /*global self, hljsExtentCbtpl */
 'use strict';
+
 self.onmessage = function(event) {
   var path = event.data[1] || ''; // Path URL of js
   var mode = event.data[2] || ''; // '' → std, 'mini', 'common', 'full'

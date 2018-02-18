@@ -1,5 +1,6 @@
 /*global $, hljs, hljs_path, hljs_mode:true, hljsExtentCbtpl */
 'use strict';
+
 $(function() {
   $('#hljs-form').keyup(function(e) {
     // Cope with Escape key anyway in form
