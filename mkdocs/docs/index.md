@@ -1,7 +1,7 @@
 # HLJS: Syntax highlighter plugin for Dotclear 2
 
 !!! tip "Current release"
-    [0.3 — 2018-02-12][ot-dl] (Dotclear 2.13+)
+    [0.4.1 — 2018-02-18][ot-dl] (Dotclear 2.13+)
 
 ![](img/icon-big.png)
 
@@ -67,4 +67,4 @@ The plugin **must** be activated before being used on your blog[^1]. See [user g
 
 [^1]: Go to the main page of the HLJS plugin to activated it (Blog section of the Dotclear admin menu).
 
-[ot-dl]: https://open-time.net/post/2018/02/14/Plugin-hljs-4-pour-Dotclear
+[ot-dl]: https://open-time.net/post/2018/02/18/Plugin-hljs-041-pour-Dotclear
