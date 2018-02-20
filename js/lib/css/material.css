@@ -50,7 +50,8 @@
   color: rgb(112,214,255);
 }
 
-.hljs-tag {
+.hljs-tag,
+.hljs-attr {
   color: #abb2bf;
 }
 
