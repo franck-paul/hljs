@@ -1,3 +1,9 @@
+[0.5 - 2018-02-20](https://open-time.net/post/2018/02/20/Plugin-hljs-05-pour-Dotclear)
+================
+
+* cbtpl/dctpl syntax extended (tags/variables and attributes are now highlighted)
+* material theme adapted
+
 [0.4.1 - 2018-02-18](https://open-time.net/post/2018/02/18/Plugin-hljs-041-pour-Dotclear)
 ================
 
