@@ -1,4 +1,5 @@
 /* Languages list */
+
 #hljs_options #syntaxes ins {
   font-weight: bold;
   text-decoration: none;
@@ -7,6 +8,7 @@
   opacity: .6;
 }
 /* Code sample */
+
 .hljs-wrapper {
   border: 1px solid;
 }

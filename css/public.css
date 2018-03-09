@@ -8,6 +8,7 @@
   font-size: 1em;
 }
 /* Syntax badge */
+
 .hljs-wrapper {
   position: relative;
 }
@@ -22,10 +23,12 @@
   background-color: #d54e21;
 }
 /* No line numbers */
+
 .hljs-no-gutter {
   padding: .5em;
 }
 /* Line numbers */
+
 .hljs-line-number {
   display: block;
   float: left;

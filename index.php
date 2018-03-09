@@ -1,16 +1,17 @@
 <?php
-# -- BEGIN LICENSE BLOCK ----------------------------------
-# This file is part of hljs, a plugin for Dotclear 2.
-#
-# Copyright (c) Franck Paul and contributors
-# carnet.franck.paul@gmail.com
-#
-# Licensed under the GPL version 2.0 license.
-# A copy of this license is available in LICENSE file or at
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-# -- END LICENSE BLOCK ------------------------------------
+/**
+ * @brief hljs, a plugin for Dotclear 2
+ *
+ * @package Dotclear
+ * @subpackage Plugins
+ *
+ * @author Franck Paul and contributors
+ *
+ * @copyright Franck Paul carnet.franck.paul@gmail.com
+ * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
-if (!defined('DC_CONTEXT_ADMIN')) {exit;}
+if (!defined('DC_CONTEXT_ADMIN')) {return;}
 
 $plugin_version = $core->getVersion('hljs');
 
@@ -35,32 +36,32 @@ if (!empty($_REQUEST['popup'])) {
     );
 
     echo
-      '<html><head>' .
-      '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
-      '<script>' .
-      'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
-      'var hljs_mode = "' . $mode . '";' .
-      '</script>';
+    '<html><head>' .
+    '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
+    '<script>' .
+    'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
+        'var hljs_mode = "' . $mode . '";' .
+        '</script>';
     echo dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
-      echo
+        echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
     } else {
-      echo
+        echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_leg.js')), $plugin_version);
     }
     echo
-      '</head><body>' .
-      '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
-      '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
-      '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
-      form::combo('syntax', $hljs_brushes, '', '', '', false, 'autofocus') . '</label></p>' .
-      '<p>' .
-      '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
-      ' ' .
-      '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
-      '</p>' .
-      '</form></body></html>';
+    '</head><body>' .
+    '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
+    '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
+    '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
+    form::combo('syntax', $hljs_brushes, '', '', '', false, 'autofocus') . '</label></p>' .
+    '<p>' .
+    '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
+    ' ' .
+    '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
+        '</p>' .
+        '</form></body></html>';
     return;
 }
 
