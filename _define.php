@@ -17,12 +17,12 @@ $this->registerModule(
     "Code highlight",            // Name
     "highlight.js for Dotclear", // Description
     "Franck Paul",               // Author
-    '0.5',                       // Version
-    array(
-        'requires'    => array(array('core', '2.13')),
+    '0.6',                       // Version
+    [
+        'requires'    => [['core', '2.13']],
         'permissions' => 'contentadmin',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'details'     => 'https://open-time.net/docs/plugins/hljs/',
         'type'        => 'plugin'
-    )
+    ]
 );

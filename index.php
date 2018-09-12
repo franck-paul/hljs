@@ -28,12 +28,12 @@ $syntaxehl   = (boolean) $core->blog->settings->hljs->syntaxehl;
 $badge       = (boolean) $core->blog->settings->hljs->badge;
 
 if (!empty($_REQUEST['popup'])) {
-    $hljs_brushes = array(
+    $hljs_brushes = [
         // Index = label
         // Value = language code
         __('Automatic')  => '',
         __('Plain Text') => 'plain'
-    );
+    ];
 
     echo
     '<html><head>' .
@@ -108,24 +108,24 @@ if (!empty($_POST['saveconfig'])) {
 <body>
 <?php
 echo dcPage::breadcrumb(
-    array(
+    [
         html::escapeHTML($core->blog->name) => '',
         __('Code highlight')                => ''
-    ));
+    ]);
 echo dcPage::notices();
 
-$combo_mode = array(
+$combo_mode = [
     __('Minimum (23 languages, 45 Kb)') => 'min',
     __('Default (46 languages, 86 Kb)') => '',
     __('Common (92 languages, 240 Kb)') => 'common',
     __('Full (176 languages, 515 Kb)')  => 'full'
-);
+];
 
-$combo_theme = array(
+$combo_theme = [
     __('Default') => ''
-);
+];
 // Populate theme list
-$themes_list = array();
+$themes_list = [];
 $themes_root = dirname(__FILE__) . '/js/lib/css/';
 if (is_dir($themes_root) && is_readable($themes_root)) {
     if (($d = @dir($themes_root)) !== false) {
@@ -142,7 +142,7 @@ if (is_dir($themes_root) && is_readable($themes_root)) {
 foreach ($themes_list as $theme_id) {
     if ($theme_id != 'default') {
         // Capitalize each word, replace dash by space, add a space before numbers
-        $theme_name               = preg_replace('/([0-9]+)/', ' $1', ucwords(str_replace(array('-', '.', '_'), ' ', $theme_id)));
+        $theme_name               = preg_replace('/([0-9]+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
         $combo_theme[$theme_name] = $theme_id;
     }
 }

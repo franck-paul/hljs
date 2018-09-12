@@ -13,7 +13,7 @@
 
 class hljsBehaviors
 {
-    public static function adminPostEditor($editor = '', $context = '', array $tags = array(), $syntax = '')
+    public static function adminPostEditor($editor = '', $context = '', array $tags = [], $syntax = '')
     {
         global $core;
 
@@ -26,7 +26,7 @@ class hljsBehaviors
             dcPage::jsVar('jsToolBar.prototype.elements.hljs.title', __('Highlighted Code')) .
                 "</script>\n";
         } else {
-            $url = $core->adminurl->get('admin.plugin.hljs', array('popup' => 1, 'plugin_id' => 'dcCKEditor'), '&');
+            $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
             $url = urldecode($url);
             return
             '<script type="text/javascript">' . "\n" .
@@ -38,30 +38,30 @@ class hljsBehaviors
 
     public static function ckeditorExtraPlugins(ArrayObject $extraPlugins, $context = '')
     {
-        $extraPlugins[] = array(
+        $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
             'url'    => DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/'
-        );
+        ];
     }
 
     public static function coreInitWikiPost($wiki2xhtml)
     {
         global $core;
 
-        $wiki2xhtml->registerFunction('macro:hljs', array('hljsBehaviors', 'transform'));
+        $wiki2xhtml->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
 
         $core->blog->settings->addNameSpace('hljs');
 
         if ((boolean) $core->blog->settings->hljs->yash) {
             // Add Yash compatibility macro
-            $wiki2xhtml->registerFunction('macro:yash', array('hljsBehaviors', 'transformYash'));
+            $wiki2xhtml->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
         }
 
         if ((boolean) $core->blog->settings->hljs->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (self::$syntaxehl_brushes as $brush => $alias) {
-                $wiki2xhtml->registerFunction('macro:[' . $brush . ']', array('hljsBehaviors', 'transformSyntaxehl'));
+                $wiki2xhtml->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
             }
         }
     }
@@ -103,7 +103,7 @@ class hljsBehaviors
     // Private
 
     // List of Yash aliases
-    private static $yash_brushes = array(
+    private static $yash_brushes = [
         'plain'       => 'plain',
         'txt'         => 'plain',
         'applescript' => 'applescript',
@@ -134,10 +134,10 @@ class hljsBehaviors
         'vb'          => 'vbnet',
         'xml'         => 'xml',
         'yaml'        => 'yaml'
-    );
+    ];
 
     // List of SyntaxHL aliases
-    private static $syntaxehl_brushes = array(
+    private static $syntaxehl_brushes = [
         '4cs'           => '',
         'abap'          => '',
         'actionscript'  => 'actionscript',
@@ -314,5 +314,5 @@ class hljsBehaviors
         'xorg_conf'     => '',
         'xpp'           => '',
         'z80'           => ''
-    );
+    ];
 }

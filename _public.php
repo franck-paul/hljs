@@ -13,8 +13,8 @@
 
 if (!defined('DC_RC_PATH')) {return;}
 
-$core->addBehavior('publicHeadContent', array('hljsPublicBehaviors', 'publicHeadContent'));
-$core->addBehavior('publicFooterContent', array('hljsPublicBehaviors', 'publicFooterContent'));
+$core->addBehavior('publicHeadContent', ['hljsPublicBehaviors', 'publicHeadContent']);
+$core->addBehavior('publicFooterContent', ['hljsPublicBehaviors', 'publicFooterContent']);
 
 class hljsPublicBehaviors
 {

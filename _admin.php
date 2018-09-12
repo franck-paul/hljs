@@ -22,5 +22,5 @@ $_menu['Blog']->addItem(__('Syntax highlighting'),
     preg_match('/plugin.php\?p=hljs(&.*)?$/', $_SERVER['REQUEST_URI']),
     $core->auth->check('contentadmin', $core->blog->id));
 
-$core->addBehavior('adminPostEditor', array('hljsBehaviors', 'adminPostEditor'));
-$core->addBehavior('ckeditorExtraPlugins', array('hljsBehaviors', 'ckeditorExtraPlugins'));
+$core->addBehavior('adminPostEditor', ['hljsBehaviors', 'adminPostEditor']);
+$core->addBehavior('ckeditorExtraPlugins', ['hljsBehaviors', 'ckeditorExtraPlugins']);
