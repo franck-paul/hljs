@@ -14,7 +14,7 @@ var hljs_ww = !!window.Worker;
 
 // Utility function: hljsAddClass()
 function hljsAddClass(element, classname) {
-  var currentClassList = (element.className || '').split(/\s+/);
+  const currentClassList = (element.className || '').split(/\s+/);
   currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
   element.className = currentClassList.join(' ').trim();
 }
@@ -31,11 +31,11 @@ function hljsDataLanguage(element, syntax) {
 }
 
 // highlight.js script loader
-var hljsLoad = function() {
+const hljsLoad = function() {
   if (!hljs_ww || !hljs_use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
-    var hljs_sc = document.createElement('script');
-    hljs_sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
+    const hljs_sc = document.createElement('script');
+    hljs_sc.src = `${hljs_path}lib/js/highlight${hljs_mode ? '-' + hljs_mode : ''}.pack.js`; // URL
     hljs_sc.type = 'text/javascript';
     if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
@@ -45,11 +45,11 @@ var hljsLoad = function() {
 };
 
 // highlight.js extensions script loader
-var hljsLoadExtensions = function() {
+const hljsLoadExtensions = function() {
   if (!hljs_ww || !hljs_use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
-    var hljs_sc = document.createElement('script');
-    hljs_sc.src = hljs_path + 'lib/js/cbtpl.js'; // URL
+    const hljs_sc = document.createElement('script');
+    hljs_sc.src = `${hljs_path}lib/js/cbtpl.js`; // URL
     hljs_sc.type = 'text/javascript';
     if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
@@ -59,29 +59,29 @@ var hljsLoadExtensions = function() {
 };
 
 // highlight.js script runner
-var hljsRun = function() {
+const hljsRun = function() {
   if (hljs_yash) {
     // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
-    var yb = document.querySelectorAll('pre[class^="brush:"]');
+    const yb = document.querySelectorAll('pre[class^="brush:"]');
     yb.forEach(function(block) {
-      block.innerHTML = '<code class="' + block.className + '">' + block.innerHTML.trim() + '</code>';
+      block.innerHTML = `<code class="${block.className}">${block.innerHTML.trim()}</code>`;
     });
   }
 
-  var sel = 'pre code';
-  var blocks = document.querySelectorAll(sel);
+  const sel = 'pre code';
+  const blocks = document.querySelectorAll(sel);
 
   blocks.forEach(function(block) {
 
     // Utility function to display line numbers
-    var showLineNumber = function(e) {
+    const showLineNumber = function(e) {
       e.innerHTML =
         '<span class="hljs-line-number"></span>' +
         '\n' + e.innerHTML + '\n' +
         '<span class="hljs-cl"></span>';
-      var num = e.innerHTML.split(/\n/).length;
-      for (var j = 0; j < num; j++) {
-        var line_num = e.getElementsByTagName('span')[0];
+      const num = e.innerHTML.split(/\n/).length;
+      for (let j = 0; j < num; j++) {
+        const line_num = e.getElementsByTagName('span')[0];
         line_num.innerHTML += '<span>' + (j == 0 || j == num - 1 ? '&nbsp;' : j) + '</span>';
       }
     };
@@ -99,9 +99,9 @@ var hljsRun = function() {
     block.textContent = block.textContent.trim();
 
     // Run engine
-    var cls;
-    var syntax = '';
-    var brush;
+    let cls;
+    let syntax = '';
+    let brush;
     if (hljs_ww && hljs_use_ww) {
       // Get specified syntax if any
       cls = block.className;
@@ -120,12 +120,12 @@ var hljsRun = function() {
       }
 
       // Create web worker
-      var worker = new Worker(hljs_path + 'worker.js');
+      const worker = new Worker(hljs_path + 'worker.js');
       // Cope with web worker returned message
       worker.onmessage = function(event) {
         // Web worker send result
         block.innerHTML = event.data.result;
-        var syntax = event.data.language;
+        const syntax = event.data.language;
         hljsAddClass(block, syntax);
         hljsDataLanguage(block, syntax);
         if (hljs_show_line) {
@@ -146,7 +146,7 @@ var hljsRun = function() {
       cls = block.className;
       syntax = 'plain';
       brush = cls.match(/\blanguage-(\w*)\b/);
-      var yash = false;
+      let yash = false;
       if ((hljs_yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush\:(\w*)\b/);

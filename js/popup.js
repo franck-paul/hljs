@@ -19,22 +19,22 @@ $(function() {
   });
 
   // Populate language list combo
-  var sc = document.createElement('script');
-  sc.src = hljs_path + 'lib/js/highlight' + (hljs_mode ? '-' + hljs_mode : '') + '.pack.js'; // URL
+  const sc = document.createElement('script');
+  sc.src = `${hljs_path}lib/js/highlight${hljs_mode ? '-' + hljs_mode : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
   sc.onload = function() {
     // Load extension
-    var sce = document.createElement('script');
-    sce.src = hljs_path + 'lib/js/cbtpl.js'; // URL
+    const sce = document.createElement('script');
+    sce.src = `${hljs_path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
     sce.onload = function() {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
-      var input = document.getElementById('syntax');
-      var ll = hljs.listLanguages().sort();
-      var l = null;
-      var t = null;
+      const input = document.getElementById('syntax');
+      const ll = hljs.listLanguages().sort();
+      let l = null;
+      let t = null;
       ll.forEach(function(e) {
         l = hljs.getLanguage(e);
         t = e;
@@ -42,7 +42,7 @@ $(function() {
           t = t + ', ' + l.aliases.join(', ');
         }
         // Add new option to input combolist (value = e, label = t)
-        var option = document.createElement('option');
+        const option = document.createElement('option');
         option.text = t;
         option.value = e;
         input.add(option, null);

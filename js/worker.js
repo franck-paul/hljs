@@ -2,15 +2,15 @@
 'use strict';
 
 self.onmessage = function(event) {
-  var path = event.data[1] || ''; // Path URL of js
-  var mode = event.data[2] || ''; // '' → std, 'mini', 'common', 'full'
-  var syntax = event.data[3] || ''; // Syntax if specified in block
-  var result;
+  const path = event.data[1] || ''; // Path URL of js
+  const mode = event.data[2] || ''; // '' → std, 'mini', 'common', 'full'
+  let syntax = event.data[3] || ''; // Syntax if specified in block
+  let result;
 
   // Load highlight.js script → loaded in hljs object
-  self.importScripts(path + 'lib/js/highlight' + (mode ? '-' + mode : '') + '.pack.js');
+  self.importScripts(`${path}lib/js/highlight${mode ? '-' + mode : ''}.pack.js`);
   // Load highlight.js extensions
-  self.importScripts(path + 'lib/js/cbtpl.js');
+  self.importScripts(`${path}lib/js/cbtpl.js`);
 
   // Register extensions
   self.hljs.registerLanguage('cbtpl', hljsExtentCbtpl);

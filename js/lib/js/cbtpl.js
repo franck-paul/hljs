@@ -7,34 +7,34 @@ Author: Franck Paul <carnet.franck.paul@gmail.com>
 Description: Clearbricks templates (used by Dotclear)
 Category: template
 */
-var hljsExtentCbtpl = function(hljs) {
-  var e = "[A-Za-z0-9\\._:-]+",
-    t = {
-      eW: !0,
-      i: /</,
+const hljsExtentCbtpl = function(hljs) {
+  const e = "[A-Za-z0-9\\._:-]+";
+  const t = {
+    eW: !0,
+    i: /</,
+    r: 0,
+    c: [{
+      cN: "attr",
+      b: e,
+      r: 0
+    }, {
+      b: /=\s*/,
       r: 0,
       c: [{
-        cN: "attr",
-        b: e,
-        r: 0
-      }, {
-        b: /=\s*/,
-        r: 0,
-        c: [{
-          cN: "string",
-          endsParent: !0,
-          v: [{
-            b: /"/,
-            e: /"/
-          }, {
-            b: /'/,
-            e: /'/
-          }, {
-            b: /[^\s"'=<>`]+/
-          }]
+        cN: "string",
+        endsParent: !0,
+        v: [{
+          b: /"/,
+          e: /"/
+        }, {
+          b: /'/,
+          e: /'/
+        }, {
+          b: /[^\s"'=<>`]+/
         }]
       }]
-    };
+    }]
+  };
   return {
     aliases: ['dctpl'],
     cI: false,
@@ -46,9 +46,9 @@ var hljsExtentCbtpl = function(hljs) {
         e: /\>/,
         r: 10,
         c: [{
-            cN: "name",
-            b: /[^}}{{\/><\s]+/,
-            r: 0
+          cN: "name",
+          b: /[^}}{{\/><\s]+/,
+          r: 0
         }, t]
       }, {
         cN: 'template-tag',
@@ -56,9 +56,9 @@ var hljsExtentCbtpl = function(hljs) {
         e: /\>/,
         r: 10,
         c: [{
-            cN: "name",
-            b: /[^}}{{\/><\s]+/,
-            r: 0
+          cN: "name",
+          b: /[^}}{{\/><\s]+/,
+          r: 0
         }]
       }, {
         cN: 'template-variable',
@@ -66,9 +66,9 @@ var hljsExtentCbtpl = function(hljs) {
         e: /}}/,
         r: 10,
         c: [{
-            cN: "name",
-            b: /[^}}{{\/><\s]+/,
-            r: 0
+          cN: "name",
+          b: /[^}}{{\/><\s]+/,
+          r: 0
         }, t]
       }
     ]

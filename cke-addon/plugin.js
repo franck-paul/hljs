@@ -1,14 +1,18 @@
+/*global $, CKEDITOR, hljs_popup_url, hljs_title */
+'use strict';
+
 CKEDITOR.plugins.add('hljs', {
   init: function(editor) {
 
     editor.addCommand('hljsCommand', {
-      exec: function(editor) {
-        var popup_size = {
-          'width': 480,
-          'height': 240
-        };
-        var url = hljs_popup_url.replace(/&amp;/g, '&');
-        $.toolbarPopup(url, popup_size);
+      exec: function() {
+        $.toolbarPopup(
+          hljs_popup_url.replace(/&amp;/g, '&'), // URL
+          { // Popup size
+            'width': 480,
+            'height': 240
+          }
+        );
       }
     });
 
