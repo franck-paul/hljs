@@ -23,6 +23,7 @@ $this->registerModule(
         'permissions' => 'contentadmin',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'details'     => 'https://open-time.net/docs/plugins/hljs/',
+        'support'     => 'https://github.com/franck-paul/hljs',
         'type'        => 'plugin'
     ]
 );
