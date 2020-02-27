@@ -19,7 +19,7 @@ $this->registerModule(
     "Franck Paul",               // Author
     '0.6',                       // Version
     [
-        'requires'    => [['core', '2.13']],
+        'requires'    => [['core', '2.14']],
         'permissions' => 'contentadmin',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'details'     => 'https://open-time.net/docs/plugins/hljs/',

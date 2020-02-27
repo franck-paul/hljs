@@ -55,7 +55,7 @@ if (!empty($_REQUEST['popup'])) {
     '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
     '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
     '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
-    form::combo('syntax', $hljs_brushes, '', '', '', false, 'autofocus') . '</label></p>' .
+    form::combo('syntax', $hljs_brushes, array('extra_html' => 'autofocus')) . '</label></p>' .
     '<p>' .
     '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
     ' ' .
@@ -159,10 +159,10 @@ foreach ($themes_list as $theme_id) {
     <div class="two-cols clearfix">
       <div class="col">
         <p class="field"><label for="theme" class="classic"><?php echo __('Theme:'); ?> </label>
-          <?php echo form::combo('theme', $combo_theme, $theme, '', '', false, 'onchange="selectTheme()"'); ?>
+          <?php echo form::combo('theme', $combo_theme, ['default' => $theme]); ?>
         </p>
         <p class="field"><label for="mode" class="classic"><?php echo __('Set of languages:'); ?> </label>
-          <?php echo form::combo('mode', $combo_mode, $mode, '', '', false, 'onchange="selectMode()"'); ?>
+          <?php echo form::combo('mode', $combo_mode, ['default' => $mode]); ?>
         </p>
         <p class="info"><?php echo __('List of languages:'); ?><br /><span id="syntaxes"></span>
         </p>

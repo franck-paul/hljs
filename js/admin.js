@@ -1,5 +1,4 @@
 /*global $, hljs, hljsExtentCbtpl, hljs_config */
-/*exported selectMode, selectTheme */
 'use strict';
 
 // Show list of languages
@@ -72,4 +71,6 @@ function selectTheme() {
 
 $(document).ready(function() {
   listLanguages(true);
+  $('#theme').on('change', selectTheme);
+  $('#mode').on('change', selectMode);
 });

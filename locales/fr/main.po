@@ -47,7 +47,7 @@ msgid "Common (92 languages, 284 Kb)"
 msgstr "Commun (92 syntaxes, 284 Kb)"
 
 msgid "Full (185 languages, 731 Kb)"
-msgstr "Complet (176 syntaxes, 731 Kb)"
+msgstr "Complet (185 syntaxes, 731 Kb)"
 
 msgid "Enable Code highlight"
 msgstr "Activer la coloration syntaxique du code"
