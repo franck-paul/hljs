@@ -38,11 +38,11 @@ if (!empty($_REQUEST['popup'])) {
     echo
     '<html><head>' .
     '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
-    '<script>' .
-    'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";' .
-        'var hljs_mode = "' . $mode . '";' .
-        '</script>';
-    echo dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
+    dcPage::jsJson('hljs_config', [
+        'path' => dcPage::getPF('hljs/js/'),
+        'mode' => $mode
+    ]) .
+    dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
         echo
         dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
@@ -184,21 +184,19 @@ foreach ($themes_list as $theme_id) {
 echo dcPage::cssLoad(dcPage::getPF('hljs/css/public.css', $plugin_version));
 echo dcPage::cssLoad(dcPage::getPF('hljs/css/admin.css', $plugin_version));
 echo dcPage::cssLoad(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css', $plugin_version));
+echo dcPage::jsJson('hljs_config', [
+    'path'           => urldecode(dcPage::getPF('hljs/js/')),
+    'mode'           => $mode,
+    'current_mode'   => $mode,
+    'list'           => [],
+    'show_line'      => $hide_gutter ? 0 : 1,
+    'badge'          => $badge ? 1 : 0,
+    'use_ww'         => $web_worker ? 1 : 0,
+    'yash'           => $yash ? 1 : 0,
+    'theme'          => $theme ? $theme : 'default',
+    'previous_theme' => $theme ? $theme : 'default'
+]);
 ?>
-        <script>
-          <?php
-echo 'var hljs_path = "' . dcPage::getPF('hljs/js/') . '";';
-echo 'var hljs_mode = "' . $mode . '";';
-echo 'var hljs_current_mode = hljs_mode;';
-echo 'var hljs_list = [];';
-echo 'var hljs_show_line = ' . ($hide_gutter ? '0' : '1') . ';';
-echo 'var hljs_badge = ' . ($badge ? '1' : '0') . ';';
-echo 'var hljs_use_ww = ' . ($web_worker ? '1' : '0') . ';';
-echo 'var hljs_yash = ' . ($yash ? '1' : '0') . ';';
-echo 'var hljs_theme = "' . ($theme ? $theme : 'default') . '";';
-echo 'var hljs_previous_theme = hljs_theme;';
-?>
-        </script>
         <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/public.js', $plugin_version); ?>"></script>
         <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/admin.js', $plugin_version); ?>"></script>
       </div>

@@ -1,4 +1,4 @@
-/*global $, hljs, hljs_path, hljs_mode:true, hljsExtentCbtpl */
+/*global $, getData, hljs, hljsExtentCbtpl */
 'use strict';
 
 $(function() {
@@ -18,14 +18,16 @@ $(function() {
     }
   });
 
+  let hljs_config = getData('hljs_config');
+
   // Populate language list combo
   const sc = document.createElement('script');
-  sc.src = `${hljs_path}lib/js/highlight${hljs_mode ? '-' + hljs_mode : ''}.pack.js`; // URL
+  sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
   sc.onload = function() {
     // Load extension
     const sce = document.createElement('script');
-    sce.src = `${hljs_path}lib/js/cbtpl.js`; // URL
+    sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
     sce.onload = function() {
       // Register extensions

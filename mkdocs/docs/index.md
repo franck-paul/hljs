@@ -56,7 +56,7 @@ Will be rendered as (using Material theme):
 
 The plugin may be downloaded and installed from following sources:
 
- * [DotAddict](http://plugins.dotaddict.org/dc2/details/hljs)
+ * [DotAddict](https://plugins.dotaddict.org/dc2/details/hljs)
  * [Open-Time][ot-dl]
 
 Or directly from the administration plugins page of Dotclear

@@ -3,12 +3,12 @@
 
 $(function() {
   // Cancel button fired
-  $('#hljs-cancel').click(function() {
+  $('#hljs-cancel').on('click', function() {
     window.close();
   });
 
   // Ok button fired
-  $('#hljs-ok').click(function(e) {
+  $('#hljs-ok').on('click', function(e) {
     e.preventDefault();
     sendClose();
     window.close();

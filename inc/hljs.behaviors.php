@@ -21,18 +21,18 @@ class hljsBehaviors
 
         if ($editor == 'dcLegacyEditor') {
             return
-            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs')) .
-            '<script type="text/javascript">' . "\n" .
-            dcPage::jsVar('jsToolBar.prototype.elements.hljs.title', __('Highlighted Code')) .
-                "</script>\n";
+            dcPage::jsJson('hljs_editor', [
+                'title' => __('Highlighted Code')
+            ]) .
+            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs'));
         } else {
             $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
             $url = urldecode($url);
             return
-            '<script type="text/javascript">' . "\n" .
-            dcPage::jsVar('hljs_title', __('Highlighted Code')) .
-            dcPage::jsVar('hljs_popup_url', $url) .
-                "</script>\n";
+            dcPage::jsJson('hljs_editor', [
+                'title'     => __('Highlighted Code'),
+                'popup_url' => $url
+            ]);
         }
     }
 

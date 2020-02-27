@@ -1,4 +1,4 @@
-/*global jsToolBar */
+/*global jsToolBar, getData */
 'use strict';
 
 jsToolBar.prototype.elements.hljsSpace = {
@@ -29,6 +29,8 @@ jsToolBar.prototype.elements.hljs = {
       'menubar=no,resizable=yes,scrollbars=yes,status=no');
   }
 };
+
+jsToolBar.prototype.elements.hljs.title = getData('hljs_editor', false).title;
 
 jsToolBar.prototype.elements.hljs.fn.wiki = function() {
   this.elements.hljs.popup.call(this);

@@ -55,12 +55,15 @@ class hljsPublicBehaviors
         $core->blog->settings->addNamespace('hljs');
         if ($core->blog->settings->hljs->active) {
             echo
-            dcUtils::jsVar('hljs_path', $core->blog->getPF('hljs/js/')) .
-            dcUtils::jsVar('hljs_mode', ($core->blog->settings->hljs->mode ?: '')) .
-            dcUtils::jsVar('hljs_show_line', ($core->blog->settings->hljs->hide_gutter ? 0 : 1)) .
-            dcUtils::jsVar('hljs_badge', ($core->blog->settings->hljs->badge ? 1 : 0)) .
-            dcUtils::jsVar('hljs_use_ww', ($core->blog->settings->hljs->web_worker ? 1 : 0)) .
-            dcUtils::jsVar('hljs_yash', ($core->blog->settings->hljs->yash ? 1 : 0)) .
+            dcUtils::jsJson('hljs_config', [
+                'path'      => urldecode($core->blog->getPF('hljs/js/')),
+                'mode'      => $core->blog->settings->hljs->mode ?: '',
+                'show_line' => $core->blog->settings->hljs->hide_gutter ? 0 : 1,
+                'badge'     => $core->blog->settings->hljs->badge ? 1 : 0,
+                'use_ww'    => $core->blog->settings->hljs->web_worker ? 1 : 0,
+                'yash'      => $core->blog->settings->hljs->yash ? 1 : 0
+            ]);
+            echo
             dcUtils::jsLoad($core->blog->getPF('hljs/js/public.js'));
         }
     }

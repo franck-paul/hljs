@@ -1,16 +1,18 @@
-/*global hljs, hljsExtentCbtpl */
+/*global getData, hljs, hljsExtentCbtpl */
 'use strict';
 
+var hljs_config = getData('hljs_config');
+
 // Set defaults
-var hljs_path = hljs_path || ''; // Path URL of js
-var hljs_mode = hljs_mode || ''; // '' → std, 'mini', 'common', 'full'
-var hljs_show_line = hljs_show_line && true; // Show/Hide line numbers
-var hljs_badge = hljs_badge || false; // Use or not web workers
-var hljs_use_ww = hljs_use_ww || false; // Use or not web workers
-var hljs_yash = hljs_yash && true; // Yash compatibility
+hljs_config.path = hljs_config.path || ''; // Path URL of js
+hljs_config.mode = hljs_config.mode || ''; // '' → std, 'mini', 'common', 'full'
+hljs_config.show_line = hljs_config.show_line && true; // Show/Hide line numbers
+hljs_config.badge = hljs_config.badge || false; // Use or not web workers
+hljs_config.use_ww = hljs_config.use_ww || false; // Use or not web workers
+hljs_config.yash = hljs_config.yash && true; // Yash compatibility
 
 // Test browser support of web workers
-var hljs_ww = !!window.Worker;
+hljs_config.ww = !!window.Worker;
 
 // Utility function: hljsAddClass()
 function hljsAddClass(element, classname) {
@@ -21,7 +23,7 @@ function hljsAddClass(element, classname) {
 
 // Utility function: hljsDataLanguage()
 function hljsDataLanguage(element, syntax) {
-  if (hljs_badge) {
+  if (hljs_config.badge) {
     if (syntax !== undefined && syntax !== 'undefined' &&
       syntax !== 'plain' && syntax !== 'txt' && syntax !== 'text') {
       element.dataset.language = syntax;
@@ -32,10 +34,10 @@ function hljsDataLanguage(element, syntax) {
 
 // highlight.js script loader
 const hljsLoad = function() {
-  if (!hljs_ww || !hljs_use_ww) {
+  if (!hljs_config.ww || !hljs_config.use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
     const hljs_sc = document.createElement('script');
-    hljs_sc.src = `${hljs_path}lib/js/highlight${hljs_mode ? '-' + hljs_mode : ''}.pack.js`; // URL
+    hljs_sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
     hljs_sc.type = 'text/javascript';
     if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
@@ -46,10 +48,10 @@ const hljsLoad = function() {
 
 // highlight.js extensions script loader
 const hljsLoadExtensions = function() {
-  if (!hljs_ww || !hljs_use_ww) {
+  if (!hljs_config.ww || !hljs_config.use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
     const hljs_sc = document.createElement('script');
-    hljs_sc.src = `${hljs_path}lib/js/cbtpl.js`; // URL
+    hljs_sc.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
     hljs_sc.type = 'text/javascript';
     if (typeof hljs_sc.async !== 'undefined') {
       hljs_sc.async = true;
@@ -60,7 +62,7 @@ const hljsLoadExtensions = function() {
 
 // highlight.js script runner
 const hljsRun = function() {
-  if (hljs_yash) {
+  if (hljs_config.yash) {
     // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
     const yb = document.querySelectorAll('pre[class^="brush:"]');
     yb.forEach(function(block) {
@@ -91,7 +93,7 @@ const hljsRun = function() {
     // Add wrapper class to parent
     hljsAddClass(block.parentNode, 'hljs-wrapper');
     // Add no gutter class if necessary
-    if (!hljs_show_line) {
+    if (!hljs_config.show_line) {
       hljsAddClass(block, 'hljs-no-gutter');
     }
 
@@ -102,12 +104,12 @@ const hljsRun = function() {
     let cls;
     let syntax = '';
     let brush;
-    if (hljs_ww && hljs_use_ww) {
+    if (hljs_config.ww && hljs_config.use_ww) {
       // Get specified syntax if any
       cls = block.className;
       // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
       brush = cls.match(/\blanguage\-(\w*)\b/);
-      if ((hljs_yash) && (!brush || brush.length !== 2)) {
+      if ((hljs_config.yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush\:(\w*)\b/);
       }
@@ -120,7 +122,7 @@ const hljsRun = function() {
       }
 
       // Create web worker
-      const worker = new Worker(hljs_path + 'worker.js');
+      const worker = new Worker(hljs_config.path + 'worker.js');
       // Cope with web worker returned message
       worker.onmessage = function(event) {
         // Web worker send result
@@ -128,12 +130,12 @@ const hljsRun = function() {
         const syntax = event.data.language;
         hljsAddClass(block, syntax);
         hljsDataLanguage(block, syntax);
-        if (hljs_show_line) {
+        if (hljs_config.show_line) {
           showLineNumber(block);
         }
       };
       // Run web worker
-      worker.postMessage([block.textContent, hljs_path, hljs_mode, syntax]);
+      worker.postMessage([block.textContent, hljs_config.path, hljs_config.mode, syntax]);
     } else {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
@@ -147,7 +149,7 @@ const hljsRun = function() {
       syntax = 'plain';
       brush = cls.match(/\blanguage-(\w*)\b/);
       let yash = false;
-      if ((hljs_yash) && (!brush || brush.length !== 2)) {
+      if ((hljs_config.yash) && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush\:(\w*)\b/);
         if (brush && brush.length == 2) {
@@ -172,7 +174,7 @@ const hljsRun = function() {
       });
       // Run highlight.js
       hljs.highlightBlock(block);
-      if (hljs_show_line) {
+      if (hljs_config.show_line) {
         showLineNumber(block);
       }
       if (hljsDataLanguage(block) === undefined) {
