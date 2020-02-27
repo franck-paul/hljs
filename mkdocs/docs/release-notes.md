@@ -1,3 +1,9 @@
+[0.6 - 2020-02-27](https://github.com/franck-paul/hljs)
+================
+
+* Update highlight.js library from 9.12.0 to 9.18.1
+* jQuery 3 compliance and no more inline javascript
+
 [0.5 - 2018-02-20](https://open-time.net/post/2018/02/20/Plugin-hljs-05-pour-Dotclear)
 ================
 
