@@ -65,8 +65,8 @@ function selectTheme() {
   if (theme == '') {
     theme = 'default';
   }
-  const $css = $(`link[href^="${hljs_config.path}lib%2Fcss%2F${hljs_config.previous_theme}.css"]`);
-  $css.attr('href', `${hljs_config.path}lib%2Fcss%2F${theme}.css`);
+  const $css = $(`link[href^="${hljs_config.path}lib/css/${hljs_config.previous_theme}.css"]`);
+  $css.attr('href', `${hljs_config.path}lib/css/${theme}.css`);
   hljs_config.previous_theme = theme;
 }
 

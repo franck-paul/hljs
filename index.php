@@ -115,10 +115,10 @@ echo dcPage::breadcrumb(
 echo dcPage::notices();
 
 $combo_mode = [
-    __('Minimum (23 languages, 45 Kb)') => 'min',
-    __('Default (46 languages, 86 Kb)') => '',
-    __('Common (92 languages, 240 Kb)') => 'common',
-    __('Full (176 languages, 515 Kb)')  => 'full'
+    __('Minimum (23 languages, 53 Kb)') => 'min',
+    __('Default (46 languages, 93 Kb)') => '',
+    __('Common (92 languages, 284 Kb)') => 'common',
+    __('Full (185 languages, 731 Kb)')  => 'full'
 ];
 
 $combo_theme = [
@@ -180,11 +180,12 @@ foreach ($themes_list as $theme_id) {
   }
   return find(1, "1");
 }</code></pre>
-        <?php
-echo dcPage::cssLoad(dcPage::getPF('hljs/css/public.css', $plugin_version));
-echo dcPage::cssLoad(dcPage::getPF('hljs/css/admin.css', $plugin_version));
-echo dcPage::cssLoad(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css', $plugin_version));
-echo dcPage::jsJson('hljs_config', [
+<?php
+echo
+dcPage::cssLoad(urldecode(dcPage::getPF('hljs/css/public.css')), 'screen', $plugin_version) .
+dcPage::cssLoad(urldecode(dcPage::getPF('hljs/css/admin.css')), 'screen', $plugin_version) .
+dcPage::cssLoad(urldecode(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css')), 'screen', $plugin_version) .
+dcPage::jsJson('hljs_config', [
     'path'           => urldecode(dcPage::getPF('hljs/js/')),
     'mode'           => $mode,
     'current_mode'   => $mode,
@@ -195,10 +196,10 @@ echo dcPage::jsJson('hljs_config', [
     'yash'           => $yash ? 1 : 0,
     'theme'          => $theme ? $theme : 'default',
     'previous_theme' => $theme ? $theme : 'default'
-]);
+]) .
+dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/public.js')), $plugin_version) .
+dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/admin.js')), $plugin_version);
 ?>
-        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/public.js', $plugin_version); ?>"></script>
-        <script type="text/javascript" src="<?php echo dcPage::getPF('hljs/js/admin.js', $plugin_version); ?>"></script>
       </div>
     </div>
     <h3><?php echo __('Options'); ?></h3>
