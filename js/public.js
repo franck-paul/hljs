@@ -1,7 +1,11 @@
-/*global dotclear, hljs, hljsExtentCbtpl */
+/*global dotclear, hljs, hljsExtentCbtpl, getData */
 'use strict';
 
-var hljs_config = dotclear.getData('hljs_config');
+if (typeof dotclear.getData === "function") {
+  var hljs_config = dotclear.getData('hljs_config');
+} else {
+  var hljs_config = getData('hljs_config');
+}
 
 // Set defaults
 hljs_config.path = hljs_config.path || ''; // Path URL of js
