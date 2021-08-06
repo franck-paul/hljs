@@ -10,8 +10,9 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 $plugin_version = $core->getVersion('hljs');
 
@@ -55,20 +56,20 @@ if (!empty($_REQUEST['popup'])) {
     '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
     '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
     '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
-    form::combo('syntax', $hljs_brushes, array('extra_html' => 'autofocus')) . '</label></p>' .
+    form::combo('syntax', $hljs_brushes, ['extra_html' => 'autofocus']) . '</label></p>' .
     '<p>' .
     '<button type="button" id="hljs-ok" class="submit">' . __('Ok') . '</button>' .
     ' ' .
     '<button type="button" id="hljs-cancel">' . __('Cancel') . '</button>' .
         '</p>' .
         '</form></body></html>';
+
     return;
 }
 
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
-    try
-    {
+    try {
         $core->blog->settings->addNameSpace('hljs');
 
         $active      = (empty($_POST['active'])) ? false : true;

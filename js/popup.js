@@ -1,22 +1,22 @@
-/*global dotclear, $, getData, hljs, hljsExtentCbtpl */
+/*global dotclear, $, hljs, hljsExtentCbtpl */
 'use strict';
 
-$(function() {
+$(function () {
   // Cope with enter key in popup
   dotclear.enterKeyInForm('#hljs-form', '#hljs-ok', '#hljs-cancel');
 
-  let hljs_config = getData('hljs_config');
+  let hljs_config = dotclear.getData('hljs_config');
 
   // Populate language list combo
   const sc = document.createElement('script');
   sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
-  sc.onload = function() {
+  sc.onload = function () {
     // Load extension
     const sce = document.createElement('script');
     sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
-    sce.onload = function() {
+    sce.onload = function () {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
@@ -24,7 +24,7 @@ $(function() {
       const ll = hljs.listLanguages().sort();
       let l = null;
       let t = null;
-      ll.forEach(function(e) {
+      ll.forEach(function (e) {
         l = hljs.getLanguage(e);
         t = e;
         if (typeof l.aliases !== 'undefined') {

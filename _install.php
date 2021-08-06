@@ -10,16 +10,18 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 $new_version = $core->plugins->moduleInfo('hljs', 'version');
 $old_version = $core->getVersion('hljs');
 
-if (version_compare($old_version, $new_version, '>=')) {return;}
+if (version_compare($old_version, $new_version, '>=')) {
+    return;
+}
 
-try
-{
+try {
     $core->blog->settings->addNamespace('hljs');
     $core->blog->settings->hljs->put('active', false, 'boolean', '', false, true);
     $core->blog->settings->hljs->put('mode', '', 'string', '', false, true);
@@ -37,4 +39,5 @@ try
 } catch (Exception $e) {
     $core->error->add($e->getMessage());
 }
+
 return false;

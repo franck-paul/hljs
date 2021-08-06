@@ -10,14 +10,15 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
 class hljsBehaviors
 {
     public static function adminPostEditor($editor = '', $context = '', array $tags = [], $syntax = '')
     {
         global $core;
 
-        if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {return;}
+        if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
+            return;
+        }
 
         if ($editor == 'dcLegacyEditor') {
             return
@@ -25,15 +26,15 @@ class hljsBehaviors
                 'title' => __('Highlighted Code')
             ]) .
             dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs'));
-        } else {
-            $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
-            $url = urldecode($url);
-            return
+        }
+        $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
+        $url = urldecode($url);
+
+        return
             dcPage::jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
                 'popup_url' => $url
             ]);
-        }
     }
 
     public static function ckeditorExtraPlugins(ArrayObject $extraPlugins, $context = '')
@@ -81,8 +82,7 @@ class hljsBehaviors
         $text      = trim($text);
         $real_args = explode(' ', $args);
         $syntax    = empty($real_args[1]) ? 'plain' : $real_args[1];
-        $class     =
-        array_key_exists($syntax, self::$yash_brushes) && self::$yash_brushes[$syntax] != '' ?
+        $class     = array_key_exists($syntax, self::$yash_brushes) && self::$yash_brushes[$syntax] != '' ?
         ' class="language-' . self::$yash_brushes[$syntax] . '"' :
         '';
 
@@ -94,8 +94,7 @@ class hljsBehaviors
         // Try to find a supported language, if not set original
         $text      = trim($text);
         $real_args = preg_replace('/^(\[(.*)\]$)/', '$2', $args);
-        $class     = array_key_exists($real_args, self::$syntaxehl_brushes) &&
-        self::$syntaxehl_brushes[$real_args] != '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
+        $class     = array_key_exists($real_args, self::$syntaxehl_brushes) && self::$syntaxehl_brushes[$real_args] != '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
 
         return '<pre><code class="language-' . $class . '">' . htmlspecialchars($text) . '</code></pre>';
     }

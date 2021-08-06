@@ -10,8 +10,9 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_RC_PATH')) {return;}
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
 $core->addBehavior('publicHeadContent', ['hljsPublicBehaviors', 'publicHeadContent']);
 $core->addBehavior('publicFooterContent', ['hljsPublicBehaviors', 'publicFooterContent']);
@@ -29,9 +30,8 @@ class hljsPublicBehaviors
                 if (strpos('/', $custom_css) === 0) {
                     $css = $custom_css;
                 } else {
-                    $css =
-                    $core->blog->settings->system->themes_url . "/" .
-                    $core->blog->settings->system->theme . "/" .
+                    $css = $core->blog->settings->system->themes_url . '/' .
+                    $core->blog->settings->system->theme . '/' .
                         $custom_css;
                 }
             } else {

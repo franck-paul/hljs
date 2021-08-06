@@ -1,17 +1,20 @@
 .hljs-wrapper {
   padding: 0;
 }
+
 .hljs {
   padding: 0 .5em;
   white-space: pre;
   word-wrap: normal !important;
   font-size: 1.75ex;
 }
+
 /* Syntax badge */
 
 .hljs-wrapper {
   position: relative;
 }
+
 .hljs[data-language]::before {
   content: attr(data-language);
   position: absolute;
@@ -22,11 +25,13 @@
   color: #ffF;
   background-color: #d54e21;
 }
+
 /* No line numbers */
 
 .hljs-no-gutter {
   padding: .5em;
 }
+
 /* Line numbers */
 
 .hljs-line-number {
@@ -37,10 +42,12 @@
   text-align: right;
   opacity: .6;
 }
+
 .hljs-line-number span {
   display: block;
   padding: 0 .5em 0 1em;
 }
+
 .hljs-cl {
   display: block;
   clear: both;

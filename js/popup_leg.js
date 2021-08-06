@@ -1,15 +1,15 @@
 /*global $ */
 'use strict';
 
-$(function() {
+$(function () {
   // Cancel button fired
-  $('#hljs-cancel').on('click', function() {
+  $('#hljs-cancel').on('click', function () {
     window.close();
     return false;
   });
 
   // Ok button fired
-  $('#hljs-ok').on('click', function() {
+  $('#hljs-ok').on('click', function () {
     sendClose();
     window.close();
     return false;

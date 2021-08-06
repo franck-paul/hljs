@@ -6,12 +6,12 @@ function listLanguages(init) {
   const sc = document.createElement('script');
   sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
-  sc.onload = function() {
+  sc.onload = function () {
     // Load extension
     const sce = document.createElement('script');
     sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
-    sce.onload = function() {
+    sce.onload = function () {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
@@ -19,11 +19,13 @@ function listLanguages(init) {
       let list = '';
       if (!init) {
         // Show diff between current choosen list and the selected one
-        let full = ll.concat(hljs_config.list.filter(function(item) {
-          return ll.indexOf(item) < 0;
-        }));
+        let full = ll.concat(
+          hljs_config.list.filter(function (item) {
+            return ll.indexOf(item) < 0;
+          })
+        );
         full = full.sort();
-        full.forEach(function(e) {
+        full.forEach(function (e) {
           if (list !== '') {
             list = `${list}, `;
           }
@@ -40,7 +42,7 @@ function listLanguages(init) {
       } else {
         list = ll.join(', ');
       }
-      document.getElementById('syntaxes').innerHTML = (list ? `<br />${list}` : '');
+      document.getElementById('syntaxes').innerHTML = list ? `<br />${list}` : '';
       if (init) {
         // Store current list choosen
         hljs_config.list = ll;
@@ -69,7 +71,7 @@ function selectTheme() {
   hljs_config.previous_theme = theme;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   listLanguages(true);
   $('#theme').on('change', selectTheme);
   $('#mode').on('change', selectMode);

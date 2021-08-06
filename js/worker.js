@@ -1,7 +1,7 @@
 /*global self, hljsExtentCbtpl */
 'use strict';
 
-self.onmessage = function(event) {
+self.onmessage = function (event) {
   const path = event.data[1] || ''; // Path URL of js
   const mode = event.data[2] || ''; // '' → std, 'mini', 'common', 'full'
   let syntax = event.data[3] || ''; // Syntax if specified in block
@@ -17,7 +17,7 @@ self.onmessage = function(event) {
 
   // Configure highlight.js script
   self.hljs.configure({
-    tabReplace: '  '
+    tabReplace: '  ',
   });
 
   // Run highlight.js
@@ -35,6 +35,6 @@ self.onmessage = function(event) {
   // Return language detected (or set) and result
   self.postMessage({
     language: syntax, // Language detected or specified
-    result: result.value // HTML Result
+    result: result.value, // HTML Result
   });
 };

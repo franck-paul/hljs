@@ -4,9 +4,11 @@
   font-weight: bold;
   text-decoration: none;
 }
+
 #hljs_options #syntaxes del {
   opacity: .6;
 }
+
 /* Code sample */
 
 .hljs-wrapper {
