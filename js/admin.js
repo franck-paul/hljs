@@ -1,15 +1,15 @@
-/*global $, hljs, hljsExtentCbtpl, hljs_config */
+/*global $, hljs, hljsExtentCbtpl, dotclear */
 'use strict';
 
 // Show list of languages
 function listLanguages(init) {
   const sc = document.createElement('script');
-  sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
+  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${dotclear.hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
   sc.onload = function () {
     // Load extension
     const sce = document.createElement('script');
-    sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
+    sce.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
     sce.onload = function () {
       // Register extensions
@@ -20,7 +20,7 @@ function listLanguages(init) {
       if (!init) {
         // Show diff between current choosen list and the selected one
         let full = ll.concat(
-          hljs_config.list.filter(function (item) {
+          dotclear.hljs_config.list.filter(function (item) {
             return ll.indexOf(item) < 0;
           })
         );
@@ -29,7 +29,7 @@ function listLanguages(init) {
           if (list !== '') {
             list = `${list}, `;
           }
-          if (!hljs_config.list.includes(e)) {
+          if (!dotclear.hljs_config.list.includes(e)) {
             // Language added
             list = `${list}<ins>${e}</ins>`;
           } else if (!ll.includes(e)) {
@@ -45,7 +45,7 @@ function listLanguages(init) {
       document.getElementById('syntaxes').innerHTML = list ? `<br />${list}` : '';
       if (init) {
         // Store current list choosen
-        hljs_config.list = ll;
+        dotclear.hljs_config.list = ll;
       }
     };
     document.getElementsByTagName('head')[0].appendChild(sce);
@@ -55,9 +55,9 @@ function listLanguages(init) {
 // Update list of languages
 function selectMode() {
   const input = document.getElementById('mode');
-  hljs_config.mode = input.options[input.selectedIndex].value;
+  dotclear.hljs_config.mode = input.options[input.selectedIndex].value;
   listLanguages(false);
-  hljs_config.current_mode = hljs_config.mode;
+  dotclear.hljs_config.current_mode = dotclear.hljs_config.mode;
 }
 // Change theme CSS of code sample
 function selectTheme() {
@@ -66,9 +66,9 @@ function selectTheme() {
   if (theme == '') {
     theme = 'default';
   }
-  const $css = $(`link[href^="${hljs_config.path}lib/css/${hljs_config.previous_theme}.css"]`);
-  $css.attr('href', `${hljs_config.path}lib/css/${theme}.css`);
-  hljs_config.previous_theme = theme;
+  const $css = $(`link[href^="${dotclear.hljs_config.path}lib/css/${dotclear.hljs_config.previous_theme}.css"]`);
+  $css.attr('href', `${dotclear.hljs_config.path}lib/css/${theme}.css`);
+  dotclear.hljs_config.previous_theme = theme;
 }
 
 $(document).ready(function () {
