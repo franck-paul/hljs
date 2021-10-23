@@ -18,13 +18,14 @@ $this->registerModule(
     'Code highlight',            // Name
     'highlight.js for Dotclear', // Description
     'Franck Paul',               // Author
-    '0.8',                       // Version
+    '0.8.1',                     // Version
     [
         'requires'    => [['core', '2.19']],
         'permissions' => 'contentadmin',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'details'     => 'https://open-time.net/docs/plugins/hljs/',
         'support'     => 'https://github.com/franck-paul/hljs',
-        'type'        => 'plugin'
+        'type'        => 'plugin',
+        'repository'  => 'https://raw.githubusercontent.com/franck-paul/hljs/main/dcstore.xml'
     ]
 );
