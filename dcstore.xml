@@ -6,7 +6,7 @@
     <desc>highlight.js for Dotclear</desc>
     <file>https://github.com/franck-paul/hljs/releases/download/0.8.1/plugin-hljs-0.8.1.zip</file>
     <da:dcmin>2.19</da:dcmin>
-    <da:details>https://open-time.net/?q=hljs</da:details>
+    <da:details>https://open-time.net/docs/plugins/hljs/</da:details>
     <da:support>https://github.com/franck-paul/hljs</da:support>
   </module>
 </modules>
