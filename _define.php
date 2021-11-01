@@ -27,6 +27,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/docs/plugins/hljs/',
         'support'    => 'https://github.com/franck-paul/hljs',
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/hljs/main/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/hljs/master/dcstore.xml'
     ]
 );
