@@ -1,7 +1,7 @@
 /*global dotclear, $, hljs, hljsExtentCbtpl */
 'use strict';
 
-$(function () {
+$(() => {
   // Cope with enter key in popup
   dotclear.enterKeyInForm('#hljs-form', '#hljs-ok', '#hljs-cancel');
 
@@ -9,14 +9,14 @@ $(function () {
 
   // Populate language list combo
   const sc = document.createElement('script');
-  sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
+  sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? `-${hljs_config.mode}` : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
-  sc.onload = function () {
+  sc.onload = () => {
     // Load extension
     const sce = document.createElement('script');
     sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
-    sce.onload = function () {
+    sce.onload = () => {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
@@ -24,11 +24,11 @@ $(function () {
       const ll = hljs.listLanguages().sort();
       let l = null;
       let t = null;
-      ll.forEach(function (e) {
+      ll.forEach((e) => {
         l = hljs.getLanguage(e);
         t = e;
         if (typeof l.aliases !== 'undefined') {
-          t = t + ', ' + l.aliases.join(', ');
+          t = `${t}, ${l.aliases.join(', ')}`;
         }
         // Add new option to input combolist (value = e, label = t)
         const option = document.createElement('option');

@@ -61,7 +61,7 @@ class hljsPublicBehaviors
                 'show_line' => $core->blog->settings->hljs->hide_gutter ? 0 : 1,
                 'badge'     => $core->blog->settings->hljs->badge ? 1 : 0,
                 'use_ww'    => $core->blog->settings->hljs->web_worker ? 1 : 0,
-                'yash'      => $core->blog->settings->hljs->yash ? 1 : 0
+                'yash'      => $core->blog->settings->hljs->yash ? 1 : 0,
             ]);
             echo
             dcUtils::jsLoad($core->blog->getPF('hljs/js/public.js'));

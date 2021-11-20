@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 13:42+0100\n"
+"POT-Creation-Date: 2021-11-20 14:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,6 +37,12 @@ msgstr "Coloration syntaxique - Sélecteur de syntaxe"
 msgid "Select the primary syntax of your code snippet:"
 msgstr "Sélectionnez la syntaxe principale de votre extrait de code :"
 
+msgid "Ok"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Annuler"
+
 msgid "Minimum (23 languages, 53 Kb)"
 msgstr "Minimum (23 syntaxes, 53 Ko)"
 
@@ -49,17 +55,26 @@ msgstr "Commun (92 syntaxes, 284 Kb)"
 msgid "Full (185 languages, 731 Kb)"
 msgstr "Complet (185 syntaxes, 731 Kb)"
 
+msgid "Default"
+msgstr "Défaut"
+
 msgid "Enable Code highlight"
 msgstr "Activer la coloration syntaxique du code"
 
 msgid "Presentation"
 msgstr "Présentation"
 
+msgid "Theme:"
+msgstr "Thème :"
+
 msgid "Set of languages:"
-msgstr "Jeu de syntaxes"
+msgstr "Jeu de syntaxes :"
 
 msgid "List of languages:"
 msgstr "Liste des syntaxes :"
+
+msgid "Options"
+msgstr "Options"
 
 msgid "Hide gutter with line numbers"
 msgstr "Masquer la colonne des numéros de ligne"
@@ -102,3 +117,9 @@ msgstr "Tous les langages proposés par SyntaxeHL ne sont pas supportés (voir l
 
 msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
 msgstr "Sera appliqué aux prochaines éditions des billets contenant des macros SyntaxeHL (///[langage]…///)."
+
+msgid "Generic code compatibility mode"
+msgstr "Activer la compatibilité avec la macro code générique"
+
+msgid "Will be applied on future edition of posts containing generic code macros (///code [language]…///)."
+msgstr "Sera appliqué aux prochaines éditions des billets contenant des macros code (///code [langage]…///)."

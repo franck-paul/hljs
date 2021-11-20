@@ -1,62 +1,69 @@
-Usage
-=====
+# Usage
 
 The plugin should be activated for the blog (see main [setting page](/user-guide/settings) of this plugin) before using it.
 
-
-Using HLJS in content
----------------------
+## Using HLJS in content
 
 In order to specify codes to be rendered by HLJS you have to use the following syntax:
 
 In **Wiki** mode:
 
-``` hl_lines="1"
+```hl_lines="1"
 ///hljs [language_code]
+...
+///
+```
+
+Or this, if generic code compatibility mode is enabled (true by default)
+
+```hl_lines="1"
+///code [language_code]
 ...
 ///
 ```
 
 In **HTML** (source) or **Markdown** modes:
 
-``` html hl_lines="1"
+```html hl_lines="1"
 <pre><code [class="language-{language_code}"]>
 ...
 </code></pre>
 ```
 
-Replacing ```language_code``` by one of the [following syntaxes](#available-syntaxes)
+In **Markdown** mode:
+
+````markdown hl_lines="1"
+```language-{language_code}
+...
+```
+````
+
+Replacing `language_code` by one of the [following syntaxes](#available-syntaxes)
 
 !!! tip
-    Note that the plugin may **automatically** detect the language used in your code. In this case **do not specify** any language-code.
+Note that the plugin may **automatically** detect the language used in your code. In this case **do not specify** any language-code.
 
 Exemple with this Javascript code:
 
-``` js hl_lines="1"
+```js hl_lines="1"
 ///hljs js
 function findSequence(goal) {
-  function find(start, history) {
-    if (start == goal)
-      return history;
-    else if (start > goal)
-      return null;
-    else
-      return find(start + 5, "(" + history + " + 5)") ||
-             find(start * 3, "(" + history + " * 3)");
-  }
-  return find(1, "1");
+    function find(start, history) {
+        if (start == goal) return history;
+        else if (start > goal) return null;
+        else return find(start + 5, '(' + history + ' + 5)') || find(start * 3, '(' + history + ' * 3)');
+    }
+    return find(1, '1');
 }
 ///
 ```
 
 !!! tip
-    A toolbar button is available for dcLegacyEditor (wiki/markown and wysiwyg in source mode), and also for dcCKEditor (xhtml in wysiwyg mode) to select syntax:  
+A toolbar button is available for dcLegacyEditor (wiki/markown and wysiwyg in source mode), and also for dcCKEditor (xhtml in wysiwyg mode) to select syntax:
 
     ![dcLegacyEditor button](../img/hljs-toolbar-button.jpg)
 
-
-Available syntaxes
-------------------
+## Available syntaxes
 
 Min, Std and Com columns design respectively the Minimum, Standard and Commun Language Sets
 
@@ -240,4 +247,3 @@ Min, Std and Com columns design respectively the Minimum, Standard and Commun La
 | -   | -   | -   | xquery, xpath, xq                                            | XQuery                               |
 | -   | x   | x   | yaml, yml, YAML, yaml                                        | YAML (Yet Another Markdown Language) |
 | -   | -   | -   | zephir, zep                                                  | Zephir                               |
-

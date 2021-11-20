@@ -1,17 +1,17 @@
-/*global $, hljs, hljsExtentCbtpl, dotclear */
+/*global $, hljs, hljs_config, hljsExtentCbtpl, dotclear */
 'use strict';
 
 // Show list of languages
 function listLanguages(init) {
   const sc = document.createElement('script');
-  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${dotclear.hljs_config.mode ? '-' + hljs_config.mode : ''}.pack.js`; // URL
+  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${dotclear.hljs_config.mode ? `-${hljs_config.mode}` : ''}.pack.js`; // URL
   sc.type = 'text/javascript';
-  sc.onload = function () {
+  sc.onload = () => {
     // Load extension
     const sce = document.createElement('script');
     sce.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
     sce.type = 'text/javascript';
-    sce.onload = function () {
+    sce.onload = () => {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
@@ -19,13 +19,9 @@ function listLanguages(init) {
       let list = '';
       if (!init) {
         // Show diff between current choosen list and the selected one
-        let full = ll.concat(
-          dotclear.hljs_config.list.filter(function (item) {
-            return ll.indexOf(item) < 0;
-          })
-        );
+        let full = ll.concat(dotclear.hljs_config.list.filter((item) => ll.indexOf(item) < 0));
         full = full.sort();
-        full.forEach(function (e) {
+        full.forEach((e) => {
           if (list !== '') {
             list = `${list}, `;
           }
@@ -36,7 +32,7 @@ function listLanguages(init) {
             // Language removed
             list = `${list}<del>${e}</del>`;
           } else {
-            list = list + e;
+            list += e;
           }
         });
       } else {
@@ -71,7 +67,7 @@ function selectTheme() {
   dotclear.hljs_config.previous_theme = theme;
 }
 
-$(document).ready(function () {
+$(() => {
   listLanguages(true);
   $('#theme').on('change', selectTheme);
   $('#mode').on('change', selectMode);

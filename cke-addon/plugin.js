@@ -2,18 +2,18 @@
 'use strict';
 
 CKEDITOR.plugins.add('hljs', {
-  init: function (editor) {
+  init(editor) {
     let hljs_editor = dotclear.getData('hljs_editor', false);
 
     editor.addCommand('hljsCommand', {
-      exec: function () {
+      exec() {
         $.toolbarPopup(
           hljs_editor.popup_url.replace(/&amp;/g, '&'), // URL
           {
             // Popup size
             width: 480,
             height: 240,
-          }
+          },
         );
       },
     });
@@ -21,7 +21,7 @@ CKEDITOR.plugins.add('hljs', {
     editor.ui.addButton('hljs', {
       label: hljs_editor.title,
       command: 'hljsCommand',
-      icon: this.path + 'icons/icon.png',
+      icon: `${this.path}icons/icon.png`,
     });
   },
 });

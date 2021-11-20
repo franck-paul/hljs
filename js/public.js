@@ -17,27 +17,32 @@ dotclear.hljs_config.ww = !!window.Worker;
 // Utility function: hljsAddClass()
 function hljsAddClass(element, classname) {
   const currentClassList = (element.className || '').split(/\s+/);
-  currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
+  currentClassList.push(currentClassList.includes(classname) ? '' : classname);
   element.className = currentClassList.join(' ').trim();
 }
 
 // Utility function: hljsDataLanguage()
 function hljsDataLanguage(element, syntax) {
-  if (dotclear.hljs_config.badge) {
-    if (syntax !== undefined && syntax !== 'undefined' && syntax !== 'plain' && syntax !== 'txt' && syntax !== 'text') {
-      element.dataset.language = syntax;
-    }
+  if (
+    dotclear.hljs_config.badge &&
+    syntax !== undefined &&
+    syntax !== 'undefined' &&
+    syntax !== 'plain' &&
+    syntax !== 'txt' &&
+    syntax !== 'text'
+  ) {
+    element.dataset.language = syntax;
   }
   return element.dataset.language;
 }
 
 // highlight.js script loader
-const hljsLoad = function () {
+const hljsLoad = () => {
   if (!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
     const hljs_sc = document.createElement('script');
     hljs_sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
-      dotclear.hljs_config.mode ? '-' + dotclear.hljs_config.mode : ''
+      dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
     }.pack.js`; // URL
     hljs_sc.type = 'text/javascript';
     if (typeof hljs_sc.async !== 'undefined') {
@@ -48,7 +53,7 @@ const hljsLoad = function () {
 };
 
 // highlight.js extensions script loader
-const hljsLoadExtensions = function () {
+const hljsLoadExtensions = () => {
   if (!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww) {
     // Load highlight[-mode].js script → loaded in hljs object
     const hljs_sc = document.createElement('script');
@@ -62,11 +67,11 @@ const hljsLoadExtensions = function () {
 };
 
 // highlight.js script runner
-const hljsRun = function () {
+const hljsRun = () => {
   if (dotclear.hljs_config.yash) {
     // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
     const yb = document.querySelectorAll('pre[class^="brush:"]');
-    yb.forEach(function (block) {
+    yb.forEach((block) => {
       block.innerHTML = `<code class="${block.className}">${block.innerHTML.trim()}</code>`;
     });
   }
@@ -74,14 +79,14 @@ const hljsRun = function () {
   const sel = 'pre code';
   const blocks = document.querySelectorAll(sel);
 
-  blocks.forEach(function (block) {
+  blocks.forEach((block) => {
     // Utility function to display line numbers
-    const showLineNumber = function (e) {
-      e.innerHTML = '<span class="hljs-line-number"></span>' + '\n' + e.innerHTML + '\n' + '<span class="hljs-cl"></span>';
+    const showLineNumber = (e) => {
+      e.innerHTML = `<span class="hljs-line-number"></span>\n${e.innerHTML}\n<span class="hljs-cl"></span>`;
       const num = e.innerHTML.split(/\n/).length;
       for (let j = 0; j < num; j++) {
         const line_num = e.getElementsByTagName('span')[0];
-        line_num.innerHTML += '<span>' + (j == 0 || j == num - 1 ? '&nbsp;' : j) + '</span>';
+        line_num.innerHTML += `<span>${j == 0 || j == num - 1 ? '&nbsp;' : j}</span>`;
       }
     };
 
@@ -111,17 +116,13 @@ const hljsRun = function () {
         brush = cls.match(/\bbrush\:(\w*)\b/);
       }
       if (brush && brush.length == 2) {
-        if (brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text') {
-          syntax = 'plain';
-        } else {
-          syntax = brush[1];
-        }
+        syntax = brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text' ? 'plain' : brush[1];
       }
 
       // Create web worker
-      const worker = new Worker(dotclear.hljs_config.path + 'worker.js');
+      const worker = new Worker(`${dotclear.hljs_config.path}worker.js`);
       // Cope with web worker returned message
-      worker.onmessage = function (event) {
+      worker.onmessage = (event) => {
         // Web worker send result
         block.innerHTML = event.data.result;
         const syntax = event.data.language;
@@ -153,12 +154,15 @@ const hljsRun = function () {
           yash = true;
         }
       }
-      if (brush && brush.length == 2) {
-        if (brush[1] != 'plain' && brush[1] != 'txt' && brush[1] != 'text') {
-          if (hljs.getLanguage(brush[1])) {
-            syntax = brush[1];
-          }
-        }
+      if (
+        brush &&
+        brush.length == 2 &&
+        brush[1] != 'plain' &&
+        brush[1] != 'txt' &&
+        brush[1] != 'text' &&
+        hljs.getLanguage(brush[1])
+      ) {
+        syntax = brush[1];
       }
       // Set class : will be used by highlight.js
       if (yash) {
@@ -176,7 +180,7 @@ const hljsRun = function () {
       }
       if (hljsDataLanguage(block) === undefined) {
         cls = block.className.split(' ');
-        cls.forEach(function (syntax) {
+        cls.forEach((syntax) => {
           if (hljs.getLanguage(syntax)) {
             hljsDataLanguage(block, syntax);
           }
@@ -188,6 +192,6 @@ const hljsRun = function () {
 
 hljsLoad();
 hljsLoadExtensions();
-addEventListener('load', function () {
+addEventListener('load', () => {
   hljsRun();
 });

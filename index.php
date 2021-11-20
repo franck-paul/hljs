@@ -18,22 +18,23 @@ $plugin_version = $core->getVersion('hljs');
 
 // Getting current parameters if any (get global parameters if not)
 $core->blog->settings->addNamespace('hljs');
-$active      = (boolean) $core->blog->settings->hljs->active;
+$active      = (bool) $core->blog->settings->hljs->active;
 $mode        = (string) $core->blog->settings->hljs->mode;
 $theme       = (string) $core->blog->settings->hljs->theme;
 $custom_css  = (string) $core->blog->settings->hljs->custom_css;
-$hide_gutter = (boolean) $core->blog->settings->hljs->hide_gutter;
-$web_worker  = (boolean) $core->blog->settings->hljs->web_worker;
-$yash        = (boolean) $core->blog->settings->hljs->yash;
-$syntaxehl   = (boolean) $core->blog->settings->hljs->syntaxehl;
-$badge       = (boolean) $core->blog->settings->hljs->badge;
+$hide_gutter = (bool) $core->blog->settings->hljs->hide_gutter;
+$web_worker  = (bool) $core->blog->settings->hljs->web_worker;
+$yash        = (bool) $core->blog->settings->hljs->yash;
+$syntaxehl   = (bool) $core->blog->settings->hljs->syntaxehl;
+$code        = (bool) $core->blog->settings->hljs->code;
+$badge       = (bool) $core->blog->settings->hljs->badge;
 
 if (!empty($_REQUEST['popup'])) {
     $hljs_brushes = [
         // Index = label
         // Value = language code
         __('Automatic')  => '',
-        __('Plain Text') => 'plain'
+        __('Plain Text') => 'plain',
     ];
 
     echo
@@ -41,7 +42,7 @@ if (!empty($_REQUEST['popup'])) {
     '<title>' . __('Code highlight - Syntax Selector') . '</title>' .
     dcPage::jsJson('hljs_config', [
         'path' => dcPage::getPF('hljs/js/'),
-        'mode' => $mode
+        'mode' => $mode,
     ]) .
     dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
@@ -80,6 +81,7 @@ if (!empty($_POST['saveconfig'])) {
         $web_worker  = (empty($_POST['web_worker'])) ? false : true;
         $yash        = (empty($_POST['yash'])) ? false : true;
         $syntaxehl   = (empty($_POST['syntaxehl'])) ? false : true;
+        $code        = (empty($_POST['code'])) ? false : true;
         $badge       = (empty($_POST['badge'])) ? false : true;
 
         $core->blog->settings->hljs->put('active', $active, 'boolean');
@@ -90,6 +92,7 @@ if (!empty($_POST['saveconfig'])) {
         $core->blog->settings->hljs->put('web_worker', $web_worker, 'boolean');
         $core->blog->settings->hljs->put('yash', $yash, 'boolean');
         $core->blog->settings->hljs->put('syntaxehl', $syntaxehl, 'boolean');
+        $core->blog->settings->hljs->put('code', $code, 'boolean');
         $core->blog->settings->hljs->put('badge', $badge, 'boolean');
 
         $core->blog->triggerBlog();
@@ -111,19 +114,20 @@ if (!empty($_POST['saveconfig'])) {
 echo dcPage::breadcrumb(
     [
         html::escapeHTML($core->blog->name) => '',
-        __('Code highlight')                => ''
-    ]);
+        __('Code highlight')                => '',
+    ]
+);
 echo dcPage::notices();
 
 $combo_mode = [
     __('Minimum (23 languages, 53 Kb)') => 'min',
     __('Default (46 languages, 93 Kb)') => '',
     __('Common (92 languages, 284 Kb)') => 'common',
-    __('Full (185 languages, 731 Kb)')  => 'full'
+    __('Full (185 languages, 731 Kb)')  => 'full',
 ];
 
 $combo_theme = [
-    __('Default') => ''
+    __('Default') => '',
 ];
 // Populate theme list
 $themes_list = [];
@@ -196,7 +200,7 @@ dcPage::jsJson('hljs_config', [
     'use_ww'         => $web_worker ? 1 : 0,
     'yash'           => $yash ? 1 : 0,
     'theme'          => $theme ? $theme : 'default',
-    'previous_theme' => $theme ? $theme : 'default'
+    'previous_theme' => $theme ? $theme : 'default',
 ]) .
 dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/public.js')), $plugin_version) .
 dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/admin.js')), $plugin_version);
@@ -241,6 +245,13 @@ dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/admin.js')), $plugin_version);
     </p>
     <p class="info">
       <?php echo __('Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///).'); ?><br /><?php echo __('All SyntaxeHL languages are not supported by Code highlight (see documentation).'); ?>
+    </p>
+    <p>
+      <?php echo form::checkbox('code', 1, $code); ?>
+      <label class="classic" for="code">&nbsp;<?php echo __('Generic code compatibility mode'); ?></label>
+    </p>
+    <p class="info">
+      <?php echo __('Will be applied on future edition of posts containing generic code macros (///code [language]…///).'); ?>
     </p>
     <p><input type="hidden" name="p" value="hljs" />
       <?php echo $core->formNonce(); ?>

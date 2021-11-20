@@ -20,14 +20,14 @@ jsToolBar.prototype.elements.hljs = {
   fncall: {},
   open_url: 'plugin.php?p=hljs&popup=1',
   data: {},
-  popup: function () {
+  popup() {
     window.the_toolbar = this;
     this.elements.hljs.data = {};
 
     window.open(
       this.elements.hljs.open_url,
       'dc_popup',
-      'alwaysRaised=yes,dependent=yes,toolbar=yes,height=240,width=480,' + 'menubar=no,resizable=yes,scrollbars=yes,status=no'
+      'alwaysRaised=yes,dependent=yes,toolbar=yes,height=240,width=480,menubar=no,resizable=yes,scrollbars=yes,status=no',
     );
   },
 };

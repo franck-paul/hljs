@@ -23,7 +23,7 @@ class hljsBehaviors
         if ($editor == 'dcLegacyEditor') {
             return
             dcPage::jsJson('hljs_editor', [
-                'title' => __('Highlighted Code')
+                'title' => __('Highlighted Code'),
             ]) .
             dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs'));
         }
@@ -33,7 +33,7 @@ class hljsBehaviors
         return
             dcPage::jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
-                'popup_url' => $url
+                'popup_url' => $url,
             ]);
     }
 
@@ -42,7 +42,7 @@ class hljsBehaviors
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
-            'url'    => DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/'
+            'url'    => DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/',
         ];
     }
 
@@ -51,15 +51,18 @@ class hljsBehaviors
         global $core;
 
         $wiki2xhtml->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
+        if ((bool) $core->blog->settings->hljs->code) {
+            $wiki2xhtml->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
+        }
 
         $core->blog->settings->addNameSpace('hljs');
 
-        if ((boolean) $core->blog->settings->hljs->yash) {
+        if ((bool) $core->blog->settings->hljs->yash) {
             // Add Yash compatibility macro
             $wiki2xhtml->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
         }
 
-        if ((boolean) $core->blog->settings->hljs->syntaxehl) {
+        if ((bool) $core->blog->settings->hljs->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (self::$syntaxehl_brushes as $brush => $alias) {
                 $wiki2xhtml->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
@@ -132,7 +135,7 @@ class hljsBehaviors
         'ts'          => 'typescript',
         'vb'          => 'vbnet',
         'xml'         => 'xml',
-        'yaml'        => 'yaml'
+        'yaml'        => 'yaml',
     ];
 
     // List of SyntaxHL aliases
@@ -312,6 +315,6 @@ class hljsBehaviors
         'xml'           => 'xml',
         'xorg_conf'     => '',
         'xpp'           => '',
-        'z80'           => ''
+        'z80'           => '',
     ];
 }
