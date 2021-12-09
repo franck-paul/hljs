@@ -96,7 +96,7 @@ class hljsBehaviors
     {
         // Try to find a supported language, if not set original
         $text      = trim($text);
-        $real_args = preg_replace('/^(\[(.*)\]$)/', '$2', $args);
+        $real_args = preg_replace('/^(\[(.*)\]$)/', '$2', (string) $args);
         $class     = array_key_exists($real_args, self::$syntaxehl_brushes) && self::$syntaxehl_brushes[$real_args] != '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
 
         return '<pre><code class="language-' . $class . '">' . htmlspecialchars($text) . '</code></pre>';

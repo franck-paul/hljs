@@ -20,7 +20,7 @@ __('Code highlight') . __('highlight.js for Dotclear');
 $_menu['Blog']->addItem(
     __('Syntax highlighting'),
     'plugin.php?p=hljs',
-    urldecode(dcPage::getPF('hljs/icon.png')),
+    urldecode(dcPage::getPF('hljs/icon.svg')),
     preg_match('/plugin.php\?p=hljs(&.*)?$/', $_SERVER['REQUEST_URI']),
     $core->auth->check('contentadmin', $core->blog->id)
 );

@@ -7,7 +7,7 @@ Author: Franck Paul <carnet.franck.paul@gmail.com>
 Description: Clearbricks templates (used by Dotclear)
 Category: template
 */
-const hljsExtentCbtpl = function(hljs) {
+const hljsExtentCbtpl = (hljs) => {
   const e = "[A-Za-z0-9\\._:-]+";
   const t = {
     eW: !0,

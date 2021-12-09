@@ -15,7 +15,7 @@ jsToolBar.prototype.elements.hljs = {
   type: 'button',
   title: 'Highlighted Code',
   context: 'post',
-  icon: 'index.php?pf=hljs/icon.png',
+  icon: 'index.php?pf=hljs/icon.svg',
   fn: {},
   fncall: {},
   open_url: 'plugin.php?p=hljs&popup=1',

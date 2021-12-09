@@ -1,27 +1,21 @@
 site_name: 'HLJS: Syntax highlighter'
 
-# repo_url: https://bitbucket.org/franckpaul/
 repo_url: https://open-time.net/docs
-# edit_uri: src/default/mkdocs/docs/
 
 site_description: Syntax highlighter plugin for Dotclear 2
 site_author: Franck Paul
-site_favicon: img/favicon.png
 
-pages:
-- 'Introduction': 'index.md'
-- User Guide:
-    - 'Usage': 'user-guide/usage.md'
-    - 'Settings': 'user-guide/settings.md'
-    - 'Yash compatibility': 'user-guide/yash.md'
-    - 'SyntaxeHL compatibility': 'user-guide/syntaxehl.md'
-- 'Release Notes': 'release-notes.md'
-- 'About': 'about.md'
+nav:
+  - 'Introduction': 'index.md'
+  - User Guide:
+      - 'Usage': 'user-guide/usage.md'
+      - 'Settings': 'user-guide/settings.md'
+      - 'Yash compatibility': 'user-guide/yash.md'
+      - 'SyntaxeHL compatibility': 'user-guide/syntaxehl.md'
+  - 'Release Notes': 'release-notes.md'
+  - 'About': 'about.md'
 
-# Theme (doc: http://squidfunk.github.io/mkdocs-material/)
-theme: material
 extra:
-#  logo: 'img/icon-big.png'
   palette:
     primary: 'Deep Purple'
     accent: 'Pink'
@@ -32,28 +26,28 @@ extra:
       link: 'https://twitter.com/franckpaul'
 
 markdown_extensions:
-- extra
-- fenced_code
-- meta
-- smarty
-- toc:
-    permalink: True
-- admonition
-- codehilite:
-    guess_lang: false
-- footnotes
-- pymdownx.arithmatex
-- pymdownx.betterem:
-    smart_enable: all
-- pymdownx.caret
-- pymdownx.critic
-- pymdownx.emoji:
-    emoji_generator: !!python/name:pymdownx.emoji.to_svg
-- pymdownx.inlinehilite
-- pymdownx.magiclink
-- pymdownx.mark
-- pymdownx.smartsymbols
-- pymdownx.superfences
-- pymdownx.tasklist:
-    custom_checkbox: true
-- pymdownx.tilde
+  - extra
+  - fenced_code
+  - meta
+  - smarty
+  - toc:
+      permalink: True
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
