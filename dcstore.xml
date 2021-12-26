@@ -1,10 +1,10 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="hljs">
     <name>Code highlight</name>
-    <version>0.10</version>
+    <version>0.10.1</version>
     <author>Franck Paul</author>
     <desc>highlight.js for Dotclear</desc>
-    <file>https://github.com/franck-paul/hljs/releases/download/0.10/plugin-hljs-0.10.zip</file>
+    <file>https://github.com/franck-paul/hljs/releases/download/0.10.1/plugin-hljs-0.10.1.zip</file>
     <da:dcmin>2.19</da:dcmin>
     <da:details>https://open-time.net/docs/plugins/hljs/</da:details>
     <da:support>https://github.com/franck-paul/hljs</da:support>
