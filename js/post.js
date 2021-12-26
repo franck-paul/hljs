@@ -50,12 +50,12 @@ jsToolBar.prototype.elements.hljs.fncall.wiki = function () {
   this.encloseSelection(stag, etag);
 };
 jsToolBar.prototype.elements.hljs.fncall.xhtml = function () {
-  const stag = `<pre><code class="languague-${this.elements.hljs.data.syntax}">\n`;
+  const stag = `<pre><code class="language-${this.elements.hljs.data.syntax}">\n`;
   const etag = '\n</code></pre>\n';
   this.encloseSelection(stag, etag);
 };
 jsToolBar.prototype.elements.hljs.fncall.markdown = function () {
-  const stag = `<pre><code class="language-${this.elements.hljs.data.syntax}">\n`;
-  const etag = '\n</code></pre>\n';
+  const stag = '```' + `language-${this.elements.hljs.data.syntax}\n`;
+  const etag = '\n```\n';
   this.encloseSelection(stag, etag);
 };
