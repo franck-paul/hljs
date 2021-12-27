@@ -28,6 +28,7 @@ function hljsDataLanguage(element, syntax) {
     syntax !== undefined &&
     syntax !== 'undefined' &&
     syntax !== 'plain' &&
+    syntax !== 'plaintext' &&
     syntax !== 'txt' &&
     syntax !== 'text'
   ) {
@@ -76,7 +77,7 @@ const hljsRun = () => {
     });
   }
 
-  const sel = 'pre code';
+  const sel = 'pre code:not(.nohighlight)';
   const blocks = document.querySelectorAll(sel);
 
   blocks.forEach((block) => {
@@ -107,6 +108,7 @@ const hljsRun = () => {
     let syntax = '';
     let brush;
     if (dotclear.hljs_config.ww && dotclear.hljs_config.use_ww) {
+      // Web workers mode
       // Get specified syntax if any
       cls = block.className;
       // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
@@ -116,7 +118,8 @@ const hljsRun = () => {
         brush = cls.match(/\bbrush\:(\w*)\b/);
       }
       if (brush && brush.length == 2) {
-        syntax = brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text' ? 'plain' : brush[1];
+        syntax =
+          brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text' || brush[1] == 'plaintext' ? 'plaintext' : brush[1];
       }
 
       // Create web worker
@@ -135,6 +138,7 @@ const hljsRun = () => {
       // Run web worker
       worker.postMessage([block.textContent, dotclear.hljs_config.path, dotclear.hljs_config.mode, syntax]);
     } else {
+      // Standard mode
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
 
@@ -158,6 +162,7 @@ const hljsRun = () => {
         brush &&
         brush.length == 2 &&
         brush[1] != 'plain' &&
+        brush[1] != 'plaintext' &&
         brush[1] != 'txt' &&
         brush[1] != 'text' &&
         hljs.getLanguage(brush[1])
