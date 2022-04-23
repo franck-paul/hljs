@@ -70,13 +70,7 @@ function selectTheme() {
 function nextTheme(forward = true) {
   const e = document.getElementById('theme');
   let next = e.selectedIndex;
-  if (forward) {
-    next = ++next % e.options.length;
-  } else if (next > 0) {
-    next--;
-  } else {
-    next = e.options.length - 1;
-  }
+  next = (forward ? ++next : --next + e.options.length) % e.options.length;
   e.value = e.options[next].value;
   selectTheme();
 }
