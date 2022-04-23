@@ -66,7 +66,7 @@ function selectTheme() {
   $css.attr('href', `${dotclear.hljs_config.path}lib/css/${theme}.css`);
   dotclear.hljs_config.previous_theme = theme;
 }
-// Change theme CSS of caode sample on arrow key
+// Change theme CSS of code sample on arrow key
 function nextTheme(forward = true) {
   const e = document.getElementById('theme');
   let next = e.selectedIndex;
