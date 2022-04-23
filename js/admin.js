@@ -66,9 +66,38 @@ function selectTheme() {
   $css.attr('href', `${dotclear.hljs_config.path}lib/css/${theme}.css`);
   dotclear.hljs_config.previous_theme = theme;
 }
+// Change theme CSS of caode sample on arrow key
+function nextTheme(forward = true) {
+  const e = document.getElementById('theme');
+  let next = e.selectedIndex;
+  if (forward) {
+    if (next < e.options.length - 1) {
+      next++;
+    } else {
+      next = 0;
+    }
+  } else if (next > 0) {
+    next--;
+  } else {
+    next = e.options.length - 1;
+  }
+  e.value = e.options[next].value;
+  selectTheme();
+}
 
 $(() => {
   listLanguages(true);
   $('#theme').on('change', selectTheme);
   $('#mode').on('change', selectMode);
+  $('#theme').on('keydown', (e) => {
+    if (e.which === 39) {
+      // Right arrow
+      nextTheme(true);
+      return false;
+    } else if (e.which === 37) {
+      // Left arrow
+      nextTheme(false);
+      return false;
+    }
+  });
 });
