@@ -71,11 +71,7 @@ function nextTheme(forward = true) {
   const e = document.getElementById('theme');
   let next = e.selectedIndex;
   if (forward) {
-    if (next < e.options.length - 1) {
-      next++;
-    } else {
-      next = 0;
-    }
+    next = ++next % e.options.length;
   } else if (next > 0) {
     next--;
   } else {
