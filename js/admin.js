@@ -1,10 +1,12 @@
-/*global $, hljs, hljs_config, hljsExtentCbtpl, dotclear */
+/*global $, hljs, hljsExtentCbtpl, dotclear */
 'use strict';
 
 // Show list of languages
 function listLanguages(init) {
   const sc = document.createElement('script');
-  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${dotclear.hljs_config.mode ? `-${hljs_config.mode}` : ''}.pack.js`; // URL
+  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
+    dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
+  }.pack.js`; // URL
   sc.type = 'text/javascript';
   sc.onload = () => {
     // Load extension
