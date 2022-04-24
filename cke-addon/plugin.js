@@ -3,7 +3,7 @@
 
 CKEDITOR.plugins.add('hljs', {
   init(editor) {
-    let hljs_editor = dotclear.getData('hljs_editor', false);
+    const hljs_editor = dotclear.getData('hljs_editor', false);
 
     editor.addCommand('hljsCommand', {
       exec() {

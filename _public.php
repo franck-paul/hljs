@@ -43,7 +43,7 @@ class hljsPublicBehaviors
                 }
             }
             echo
-            dcUtils::cssLoad($core->blog->getPF('hljs/css/public.css')) .
+            dcUtils::cssModuleLoad('hljs/css/public.css') .
             dcUtils::cssLoad($css);
         }
     }
@@ -64,7 +64,7 @@ class hljsPublicBehaviors
                 'yash'      => $core->blog->settings->hljs->yash ? 1 : 0,
             ]);
             echo
-            dcUtils::jsLoad($core->blog->getPF('hljs/js/public.js'));
+            dcUtils::jsModuleLoad('hljs/js/public.js');
         }
     }
 }

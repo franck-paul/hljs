@@ -25,7 +25,7 @@ class hljsBehaviors
             dcPage::jsJson('hljs_editor', [
                 'title' => __('Highlighted Code'),
             ]) .
-            dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/post.js')), $core->getVersion('hljs'));
+            dcPage::jsModuleLoad('hljs/js/post.js', $core->getVersion('hljs'));
         }
         $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
@@ -72,7 +72,7 @@ class hljsBehaviors
 
     public static function transform($text, $args)
     {
-        $text      = trim($text);
+        $text      = trim((string) $text);
         $real_args = explode(' ', $args);
         $class     = empty($real_args[1]) ? '' : ' class="language-' . $real_args[1] . '"';
 
@@ -82,7 +82,7 @@ class hljsBehaviors
     public static function transformYash($text, $args)
     {
         // Try to find a supported language, if not do not add class and let highlight engine doing syntax recognition
-        $text      = trim($text);
+        $text      = trim((string) $text);
         $real_args = explode(' ', $args);
         $syntax    = empty($real_args[1]) ? 'plain' : $real_args[1];
         $class     = array_key_exists($syntax, self::$yash_brushes) && self::$yash_brushes[$syntax] != '' ?
@@ -95,7 +95,7 @@ class hljsBehaviors
     public static function transformSyntaxehl($text, $args)
     {
         // Try to find a supported language, if not set original
-        $text      = trim($text);
+        $text      = trim((string) $text);
         $real_args = preg_replace('/^(\[(.*)\]$)/', '$2', (string) $args);
         $class     = array_key_exists($real_args, self::$syntaxehl_brushes) && self::$syntaxehl_brushes[$real_args] != '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
 

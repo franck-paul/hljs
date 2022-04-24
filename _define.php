@@ -18,9 +18,9 @@ $this->registerModule(
     'Code highlight',            // Name
     'highlight.js for Dotclear', // Description
     'Franck Paul',               // Author
-    '0.10.2',                    // Version
+    '0.11',                      // Version
     [
-        'requires'    => [['core', '2.19']],
+        'requires'    => [['core', '2.21']],
         'permissions' => 'contentadmin',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'type'        => 'plugin',

@@ -55,7 +55,7 @@ jsToolBar.prototype.elements.hljs.fncall.xhtml = function () {
   this.encloseSelection(stag, etag);
 };
 jsToolBar.prototype.elements.hljs.fncall.markdown = function () {
-  const stag = '```' + `language-${this.elements.hljs.data.syntax}\n`;
+  const stag = `\`\`\`language-${this.elements.hljs.data.syntax}\n`;
   const etag = '\n```\n';
   this.encloseSelection(stag, etag);
 };

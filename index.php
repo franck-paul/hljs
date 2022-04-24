@@ -44,13 +44,13 @@ if (!empty($_REQUEST['popup'])) {
         'path' => dcPage::getPF('hljs/js/'),
         'mode' => $mode,
     ]) .
-    dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup.js')), $plugin_version);
+    dcPage::jsModuleLoad('hljs/js/popup.js', $plugin_version);
     if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
         echo
-        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_cke.js')), $plugin_version);
+        dcPage::jsModuleLoad('hljs/js/popup_cke.js', $plugin_version);
     } else {
         echo
-        dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/popup_leg.js')), $plugin_version);
+        dcPage::jsModuleLoad('hljs/js/popup_leg.js', $plugin_version);
     }
     echo
     '</head><body>' .
@@ -131,7 +131,7 @@ $combo_theme = [
 ];
 // Populate theme list
 $themes_list = [];
-$themes_root = dirname(__FILE__) . '/js/lib/css/';
+$themes_root = __DIR__ . '/js/lib/css/';
 if (is_dir($themes_root) && is_readable($themes_root)) {
     if (($d = @dir($themes_root)) !== false) {
         while (($entry = $d->read()) !== false) {
@@ -187,9 +187,9 @@ foreach ($themes_list as $theme_id) {
 }</code></pre>
 <?php
 echo
-dcPage::cssLoad(urldecode(dcPage::getPF('hljs/css/public.css')), 'screen', $plugin_version) .
-dcPage::cssLoad(urldecode(dcPage::getPF('hljs/css/admin.css')), 'screen', $plugin_version) .
-dcPage::cssLoad(urldecode(dcPage::getPF('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css')), 'screen', $plugin_version) .
+dcPage::cssModuleLoad('hljs/css/public.css', 'screen', $plugin_version) .
+dcPage::cssModuleLoad('hljs/css/admin.css', 'screen', $plugin_version) .
+dcPage::cssModuleLoad('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css', 'screen', $plugin_version) .
 dcPage::jsJson('hljs_config', [
     'path'           => urldecode(dcPage::getPF('hljs/js/')),
     'mode'           => $mode,
@@ -202,8 +202,8 @@ dcPage::jsJson('hljs_config', [
     'theme'          => $theme ? $theme : 'default',
     'previous_theme' => $theme ? $theme : 'default',
 ]) .
-dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/public.js')), $plugin_version) .
-dcPage::jsLoad(urldecode(dcPage::getPF('hljs/js/admin.js')), $plugin_version);
+dcPage::jsModuleLoad('hljs/js/public.js', $plugin_version) .
+dcPage::jsModuleLoad('hljs/js/admin.js', $plugin_version);
 ?>
       </div>
     </div>

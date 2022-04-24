@@ -137,60 +137,60 @@ const hljsRun = () => {
       };
       // Run web worker
       worker.postMessage([block.textContent, dotclear.hljs_config.path, dotclear.hljs_config.mode, syntax]);
-    } else {
-      // Standard mode
-      // Register extensions
-      hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
+      return;
+    }
+    // Standard mode
+    // Register extensions
+    hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
 
-      // If YASH, keep brush if not plain or txt:
-      // - Get syntax in <code class="brush:syntax">
-      // - Test if not plain/txt and if it is supported by highlight.js and
-      //     - if yes set class="language-syntax" to block
-      //     - if no set class="hljs plain" to block
-      cls = block.className;
-      syntax = 'plain';
-      brush = cls.match(/\blanguage-(\w*)\b/);
-      let yash = false;
-      if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
-        // Yash mode (<pre brush:<syntax>…</pre>)
-        brush = cls.match(/\bbrush\:(\w*)\b/);
-        if (brush && brush.length == 2) {
-          yash = true;
+    // If YASH, keep brush if not plain or txt:
+    // - Get syntax in <code class="brush:syntax">
+    // - Test if not plain/txt and if it is supported by highlight.js and
+    //     - if yes set class="language-syntax" to block
+    //     - if no set class="hljs plain" to block
+    cls = block.className;
+    syntax = 'plain';
+    brush = cls.match(/\blanguage-(\w*)\b/);
+    let yash = false;
+    if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
+      // Yash mode (<pre brush:<syntax>…</pre>)
+      brush = cls.match(/\bbrush\:(\w*)\b/);
+      if (brush && brush.length == 2) {
+        yash = true;
+      }
+    }
+    if (
+      brush &&
+      brush.length == 2 &&
+      brush[1] != 'plain' &&
+      brush[1] != 'plaintext' &&
+      brush[1] != 'txt' &&
+      brush[1] != 'text' &&
+      hljs.getLanguage(brush[1])
+    ) {
+      syntax = brush[1];
+    }
+    // Set class : will be used by highlight.js
+    if (yash) {
+      hljsAddClass(block, syntax);
+    }
+    hljsDataLanguage(block, syntax);
+    // Configure highlight.js script
+    hljs.configure({
+      tabReplace: '  ',
+    });
+    // Run highlight.js
+    hljs.highlightBlock(block);
+    if (dotclear.hljs_config.show_line) {
+      showLineNumber(block);
+    }
+    if (hljsDataLanguage(block) === undefined) {
+      cls = block.className.split(' ');
+      cls.forEach((syntax) => {
+        if (hljs.getLanguage(syntax)) {
+          hljsDataLanguage(block, syntax);
         }
-      }
-      if (
-        brush &&
-        brush.length == 2 &&
-        brush[1] != 'plain' &&
-        brush[1] != 'plaintext' &&
-        brush[1] != 'txt' &&
-        brush[1] != 'text' &&
-        hljs.getLanguage(brush[1])
-      ) {
-        syntax = brush[1];
-      }
-      // Set class : will be used by highlight.js
-      if (yash) {
-        hljsAddClass(block, syntax);
-      }
-      hljsDataLanguage(block, syntax);
-      // Configure highlight.js script
-      hljs.configure({
-        tabReplace: '  ',
       });
-      // Run highlight.js
-      hljs.highlightBlock(block);
-      if (dotclear.hljs_config.show_line) {
-        showLineNumber(block);
-      }
-      if (hljsDataLanguage(block) === undefined) {
-        cls = block.className.split(' ');
-        cls.forEach((syntax) => {
-          if (hljs.getLanguage(syntax)) {
-            hljsDataLanguage(block, syntax);
-          }
-        });
-      }
     }
   });
 };

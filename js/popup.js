@@ -5,7 +5,7 @@ $(() => {
   // Cope with enter key in popup
   dotclear.enterKeyInForm('#hljs-form', '#hljs-ok', '#hljs-cancel');
 
-  let hljs_config = dotclear.getData('hljs_config');
+  const hljs_config = dotclear.getData('hljs_config');
 
   // Populate language list combo
   const sc = document.createElement('script');
