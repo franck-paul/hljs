@@ -2,7 +2,7 @@
 'use strict';
 
 // Show list of languages
-function listLanguages(init) {
+dotclear.hljs_config.listLanguages = (init) => {
   const sc = document.createElement('script');
   sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
     dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
@@ -51,14 +51,14 @@ function listLanguages(init) {
   document.getElementsByTagName('head')[0].appendChild(sc);
 }
 // Update list of languages
-function selectMode() {
+dotclear.hljs_config.selectMode = () => {
   const input = document.getElementById('mode');
   dotclear.hljs_config.mode = input.options[input.selectedIndex].value;
-  listLanguages(false);
+  dotclear.hljs_config.listLanguages(false);
   dotclear.hljs_config.current_mode = dotclear.hljs_config.mode;
-}
+};
 // Change theme CSS of code sample
-function selectTheme() {
+dotclear.hljs_config.selectTheme = () => {
   const input = document.getElementById('theme');
   let theme = input.options[input.selectedIndex].value;
   if (theme == '') {
@@ -67,28 +67,28 @@ function selectTheme() {
   const $css = $(`link[href^="${dotclear.hljs_config.path}lib/css/${dotclear.hljs_config.previous_theme}.css"]`);
   $css.attr('href', `${dotclear.hljs_config.path}lib/css/${theme}.css`);
   dotclear.hljs_config.previous_theme = theme;
-}
+};
 // Change theme CSS of code sample on arrow key
-function nextTheme(forward = true) {
+dotclear.hljs_config.nextTheme = (forward = true) => {
   const e = document.getElementById('theme');
   let next = e.selectedIndex;
   next = (forward ? ++next : --next + e.options.length) % e.options.length;
   e.value = e.options[next].value;
-  selectTheme();
-}
+  dotclear.hljs_config.selectTheme();
+};
 
 $(() => {
-  listLanguages(true);
-  $('#theme').on('change', selectTheme);
-  $('#mode').on('change', selectMode);
+  dotclear.hljs_config.listLanguages(true);
+  $('#theme').on('change', dotclear.hljs_config.selectTheme);
+  $('#mode').on('change', dotclear.hljs_config.selectMode);
   $('#theme').on('keydown', (e) => {
     if (e.which === 39) {
       // Right arrow
-      nextTheme(true);
+      dotclear.hljs_config.nextTheme(true);
       return false;
     } else if (e.which === 37) {
       // Left arrow
-      nextTheme(false);
+      dotclear.hljs_config.nextTheme(false);
       return false;
     }
   });
