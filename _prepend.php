@@ -16,4 +16,4 @@ if (!defined('DC_RC_PATH')) {
 
 $__autoload['hljsBehaviors'] = __DIR__ . '/inc/hljs.behaviors.php';
 
-$core->addBehavior('coreInitWikiPost', ['hljsBehaviors', 'coreInitWikiPost']);
+dcCore::app()->addBehavior('coreInitWikiPost', ['hljsBehaviors', 'coreInitWikiPost']);

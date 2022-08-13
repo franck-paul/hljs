@@ -14,20 +14,20 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$plugin_version = $core->getVersion('hljs');
+$plugin_version = dcCore::app()->getVersion('hljs');
 
 // Getting current parameters if any (get global parameters if not)
-$core->blog->settings->addNamespace('hljs');
-$active      = (bool) $core->blog->settings->hljs->active;
-$mode        = (string) $core->blog->settings->hljs->mode;
-$theme       = (string) $core->blog->settings->hljs->theme;
-$custom_css  = (string) $core->blog->settings->hljs->custom_css;
-$hide_gutter = (bool) $core->blog->settings->hljs->hide_gutter;
-$web_worker  = (bool) $core->blog->settings->hljs->web_worker;
-$yash        = (bool) $core->blog->settings->hljs->yash;
-$syntaxehl   = (bool) $core->blog->settings->hljs->syntaxehl;
-$code        = (bool) $core->blog->settings->hljs->code;
-$badge       = (bool) $core->blog->settings->hljs->badge;
+dcCore::app()->blog->settings->addNamespace('hljs');
+$active      = (bool) dcCore::app()->blog->settings->hljs->active;
+$mode        = (string) dcCore::app()->blog->settings->hljs->mode;
+$theme       = (string) dcCore::app()->blog->settings->hljs->theme;
+$custom_css  = (string) dcCore::app()->blog->settings->hljs->custom_css;
+$hide_gutter = (bool) dcCore::app()->blog->settings->hljs->hide_gutter;
+$web_worker  = (bool) dcCore::app()->blog->settings->hljs->web_worker;
+$yash        = (bool) dcCore::app()->blog->settings->hljs->yash;
+$syntaxehl   = (bool) dcCore::app()->blog->settings->hljs->syntaxehl;
+$code        = (bool) dcCore::app()->blog->settings->hljs->code;
+$badge       = (bool) dcCore::app()->blog->settings->hljs->badge;
 
 if (!empty($_REQUEST['popup'])) {
     $hljs_brushes = [
@@ -71,7 +71,7 @@ if (!empty($_REQUEST['popup'])) {
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
     try {
-        $core->blog->settings->addNameSpace('hljs');
+        dcCore::app()->blog->settings->addNameSpace('hljs');
 
         $active      = (empty($_POST['active'])) ? false : true;
         $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
@@ -84,23 +84,23 @@ if (!empty($_POST['saveconfig'])) {
         $code        = (empty($_POST['code'])) ? false : true;
         $badge       = (empty($_POST['badge'])) ? false : true;
 
-        $core->blog->settings->hljs->put('active', $active, 'boolean');
-        $core->blog->settings->hljs->put('mode', $mode, 'mode');
-        $core->blog->settings->hljs->put('theme', $theme, 'string');
-        $core->blog->settings->hljs->put('custom_css', $custom_css, 'string');
-        $core->blog->settings->hljs->put('hide_gutter', $hide_gutter, 'boolean');
-        $core->blog->settings->hljs->put('web_worker', $web_worker, 'boolean');
-        $core->blog->settings->hljs->put('yash', $yash, 'boolean');
-        $core->blog->settings->hljs->put('syntaxehl', $syntaxehl, 'boolean');
-        $core->blog->settings->hljs->put('code', $code, 'boolean');
-        $core->blog->settings->hljs->put('badge', $badge, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('active', $active, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('mode', $mode, 'mode');
+        dcCore::app()->blog->settings->hljs->put('theme', $theme, 'string');
+        dcCore::app()->blog->settings->hljs->put('custom_css', $custom_css, 'string');
+        dcCore::app()->blog->settings->hljs->put('hide_gutter', $hide_gutter, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('web_worker', $web_worker, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('yash', $yash, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('syntaxehl', $syntaxehl, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('code', $code, 'boolean');
+        dcCore::app()->blog->settings->hljs->put('badge', $badge, 'boolean');
 
-        $core->blog->triggerBlog();
+        dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Configuration successfully updated.'));
         http::redirect($p_url);
     } catch (Exception $e) {
-        $core->error->add($e->getMessage());
+        dcCore::app()->error->add($e->getMessage());
     }
 }
 ?>
@@ -113,8 +113,8 @@ if (!empty($_POST['saveconfig'])) {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML($core->blog->name) => '',
-        __('Code highlight')                => '',
+        html::escapeHTML(dcCore::app()->blog->name) => '',
+        __('Code highlight')                        => '',
     ]
 );
 echo dcPage::notices();
@@ -254,7 +254,7 @@ dcPage::jsModuleLoad('hljs/js/admin.js', $plugin_version);
       <?php echo __('Will be applied on future edition of posts containing generic code macros (///code [language]…///).'); ?>
     </p>
     <p><input type="hidden" name="p" value="hljs" />
-      <?php echo $core->formNonce(); ?>
+      <?php echo dcCore::app()->formNonce(); ?>
       <input type="submit" name="saveconfig" value="<?php echo __('Save configuration'); ?>" />
     </p>
   </form>

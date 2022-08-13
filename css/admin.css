@@ -14,3 +14,7 @@
 .hljs-wrapper {
   border: 1px solid;
 }
+
+.hljs {
+  font-size: 2ex;
+}

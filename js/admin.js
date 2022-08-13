@@ -21,7 +21,7 @@ dotclear.hljs_config.listLanguages = (init) => {
       let list = '';
       if (!init) {
         // Show diff between current choosen list and the selected one
-        let full = ll.concat(dotclear.hljs_config.list.filter((item) => ll.indexOf(item) < 0));
+        let full = ll.concat(dotclear.hljs_config.list.filter((item) => !ll.includes(item)));
         full = full.sort();
         full.forEach((e) => {
           if (list !== '') {

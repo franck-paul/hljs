@@ -21,7 +21,7 @@ $(() => {
       return;
     }
     const tb = window.opener.the_toolbar;
-    const data = tb.elements.hljs.data;
+    const { data } = tb.elements.hljs;
     data.syntax = insert_form.syntax.value;
     tb.elements.hljs.fncall[tb.mode].call(tb);
   }

@@ -14,32 +14,30 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-$core->addBehavior('publicHeadContent', ['hljsPublicBehaviors', 'publicHeadContent']);
-$core->addBehavior('publicFooterContent', ['hljsPublicBehaviors', 'publicFooterContent']);
+dcCore::app()->addBehavior('publicHeadContent', ['hljsPublicBehaviors', 'publicHeadContent']);
+dcCore::app()->addBehavior('publicFooterContent', ['hljsPublicBehaviors', 'publicFooterContent']);
 
 class hljsPublicBehaviors
 {
     public static function publicHeadContent()
     {
-        global $core;
-
-        $core->blog->settings->addNamespace('hljs');
-        if ($core->blog->settings->hljs->active) {
-            $custom_css = $core->blog->settings->hljs->custom_css;
+        dcCore::app()->blog->settings->addNamespace('hljs');
+        if (dcCore::app()->blog->settings->hljs->active) {
+            $custom_css = dcCore::app()->blog->settings->hljs->custom_css;
             if (!empty($custom_css)) {
                 if (strpos('/', $custom_css) === 0) {
                     $css = $custom_css;
                 } else {
-                    $css = $core->blog->settings->system->themes_url . '/' .
-                    $core->blog->settings->system->theme . '/' .
+                    $css = dcCore::app()->blog->settings->system->themes_url . '/' .
+                    dcCore::app()->blog->settings->system->theme . '/' .
                         $custom_css;
                 }
             } else {
-                $theme = (string) $core->blog->settings->hljs->theme;
+                $theme = (string) dcCore::app()->blog->settings->hljs->theme;
                 if ($theme == '') {
-                    $css = $core->blog->getPF('hljs/js/lib/css/default.css');
+                    $css = dcCore::app()->blog->getPF('hljs/js/lib/css/default.css');
                 } else {
-                    $css = $core->blog->getPF('hljs/js/lib/css/' . $theme . '.css');
+                    $css = dcCore::app()->blog->getPF('hljs/js/lib/css/' . $theme . '.css');
                 }
             }
             echo
@@ -50,18 +48,16 @@ class hljsPublicBehaviors
 
     public static function publicFooterContent()
     {
-        global $core;
-
-        $core->blog->settings->addNamespace('hljs');
-        if ($core->blog->settings->hljs->active) {
+        dcCore::app()->blog->settings->addNamespace('hljs');
+        if (dcCore::app()->blog->settings->hljs->active) {
             echo
             dcUtils::jsJson('hljs_config', [
-                'path'      => urldecode($core->blog->getPF('hljs/js/')),
-                'mode'      => $core->blog->settings->hljs->mode ?: '',
-                'show_line' => $core->blog->settings->hljs->hide_gutter ? 0 : 1,
-                'badge'     => $core->blog->settings->hljs->badge ? 1 : 0,
-                'use_ww'    => $core->blog->settings->hljs->web_worker ? 1 : 0,
-                'yash'      => $core->blog->settings->hljs->yash ? 1 : 0,
+                'path'      => urldecode(dcCore::app()->blog->getPF('hljs/js/')),
+                'mode'      => dcCore::app()->blog->settings->hljs->mode ?: '',
+                'show_line' => dcCore::app()->blog->settings->hljs->hide_gutter ? 0 : 1,
+                'badge'     => dcCore::app()->blog->settings->hljs->badge ? 1 : 0,
+                'use_ww'    => dcCore::app()->blog->settings->hljs->web_worker ? 1 : 0,
+                'yash'      => dcCore::app()->blog->settings->hljs->yash ? 1 : 0,
             ]);
             echo
             dcUtils::jsModuleLoad('hljs/js/public.js');

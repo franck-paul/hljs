@@ -14,8 +14,6 @@ class hljsBehaviors
 {
     public static function adminPostEditor($editor = '', $context = '', array $tags = [], $syntax = '')
     {
-        global $core;
-
         if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
             return;
         }
@@ -25,9 +23,9 @@ class hljsBehaviors
             dcPage::jsJson('hljs_editor', [
                 'title' => __('Highlighted Code'),
             ]) .
-            dcPage::jsModuleLoad('hljs/js/post.js', $core->getVersion('hljs'));
+            dcPage::jsModuleLoad('hljs/js/post.js', dcCore::app()->getVersion('hljs'));
         }
-        $url = $core->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
+        $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
 
         return
@@ -48,21 +46,19 @@ class hljsBehaviors
 
     public static function coreInitWikiPost($wiki2xhtml)
     {
-        global $core;
-
         $wiki2xhtml->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
-        if ((bool) $core->blog->settings->hljs->code) {
+        if ((bool) dcCore::app()->blog->settings->hljs->code) {
             $wiki2xhtml->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
         }
 
-        $core->blog->settings->addNameSpace('hljs');
+        dcCore::app()->blog->settings->addNameSpace('hljs');
 
-        if ((bool) $core->blog->settings->hljs->yash) {
+        if ((bool) dcCore::app()->blog->settings->hljs->yash) {
             // Add Yash compatibility macro
             $wiki2xhtml->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
         }
 
-        if ((bool) $core->blog->settings->hljs->syntaxehl) {
+        if ((bool) dcCore::app()->blog->settings->hljs->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (self::$syntaxehl_brushes as $brush => $alias) {
                 $wiki2xhtml->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);

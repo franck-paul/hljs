@@ -22,8 +22,8 @@ $_menu['Blog']->addItem(
     'plugin.php?p=hljs',
     urldecode(dcPage::getPF('hljs/icon.svg')),
     preg_match('/plugin.php\?p=hljs(&.*)?$/', $_SERVER['REQUEST_URI']),
-    $core->auth->check('contentadmin', $core->blog->id)
+    dcCore::app()->auth->check('contentadmin', dcCore::app()->blog->id)
 );
 
-$core->addBehavior('adminPostEditor', ['hljsBehaviors', 'adminPostEditor']);
-$core->addBehavior('ckeditorExtraPlugins', ['hljsBehaviors', 'ckeditorExtraPlugins']);
+dcCore::app()->addBehavior('adminPostEditor', ['hljsBehaviors', 'adminPostEditor']);
+dcCore::app()->addBehavior('ckeditorExtraPlugins', ['hljsBehaviors', 'ckeditorExtraPlugins']);
