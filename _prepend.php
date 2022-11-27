@@ -14,6 +14,6 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-$__autoload['hljsBehaviors'] = __DIR__ . '/inc/hljs.behaviors.php';
+Clearbricks::lib()->autoload(['hljsBehaviors' => __DIR__ . '/inc/hljs.behaviors.php']);
 
-dcCore::app()->addBehavior('coreInitWikiPost', ['hljsBehaviors', 'coreInitWikiPost']);
+dcCore::app()->addBehavior('coreInitWikiPost', [hljsBehaviors::class, 'coreInitWikiPost']);

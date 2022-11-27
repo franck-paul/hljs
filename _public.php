@@ -14,9 +14,6 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-dcCore::app()->addBehavior('publicHeadContent', ['hljsPublicBehaviors', 'publicHeadContent']);
-dcCore::app()->addBehavior('publicFooterContent', ['hljsPublicBehaviors', 'publicFooterContent']);
-
 class hljsPublicBehaviors
 {
     public static function publicHeadContent()
@@ -64,3 +61,6 @@ class hljsPublicBehaviors
         }
     }
 }
+
+dcCore::app()->addBehavior('publicHeadContent', [hljsPublicBehaviors::class, 'publicHeadContent']);
+dcCore::app()->addBehavior('publicFooterContent', [hljsPublicBehaviors::class, 'publicFooterContent']);

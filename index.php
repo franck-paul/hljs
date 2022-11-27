@@ -147,7 +147,7 @@ if (is_dir($themes_root) && is_readable($themes_root)) {
 foreach ($themes_list as $theme_id) {
     if ($theme_id != 'default') {
         // Capitalize each word, replace dash by space, add a space before numbers
-        $theme_name               = preg_replace('/([0-9]+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
+        $theme_name               = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
         $combo_theme[$theme_name] = $theme_id;
     }
 }

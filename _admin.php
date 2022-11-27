@@ -17,13 +17,15 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 // dead but useful code, in order to have translations
 __('Code highlight') . __('highlight.js for Dotclear');
 
-$_menu['Blog']->addItem(
+dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
     __('Syntax highlighting'),
     'plugin.php?p=hljs',
     urldecode(dcPage::getPF('hljs/icon.svg')),
     preg_match('/plugin.php\?p=hljs(&.*)?$/', $_SERVER['REQUEST_URI']),
-    dcCore::app()->auth->check('contentadmin', dcCore::app()->blog->id)
+    dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
+        dcAuth::PERMISSION_CONTENT_ADMIN,
+    ]), dcCore::app()->blog->id)
 );
 
-dcCore::app()->addBehavior('adminPostEditor', ['hljsBehaviors', 'adminPostEditor']);
-dcCore::app()->addBehavior('ckeditorExtraPlugins', ['hljsBehaviors', 'ckeditorExtraPlugins']);
+dcCore::app()->addBehavior('adminPostEditor', [hljsBehaviors::class, 'adminPostEditor']);
+dcCore::app()->addBehavior('ckeditorExtraPlugins', [hljsBehaviors::class, 'ckeditorExtraPlugins']);

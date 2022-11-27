@@ -15,15 +15,17 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'Code highlight',            // Name
-    'highlight.js for Dotclear', // Description
-    'Franck Paul',               // Author
-    '0.12',                      // Version
+    'Code highlight',
+    'highlight.js for Dotclear',
+    'Franck Paul',
+    '1.0',
     [
-        'requires'    => [['core', '2.23']],
-        'permissions' => 'contentadmin',
-        'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
-        'type'        => 'plugin',
+        'requires'    => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_CONTENT_ADMIN,
+        ]),
+        'priority' => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
+        'type'     => 'plugin',
 
         'details'    => 'https://open-time.net/docs/plugins/hljs/',
         'support'    => 'https://github.com/franck-paul/hljs',

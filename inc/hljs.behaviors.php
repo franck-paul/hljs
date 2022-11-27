@@ -12,7 +12,7 @@
  */
 class hljsBehaviors
 {
-    public static function adminPostEditor($editor = '', $context = '', array $tags = [], $syntax = '')
+    public static function adminPostEditor($editor = '')
     {
         if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
             return;
@@ -35,7 +35,7 @@ class hljsBehaviors
             ]);
     }
 
-    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins, $context = '')
+    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins)
     {
         $extraPlugins[] = [
             'name'   => 'hljs',
@@ -46,12 +46,12 @@ class hljsBehaviors
 
     public static function coreInitWikiPost($wiki2xhtml)
     {
+        dcCore::app()->blog->settings->addNameSpace('hljs');
+
         $wiki2xhtml->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
         if ((bool) dcCore::app()->blog->settings->hljs->code) {
             $wiki2xhtml->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
         }
-
-        dcCore::app()->blog->settings->addNameSpace('hljs');
 
         if ((bool) dcCore::app()->blog->settings->hljs->yash) {
             // Add Yash compatibility macro
@@ -60,7 +60,7 @@ class hljsBehaviors
 
         if ((bool) dcCore::app()->blog->settings->hljs->syntaxehl) {
             // Add syntaxehl compatibility macros
-            foreach (self::$syntaxehl_brushes as $brush => $alias) {
+            foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
                 $wiki2xhtml->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
             }
         }
