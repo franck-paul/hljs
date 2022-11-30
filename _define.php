@@ -18,7 +18,7 @@ $this->registerModule(
     'Code highlight',
     'highlight.js for Dotclear',
     'Franck Paul',
-    '1.0',
+    '1.0.1',
     [
         'requires'    => [['core', '2.24']],
         'permissions' => dcCore::app()->auth->makePermissions([
