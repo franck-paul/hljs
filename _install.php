@@ -14,10 +14,7 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$new_version = dcCore::app()->plugins->moduleInfo('hljs', 'version');
-$old_version = dcCore::app()->getVersion('hljs');
-
-if (version_compare((string) $old_version, $new_version, '>=')) {
+if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->moduleInfo(basename(__DIR__), 'version'))) {
     return;
 }
 
@@ -33,8 +30,6 @@ try {
     dcCore::app()->blog->settings->hljs->put('syntaxehl', false, 'boolean', '', false, true);
     dcCore::app()->blog->settings->hljs->put('code', true, 'boolean', '', false, true);
     dcCore::app()->blog->settings->hljs->put('badge', false, 'boolean', '', false, true);
-
-    dcCore::app()->setVersion('hljs', $new_version);
 
     return true;
 } catch (Exception $e) {

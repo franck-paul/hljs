@@ -55,7 +55,7 @@ if (!empty($_REQUEST['popup'])) {
     echo
     '</head><body>' .
     '<h2>' . __('Code highlight - Syntax Selector') . '</h2>' .
-    '<form id="hljs-form" action="' . $p_url . '&amp;popup=1" method="get">' .
+    '<form id="hljs-form" action="' . dcCore::app()->admin->getPageURL() . '&amp;popup=1" method="get">' .
     '<p><label>' . __('Select the primary syntax of your code snippet:') . ' ' .
     form::combo('syntax', $hljs_brushes, ['extra_html' => 'autofocus']) . '</label></p>' .
     '<p>' .
@@ -98,7 +98,7 @@ if (!empty($_POST['saveconfig'])) {
         dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Configuration successfully updated.'));
-        http::redirect($p_url);
+        http::redirect(dcCore::app()->admin->getPageURL());
     } catch (Exception $e) {
         dcCore::app()->error->add($e->getMessage());
     }
