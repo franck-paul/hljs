@@ -27,5 +27,7 @@ dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
     ]), dcCore::app()->blog->id)
 );
 
-dcCore::app()->addBehavior('adminPostEditor', [hljsBehaviors::class, 'adminPostEditor']);
-dcCore::app()->addBehavior('ckeditorExtraPlugins', [hljsBehaviors::class, 'ckeditorExtraPlugins']);
+dcCore::app()->addBehaviors([
+    'adminPostEditor'      => [hljsBehaviors::class, 'adminPostEditor'],
+    'ckeditorExtraPlugins' => [hljsBehaviors::class, 'ckeditorExtraPlugins'],
+]);
