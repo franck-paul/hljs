@@ -10,19 +10,14 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-if (!defined('DC_RC_PATH')) {
-    return;
-}
-
 class hljsPublicBehaviors
 {
     public static function publicHeadContent()
     {
-        dcCore::app()->blog->settings->addNamespace('hljs');
         if (dcCore::app()->blog->settings->hljs->active) {
             $custom_css = dcCore::app()->blog->settings->hljs->custom_css;
             if (!empty($custom_css)) {
-                if (strpos('/', $custom_css) === 0) {
+                if (strpos('/', (string) $custom_css) === 0) {
                     $css = $custom_css;
                 } else {
                     $css = dcCore::app()->blog->settings->system->themes_url . '/' .
@@ -45,7 +40,6 @@ class hljsPublicBehaviors
 
     public static function publicFooterContent()
     {
-        dcCore::app()->blog->settings->addNamespace('hljs');
         if (dcCore::app()->blog->settings->hljs->active) {
             echo
             dcUtils::jsJson('hljs_config', [
@@ -62,5 +56,7 @@ class hljsPublicBehaviors
     }
 }
 
-dcCore::app()->addBehavior('publicHeadContent', [hljsPublicBehaviors::class, 'publicHeadContent']);
-dcCore::app()->addBehavior('publicFooterContent', [hljsPublicBehaviors::class, 'publicFooterContent']);
+dcCore::app()->addBehaviors([
+    'publicHeadContent'   => [hljsPublicBehaviors::class, 'publicHeadContent'],
+    'publicFooterContent' => [hljsPublicBehaviors::class, 'publicFooterContent'],
+]);

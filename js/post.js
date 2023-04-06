@@ -16,6 +16,8 @@ jsToolBar.prototype.elements.hljs = {
   title: 'Highlighted Code',
   context: 'post',
   icon: 'index.php?pf=hljs/icon.svg',
+  shortkey: 'KeyJ',
+  shortkey_name: 'J',
   fn: {},
   fncall: {},
   open_url: 'plugin.php?p=hljs&popup=1',

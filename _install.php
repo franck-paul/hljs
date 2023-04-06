@@ -19,7 +19,6 @@ if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->module
 }
 
 try {
-    dcCore::app()->blog->settings->addNamespace('hljs');
     dcCore::app()->blog->settings->hljs->put('active', false, 'boolean', '', false, true);
     dcCore::app()->blog->settings->hljs->put('mode', '', 'string', '', false, true);
     dcCore::app()->blog->settings->hljs->put('theme', '', 'string', '', false, true);

@@ -10,6 +10,10 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Network\Http;
+
 if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
@@ -17,7 +21,6 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 $plugin_version = dcCore::app()->getVersion('hljs');
 
 // Getting current parameters if any (get global parameters if not)
-dcCore::app()->blog->settings->addNamespace('hljs');
 $active      = (bool) dcCore::app()->blog->settings->hljs->active;
 $mode        = (string) dcCore::app()->blog->settings->hljs->mode;
 $theme       = (string) dcCore::app()->blog->settings->hljs->theme;
@@ -71,12 +74,10 @@ if (!empty($_REQUEST['popup'])) {
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
     try {
-        dcCore::app()->blog->settings->addNameSpace('hljs');
-
         $active      = (empty($_POST['active'])) ? false : true;
         $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
         $theme       = (empty($_POST['theme'])) ? '' : $_POST['theme'];
-        $custom_css  = (empty($_POST['custom_css'])) ? '' : html::sanitizeURL($_POST['custom_css']);
+        $custom_css  = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
         $hide_gutter = (empty($_POST['hide_gutter'])) ? false : true;
         $web_worker  = (empty($_POST['web_worker'])) ? false : true;
         $yash        = (empty($_POST['yash'])) ? false : true;
@@ -98,7 +99,7 @@ if (!empty($_POST['saveconfig'])) {
         dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Configuration successfully updated.'));
-        http::redirect(dcCore::app()->admin->getPageURL());
+        Http::redirect(dcCore::app()->admin->getPageURL());
     } catch (Exception $e) {
         dcCore::app()->error->add($e->getMessage());
     }
@@ -113,7 +114,7 @@ if (!empty($_POST['saveconfig'])) {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML(dcCore::app()->blog->name) => '',
+        Html::escapeHTML(dcCore::app()->blog->name) => '',
         __('Code highlight')                        => '',
     ]
 );
@@ -154,7 +155,7 @@ foreach ($themes_list as $theme_id) {
 ?>
 
 <div id="hljs_options">
-  <form method="post" action="<?php http::getSelfURI();?>">
+  <form method="post" action="<?php Http::getSelfURI();?>">
     <p>
       <?php echo form::checkbox('active', 1, $active); ?>
       <label class="classic" for="active">&nbsp;<?php echo __('Enable Code highlight'); ?></label>
@@ -189,7 +190,7 @@ foreach ($themes_list as $theme_id) {
 echo
 dcPage::cssModuleLoad('hljs/css/public.css', 'screen', $plugin_version) .
 dcPage::cssModuleLoad('hljs/css/admin.css', 'screen', $plugin_version) .
-dcPage::cssModuleLoad('hljs/js/lib/css/' . ($theme ? $theme : 'default') . '.css', 'screen', $plugin_version) .
+dcPage::cssModuleLoad('hljs/js/lib/css/' . ($theme ?: 'default') . '.css', 'screen', $plugin_version) .
 dcPage::jsJson('hljs_config', [
     'path'           => urldecode(dcPage::getPF('hljs/js/')),
     'mode'           => $mode,
@@ -199,8 +200,8 @@ dcPage::jsJson('hljs_config', [
     'badge'          => $badge ? 1 : 0,
     'use_ww'         => $web_worker ? 1 : 0,
     'yash'           => $yash ? 1 : 0,
-    'theme'          => $theme ? $theme : 'default',
-    'previous_theme' => $theme ? $theme : 'default',
+    'theme'          => $theme ?: 'default',
+    'previous_theme' => $theme ?: 'default',
 ]) .
 dcPage::jsModuleLoad('hljs/js/public.js', $plugin_version) .
 dcPage::jsModuleLoad('hljs/js/admin.js', $plugin_version);

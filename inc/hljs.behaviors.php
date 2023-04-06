@@ -44,24 +44,22 @@ class hljsBehaviors
         ];
     }
 
-    public static function coreInitWikiPost($wiki2xhtml)
+    public static function coreInitWikiPost($wiki)
     {
-        dcCore::app()->blog->settings->addNameSpace('hljs');
-
-        $wiki2xhtml->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
+        $wiki->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
         if ((bool) dcCore::app()->blog->settings->hljs->code) {
-            $wiki2xhtml->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
+            $wiki->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
         }
 
         if ((bool) dcCore::app()->blog->settings->hljs->yash) {
             // Add Yash compatibility macro
-            $wiki2xhtml->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
+            $wiki->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
         }
 
         if ((bool) dcCore::app()->blog->settings->hljs->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
-                $wiki2xhtml->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
+                $wiki->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
             }
         }
     }
@@ -101,7 +99,7 @@ class hljsBehaviors
     // Private
 
     // List of Yash aliases
-    private static $yash_brushes = [
+    private static array $yash_brushes = [
         'plain'       => 'plain',
         'txt'         => 'plain',
         'applescript' => 'applescript',
@@ -135,7 +133,7 @@ class hljsBehaviors
     ];
 
     // List of SyntaxHL aliases
-    private static $syntaxehl_brushes = [
+    private static array $syntaxehl_brushes = [
         '4cs'           => '',
         'abap'          => '',
         'actionscript'  => 'actionscript',
