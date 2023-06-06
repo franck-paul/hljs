@@ -13,64 +13,47 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/hljs/src/Backend.php:28
-#: ../git-plugins/hljs/src/Manage.php:217
-#: ../git-plugins/hljs/src/Manage.php:222
 msgid "Code highlight"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Backend.php:28
 msgid "highlight.js for Dotclear"
 msgstr ""
 
-#: ../git-plugins/hljs/src/BackendBehaviors.php:32
-#: ../git-plugins/hljs/src/BackendBehaviors.php:41
 msgid "Highlighted Code"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:122
 msgid "Automatic"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:123
 msgid "Plain Text"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:137
 msgid "Code highlight - Syntax Selector"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:151
 msgid "Select the primary syntax of your code snippet:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:153
 msgid "Cancel"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:155
 msgid "Ok"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:167
 msgid "Minimum (23 languages, 53 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:168
 msgid "Default (46 languages, 93 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:169
 msgid "Common (92 languages, 284 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:170
 msgid "Full (185 languages, 731 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:174
 msgid "Default"
 msgstr ""

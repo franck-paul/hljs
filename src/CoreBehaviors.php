@@ -10,56 +10,31 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-class hljsBehaviors
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\hljs;
+
+use dcCore;
+
+class CoreBehaviors
 {
-    public static function adminPostEditor($editor = '')
-    {
-        if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
-            return;
-        }
-
-        if ($editor == 'dcLegacyEditor') {
-            return
-            dcPage::jsJson('hljs_editor', [
-                'title' => __('Highlighted Code'),
-            ]) .
-            dcPage::jsModuleLoad('hljs/js/post.js', dcCore::app()->getVersion('hljs'));
-        }
-        $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
-        $url = urldecode($url);
-
-        return
-            dcPage::jsJson('hljs_editor', [
-                'title'     => __('Highlighted Code'),
-                'popup_url' => $url,
-            ]);
-    }
-
-    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins)
-    {
-        $extraPlugins[] = [
-            'name'   => 'hljs',
-            'button' => 'hljs',
-            'url'    => DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/',
-        ];
-    }
-
     public static function coreInitWikiPost($wiki)
     {
-        $wiki->registerFunction('macro:hljs', ['hljsBehaviors', 'transform']);
-        if ((bool) dcCore::app()->blog->settings->hljs->code) {
-            $wiki->registerFunction('macro:code', ['hljsBehaviors', 'transform']);
+        $settings = dcCore::app()->blog->settings->get(My::id());
+        $wiki->registerFunction('macro:hljs', [static::class, 'transform']);
+        if ((bool) $settings->code) {
+            $wiki->registerFunction('macro:code', [static::class, 'transform']);
         }
 
-        if ((bool) dcCore::app()->blog->settings->hljs->yash) {
+        if ((bool) $settings->yash) {
             // Add Yash compatibility macro
-            $wiki->registerFunction('macro:yash', ['hljsBehaviors', 'transformYash']);
+            $wiki->registerFunction('macro:yash', [static::class, 'transformYash']);
         }
 
-        if ((bool) dcCore::app()->blog->settings->hljs->syntaxehl) {
+        if ((bool) $settings->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
-                $wiki->registerFunction('macro:[' . $brush . ']', ['hljsBehaviors', 'transformSyntaxehl']);
+                $wiki->registerFunction('macro:[' . $brush . ']', [static::class, 'transformSyntaxehl']);
             }
         }
     }
