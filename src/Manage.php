@@ -129,7 +129,7 @@ class Manage extends dcNsProcess
             ]) .
             dcPage::jsModuleLoad(My::id() . '/js/popup.js', dcCore::app()->getVersion(My::id()));
             if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
-                $head .= dcPage::jsModuleLoad(My::id() . 'js/popup_cke.js', dcCore::app()->getVersion(My::id()));
+                $head .= dcPage::jsModuleLoad(My::id() . '/js/popup_cke.js', dcCore::app()->getVersion(My::id()));
             } else {
                 $head .= dcPage::jsModuleLoad(My::id() . '/js/popup_leg.js', dcCore::app()->getVersion(My::id()));
             }
