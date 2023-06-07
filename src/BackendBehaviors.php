@@ -33,6 +33,7 @@ class BackendBehaviors
             ]) .
             dcPage::jsModuleLoad(My::id() . '/js/post.js', dcCore::app()->getVersion(My::id()));
         }
+
         $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
 
@@ -48,7 +49,7 @@ class BackendBehaviors
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
-            'url'    => urldecode(dcPage::getPF(My::id() . '/cke-addon')), // DC_ADMIN_URL . 'index.php?pf=hljs/cke-addon/',
+            'url'    => urldecode(DC_ADMIN_URL . dcPage::getPF(My::id() . '/cke-addon/')),
         ];
     }
 }
