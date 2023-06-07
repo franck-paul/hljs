@@ -142,19 +142,21 @@ class Manage extends dcNsProcess
                 ->method('get')
                 ->fields([
                     (new Para())
-                        ->separator(' ')
-                        ->class('field')
-                        ->items([
-                            (new Select('syntax'))
-                                ->items($hljs_brushes)
-                                ->autofocus(true)
-                                ->label((new Label(__('Select the primary syntax of your code snippet:'), Label::INSIDE_TEXT_BEFORE))),
-                            (new Submit(['hljs-cancel']))
-                                ->value(__('Cancel')),
-                            (new Submit(['hljs-ok']))
-                                ->value(__('Ok')),
-                            dcCore::app()->formNonce(false),
-                        ]),
+                    ->items([
+                        (new Select('syntax'))
+                            ->items($hljs_brushes)
+                            ->autofocus(true)
+                            ->label((new Label(__('Select the primary syntax of your code snippet:'), Label::INSIDE_TEXT_BEFORE))),
+                    ]),
+                    (new Para())
+                    ->separator(' ')
+                    ->items([
+                        (new Submit(['hljs-cancel']))
+                            ->value(__('Cancel')),
+                        (new Submit(['hljs-ok']))
+                            ->value(__('Ok')),
+                        dcCore::app()->formNonce(false),
+                    ]),
                 ])
             ->render();
 
