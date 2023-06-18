@@ -21,6 +21,7 @@ use dcPage;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
+use Dotclear\Helper\Html\Form\Hidden;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Legend;
@@ -151,10 +152,11 @@ class Manage extends dcNsProcess
                     (new Para())
                     ->separator(' ')
                     ->items([
-                        (new Submit(['hljs-cancel']))
+                        (new Submit('hljs-cancel'))
                             ->value(__('Cancel')),
-                        (new Submit(['hljs-ok']))
+                        (new Submit('hljs-ok'))
                             ->value(__('Ok')),
+                        (new Hidden('popup', '1')),
                         dcCore::app()->formNonce(false),
                     ]),
                 ])
