@@ -29,7 +29,9 @@ class BackendBehaviors
         if ($editor == 'dcLegacyEditor') {
             return
             dcPage::jsJson('hljs_editor', [
-                'title' => __('Highlighted Code'),
+                'title'    => __('Highlighted Code'),
+                'icon'     => urldecode(dcPage::getPF(My::id() . '/icon.svg')),
+                'open_url' => dcCore::app()->adminurl->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
             ]) .
             dcPage::jsModuleLoad(My::id() . '/js/post.js', dcCore::app()->getVersion(My::id()));
         }
