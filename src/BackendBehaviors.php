@@ -16,7 +16,7 @@ namespace Dotclear\Plugin\hljs;
 
 use ArrayObject;
 use dcCore;
-use dcPage;
+use Dotclear\Core\Backend\Page;
 
 class BackendBehaviors
 {
@@ -28,19 +28,19 @@ class BackendBehaviors
 
         if ($editor == 'dcLegacyEditor') {
             return
-            dcPage::jsJson('hljs_editor', [
+            Page::jsJson('hljs_editor', [
                 'title'    => __('Highlighted Code'),
-                'icon'     => urldecode(dcPage::getPF(My::id() . '/icon.svg')),
-                'open_url' => dcCore::app()->adminurl->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
+                'icon'     => urldecode(Page::getPF(My::id() . '/icon.svg')),
+                'open_url' => dcCore::app()->admin->url->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
             ]) .
-            dcPage::jsModuleLoad(My::id() . '/js/post.js', dcCore::app()->getVersion(My::id()));
+            My::jsLoad('post.js');
         }
 
-        $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
+        $url = dcCore::app()->admin->url->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
 
         return
-            dcPage::jsJson('hljs_editor', [
+            Page::jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
                 'popup_url' => $url,
             ]);
@@ -51,7 +51,7 @@ class BackendBehaviors
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
-            'url'    => urldecode(DC_ADMIN_URL . dcPage::getPF(My::id() . '/cke-addon/')),
+            'url'    => urldecode(DC_ADMIN_URL . Page::getPF(My::id() . '/cke-addon/')),
         ];
     }
 }

@@ -41,7 +41,7 @@ class FrontendBehaviors
                 }
             }
             echo
-            dcUtils::cssModuleLoad(My::id() . '/css/public.css') .
+            My::cssLoad('public.css') .
             dcUtils::cssLoad($css);
         }
     }
@@ -60,7 +60,7 @@ class FrontendBehaviors
                 'yash'      => $settings->yash ? 1 : 0,
             ]);
             echo
-            dcUtils::jsModuleLoad(My::id() . '/js/public.js');
+            My::jsLoad('public.js');
         }
     }
 }

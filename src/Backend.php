@@ -14,40 +14,37 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcAdmin;
 use dcCore;
-use dcNsProcess;
+use Dotclear\Core\Backend\Menus;
+use Dotclear\Core\Process;
 
-class Backend extends dcNsProcess
+class Backend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::BACKEND);
-
         // dead but useful code, in order to have translations
         __('Code highlight') . __('highlight.js for Dotclear');
 
-        return static::$init;
+        return self::status(My::checkContext(My::BACKEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
-        dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
+        dcCore::app()->admin->menus[Menus::MENU_BLOG]->addItem(
             __('Syntax highlighting'),
-            My::makeUrl(),
+            My::manageUrl(),
             My::icons(),
             preg_match(My::urlScheme(), $_SERVER['REQUEST_URI']),
             My::checkContext(My::MENU)
         );
 
         dcCore::app()->addBehaviors([
-            'adminPostEditor'      => [BackendBehaviors::class, 'adminPostEditor'],
-            'ckeditorExtraPlugins' => [BackendBehaviors::class, 'ckeditorExtraPlugins'],
+            'adminPostEditor'      => BackendBehaviors::adminPostEditor(...),
+            'ckeditorExtraPlugins' => BackendBehaviors::ckeditorExtraPlugins(...),
         ]);
 
         return true;

@@ -16,8 +16,9 @@ namespace Dotclear\Plugin\hljs;
 
 use dcCore;
 use dcNamespace;
-use dcNsProcess;
-use dcPage;
+use Dotclear\Core\Backend\Notices;
+use Dotclear\Core\Backend\Page;
+use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
@@ -32,17 +33,14 @@ use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
 use Exception;
 
-class Manage extends dcNsProcess
+class Manage extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     /**
      * Initializes the page.
      */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::MANAGE);
-
-        return static::$init;
+        return self::status(My::checkContext(My::MANAGE));
     }
 
     /**
@@ -50,7 +48,7 @@ class Manage extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
@@ -82,8 +80,8 @@ class Manage extends dcNsProcess
 
                 dcCore::app()->blog->triggerBlog();
 
-                dcPage::addSuccessNotice(__('Configuration successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                Notices::addSuccessNotice(__('Configuration successfully updated.'));
+                dcCore::app()->admin->url->redirect('admin.plugin.' . My::id());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -97,7 +95,7 @@ class Manage extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return;
         }
 
@@ -124,18 +122,18 @@ class Manage extends dcNsProcess
                 __('Plain Text') => 'plain',
             ];
 
-            $head = dcPage::jsJson('hljs_config', [
-                'path' => dcPage::getPF('hljs/js/'),
+            $head = Page::jsJson('hljs_config', [
+                'path' => Page::getPF('hljs/js/'),
                 'mode' => $mode,
             ]) .
-            dcPage::jsModuleLoad(My::id() . '/js/popup.js', dcCore::app()->getVersion(My::id()));
+            My::jsLoad('popup.js');
             if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
-                $head .= dcPage::jsModuleLoad(My::id() . '/js/popup_cke.js', dcCore::app()->getVersion(My::id()));
+                $head .= My::jsLoad('popup_cke.js');
             } else {
-                $head .= dcPage::jsModuleLoad(My::id() . '/js/popup_leg.js', dcCore::app()->getVersion(My::id()));
+                $head .= My::jsLoad('popup_leg.js');
             }
 
-            dcPage::openModule(__('Code highlight - Syntax Selector'), $head);
+            Page::openModule(__('Code highlight - Syntax Selector'), $head);
 
             echo
             (new Form('hljs-form'))
@@ -162,7 +160,7 @@ class Manage extends dcNsProcess
                 ])
             ->render();
 
-            dcPage::closeModule();
+            Page::closeModule();
 
             return;
         }
@@ -200,11 +198,11 @@ class Manage extends dcNsProcess
             }
         }
 
-        $head = dcPage::cssModuleLoad('hljs/css/public.css', 'screen', dcCore::app()->getVersion(My::id())) .
-        dcPage::cssModuleLoad('hljs/css/admin.css', 'screen', dcCore::app()->getVersion(My::id())) .
-        dcPage::cssModuleLoad('hljs/js/lib/css/' . ($theme ?: 'default') . '.css', 'screen', dcCore::app()->getVersion(My::id())) .
-        dcPage::jsJson('hljs_config', [
-            'path'           => urldecode(dcPage::getPF(My::id() . '/js/')),
+        $head = My::cssLoad('public.css') .
+        My::cssLoad('admin.css') .
+        My::cssLoad('/js/lib/css/' . ($theme ?: 'default') . '.css') .
+        Page::jsJson('hljs_config', [
+            'path'           => urldecode(Page::getPF(My::id() . '/js/')),
             'mode'           => $mode,
             'current_mode'   => $mode,
             'list'           => [],
@@ -215,18 +213,18 @@ class Manage extends dcNsProcess
             'theme'          => $theme ?: 'default',
             'previous_theme' => $theme ?: 'default',
         ]) .
-        dcPage::jsModuleLoad('hljs/js/public.js', dcCore::app()->getVersion(My::id())) .
-        dcPage::jsModuleLoad('hljs/js/admin.js', dcCore::app()->getVersion(My::id()));
+        My::jsLoad('public.js') .
+        My::jsLoad('admin.js');
 
-        dcPage::openModule(__('Code highlight'), $head);
+        Page::openModule(__('Code highlight'), $head);
 
-        echo dcPage::breadcrumb(
+        echo Page::breadcrumb(
             [
                 Html::escapeHTML(dcCore::app()->blog->name) => '',
                 __('Code highlight')                        => '',
             ]
         );
-        echo dcPage::notices();
+        echo Notices::getNotices();
 
         $sample = <<<EOT
             <code id="hljs-sample">function findSequence(goal) {
@@ -350,6 +348,6 @@ class Manage extends dcNsProcess
             ])
         ->render();
 
-        dcPage::closeModule();
+        Page::closeModule();
     }
 }

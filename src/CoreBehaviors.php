@@ -21,20 +21,20 @@ class CoreBehaviors
     public static function coreInitWikiPost($wiki)
     {
         $settings = dcCore::app()->blog->settings->get(My::id());
-        $wiki->registerFunction('macro:hljs', [static::class, 'transform']);
+        $wiki->registerFunction('macro:hljs', static::transform(...));
         if ((bool) $settings->code) {
-            $wiki->registerFunction('macro:code', [static::class, 'transform']);
+            $wiki->registerFunction('macro:code', static::transform(...));
         }
 
         if ((bool) $settings->yash) {
             // Add Yash compatibility macro
-            $wiki->registerFunction('macro:yash', [static::class, 'transformYash']);
+            $wiki->registerFunction('macro:yash', static::transformYash(...));
         }
 
         if ((bool) $settings->syntaxehl) {
             // Add syntaxehl compatibility macros
             foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
-                $wiki->registerFunction('macro:[' . $brush . ']', [static::class, 'transformSyntaxehl']);
+                $wiki->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
             }
         }
     }
