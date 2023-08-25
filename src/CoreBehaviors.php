@@ -14,13 +14,11 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcCore;
-
 class CoreBehaviors
 {
     public static function coreInitWikiPost($wiki)
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         $wiki->registerFunction('macro:hljs', static::transform(...));
         if ((bool) $settings->code) {
             $wiki->registerFunction('macro:code', static::transform(...));

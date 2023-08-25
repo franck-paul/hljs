@@ -22,7 +22,6 @@ use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
-use Dotclear\Helper\Html\Form\Hidden;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Legend;
@@ -65,7 +64,7 @@ class Manage extends Process
                 $code        = (empty($_POST['code'])) ? false : true;
                 $badge       = (empty($_POST['badge'])) ? false : true;
 
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
 
                 $settings->put('active', $active, dcNamespace::NS_BOOL);
                 $settings->put('mode', $mode, dcNamespace::NS_STRING);
@@ -101,7 +100,7 @@ class Manage extends Process
 
         // Getting current parameters if any (get global parameters if not)
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
 
         $active      = (bool) $settings->active;
         $mode        = (string) $settings->mode;
@@ -133,7 +132,7 @@ class Manage extends Process
                 $head .= My::jsLoad('popup_leg.js');
             }
 
-            Page::openModule(__('Code highlight - Syntax Selector'), $head);
+            Page::openModule(My::name() . ' - ' . __('Syntax Selector'), $head);
 
             echo
             (new Form('hljs-form'))
@@ -154,8 +153,9 @@ class Manage extends Process
                             ->value(__('Cancel')),
                         (new Submit('hljs-ok'))
                             ->value(__('Ok')),
-                        (new Hidden('popup', '1')),
-                        dcCore::app()->formNonce(false),
+                        ... My::hiddenFields([
+                            'popup' => '1',
+                        ]),
                     ]),
                 ])
             ->render();
@@ -216,7 +216,7 @@ class Manage extends Process
         My::jsLoad('public.js') .
         My::jsLoad('admin.js');
 
-        Page::openModule(__('Code highlight'), $head);
+        Page::openModule(My::name(), $head);
 
         echo Page::breadcrumb(
             [
@@ -343,7 +343,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['saveconfig'], __('Save configuration')))
                         ->accesskey('s'),
-                    dcCore::app()->formNonce(false),
+                    ... My::hiddenFields(),
                 ]),
             ])
         ->render();

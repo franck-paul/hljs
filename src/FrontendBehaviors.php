@@ -21,7 +21,7 @@ class FrontendBehaviors
 {
     public static function publicHeadContent()
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         if ($settings->active) {
             $custom_css = $settings->custom_css;
             if (!empty($custom_css)) {
@@ -48,7 +48,7 @@ class FrontendBehaviors
 
     public static function publicFooterContent()
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         if ($settings->active) {
             echo
             dcUtils::jsJson('hljs_config', [
