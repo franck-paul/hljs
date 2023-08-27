@@ -226,21 +226,7 @@ class Manage extends Process
         );
         echo Notices::getNotices();
 
-        $sample = <<<EOT
-            <code id="hljs-sample">function findSequence(goal) {
-                // Local scope find function
-                function find(start, history) {
-                if (start == goal)
-                  return history;
-                else if (start > goal)
-                  return null;
-                else
-                  return find(start + 5, "(" + history + " + 5)") ||
-                         find(start * 3, "(" + history + " * 3)");
-                }
-                return find(1, "1");
-            }</code>
-            EOT;
+        $sample = self::sample();
 
         // Form
         echo
@@ -349,5 +335,24 @@ class Manage extends Process
         ->render();
 
         Page::closeModule();
+    }
+
+    private static function sample(): string
+    {
+        return <<<EOT
+            <code id="hljs-sample">function findSequence(goal) {
+                // Local scope find function
+                function find(start, history) {
+                if (start == goal)
+                  return history;
+                else if (start > goal)
+                  return null;
+                else
+                  return find(start + 5, "(" + history + " + 5)") ||
+                         find(start * 3, "(" + history + " * 3)");
+                }
+                return find(1, "1");
+            }</code>
+            EOT;
     }
 }

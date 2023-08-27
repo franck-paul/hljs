@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 15:28+0200\n"
+"POT-Creation-Date: 2023-08-27 18:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Plain Text"
 msgstr ""
 
-msgid "Code highlight - Syntax Selector"
+msgid "Syntax Selector"
 msgstr ""
 
 msgid "Select the primary syntax of your code snippet:"
@@ -56,4 +56,70 @@ msgid "Full (185 languages, 731 Kb)"
 msgstr ""
 
 msgid "Default"
+msgstr ""
+
+msgid "Enable Code highlight"
+msgstr ""
+
+msgid "Presentation"
+msgstr ""
+
+msgid "Theme:"
+msgstr ""
+
+msgid "Set of languages:"
+msgstr ""
+
+msgid "List of languages:"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Hide gutter with line numbers"
+msgstr ""
+
+msgid "Show syntax badge"
+msgstr ""
+
+msgid "Use web workers"
+msgstr ""
+
+msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
+msgstr ""
+
+msgid "Use custom CSS:"
+msgstr ""
+
+msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
+msgstr ""
+
+msgid "You can use a custom CSS by providing its location."
+msgstr ""
+
+msgid "Compatibiliy"
+msgstr ""
+
+msgid "Yash compatibility mode"
+msgstr ""
+
+msgid "Some of YASH languages are not supported by Code highlight (see documentation)."
+msgstr ""
+
+msgid "Will be applied on future edition of posts containing YASH macros (///yash …///)."
+msgstr ""
+
+msgid "SyntaxeHL compatibility mode"
+msgstr ""
+
+msgid "All SyntaxeHL languages are not supported by Code highlight (see documentation)."
+msgstr ""
+
+msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
+msgstr ""
+
+msgid "Generic code compatibility mode"
+msgstr ""
+
+msgid "Will be applied on future edition of posts containing generic code macros (///code [language]…///)."
 msgstr ""
