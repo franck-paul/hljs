@@ -339,6 +339,8 @@ class Manage extends Process
 
     private static function sample(): string
     {
+        // Tricky code to avoid xgettext bug on indented end heredoc identifier (see https://savannah.gnu.org/bugs/?62158)
+        // Warning: don't use <<< if there is some __() l10n calls after as xgettext will not find them
         return <<<EOT
             <code id="hljs-sample">function findSequence(goal) {
                 // Local scope find function
