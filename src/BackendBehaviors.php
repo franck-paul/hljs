@@ -20,10 +20,10 @@ use Dotclear\Core\Backend\Page;
 
 class BackendBehaviors
 {
-    public static function adminPostEditor($editor = '')
+    public static function adminPostEditor(string $editor = ''): string
     {
         if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
-            return;
+            return '';
         }
 
         if ($editor == 'dcLegacyEditor') {
@@ -31,12 +31,12 @@ class BackendBehaviors
             Page::jsJson('hljs_editor', [
                 'title'    => __('Highlighted Code'),
                 'icon'     => urldecode(Page::getPF(My::id() . '/icon.svg')),
-                'open_url' => dcCore::app()->admin->url->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
+                'open_url' => dcCore::app()->adminurl->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
             ]) .
             My::jsLoad('post.js');
         }
 
-        $url = dcCore::app()->admin->url->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
+        $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
 
         return
@@ -46,12 +46,19 @@ class BackendBehaviors
             ]);
     }
 
-    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins)
+    /**
+     * @param      ArrayObject<int, mixed>  $extraPlugins  The extra plugins
+     *
+     * @return     string
+     */
+    public static function ckeditorExtraPlugins(ArrayObject $extraPlugins): string
     {
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
             'url'    => urldecode(DC_ADMIN_URL . Page::getPF(My::id() . '/cke-addon/')),
         ];
+
+        return '';
     }
 }

@@ -14,9 +14,11 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
+use Dotclear\Helper\Html\WikiToHtml;
+
 class CoreBehaviors
 {
-    public static function coreInitWikiPost($wiki)
+    public static function coreInitWikiPost(WikiToHtml $wiki): string
     {
         $settings = My::settings();
         $wiki->registerFunction('macro:hljs', static::transform(...));
@@ -35,9 +37,19 @@ class CoreBehaviors
                 $wiki->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
             }
         }
+
+        return '';
     }
 
-    public static function transform($text, $args)
+    /**
+     * Transform macro
+     *
+     * @param      string       $text   The text
+     * @param      string       $args   The arguments
+     *
+     * @return     string
+     */
+    public static function transform(string $text, string $args): string
     {
         $text      = trim((string) $text);
         $real_args = explode(' ', $args);
@@ -46,7 +58,15 @@ class CoreBehaviors
         return '<pre><code' . $class . '>' . htmlspecialchars($text) . '</code></pre>';
     }
 
-    public static function transformYash($text, $args)
+    /**
+     * Transform macro (YASH compliance)
+     *
+     * @param      string       $text   The text
+     * @param      string       $args   The arguments
+     *
+     * @return     string
+     */
+    public static function transformYash(string $text, string $args): string
     {
         // Try to find a supported language, if not do not add class and let highlight engine doing syntax recognition
         $text      = trim((string) $text);
@@ -59,7 +79,15 @@ class CoreBehaviors
         return '<pre><code' . $class . '>' . htmlspecialchars($text) . '</code></pre>';
     }
 
-    public static function transformSyntaxehl($text, $args)
+    /**
+     * Transform macro (SyntaxeHL compliance)
+     *
+     * @param      string       $text   The text
+     * @param      string       $args   The arguments
+     *
+     * @return     string
+     */
+    public static function transformSyntaxehl(string $text, string $args): string
     {
         // Try to find a supported language, if not set original
         $text      = trim((string) $text);
@@ -69,9 +97,9 @@ class CoreBehaviors
         return '<pre><code class="language-' . $class . '">' . htmlspecialchars($text) . '</code></pre>';
     }
 
-    // Private
-
-    // List of Yash aliases
+    /**
+     * @var array<string, string>   List of Yash aliases
+     */
     private static array $yash_brushes = [
         'plain'       => 'plain',
         'txt'         => 'plain',
@@ -105,7 +133,9 @@ class CoreBehaviors
         'yaml'        => 'yaml',
     ];
 
-    // List of SyntaxHL aliases
+    /**
+     * @var array<string, string>   List of SyntaxHL aliases
+     */
     private static array $syntaxehl_brushes = [
         '4cs'           => '',
         'abap'          => '',
