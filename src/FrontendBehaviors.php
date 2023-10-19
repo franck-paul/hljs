@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcCore;
 use dcUtils;
+use Dotclear\App;
 
 class FrontendBehaviors
 {
@@ -28,16 +28,16 @@ class FrontendBehaviors
                 if (str_starts_with((string) $custom_css, '/')) {
                     $css = $custom_css;
                 } else {
-                    $css = dcCore::app()->blog->settings->system->themes_url . '/' .
-                    dcCore::app()->blog->settings->system->theme . '/' .
+                    $css = App::blog()->settings()->system->themes_url . '/' .
+                    App::blog()->settings()->system->theme . '/' .
                         $custom_css;
                 }
             } else {
                 $theme = (string) $settings->theme;
                 if ($theme == '') {
-                    $css = dcCore::app()->blog->getPF(My::id() . '/js/lib/css/default.css');
+                    $css = App::blog()->getPF(My::id() . '/js/lib/css/default.css');
                 } else {
-                    $css = dcCore::app()->blog->getPF(My::id() . '/js/lib/css/' . $theme . '.css');
+                    $css = App::blog()->getPF(My::id() . '/js/lib/css/' . $theme . '.css');
                 }
             }
             echo
@@ -54,7 +54,7 @@ class FrontendBehaviors
         if ($settings->active) {
             echo
             dcUtils::jsJson('hljs_config', [
-                'path'      => urldecode(dcCore::app()->blog->getPF(My::id() . '/js/')),
+                'path'      => urldecode(App::blog()->getPF(My::id() . '/js/')),
                 'mode'      => $settings->mode ?? '',
                 'show_line' => $settings->hide_gutter ? 0 : 1,
                 'badge'     => $settings->badge ? 1 : 0,
