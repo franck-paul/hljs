@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Menus;
 use Dotclear\Core\Process;
 
@@ -36,7 +36,7 @@ class Backend extends Process
 
         My::addBackendMenuItem(Menus::MENU_BLOG);
 
-        dcCore::app()->addBehaviors([
+        App::behavior()->addBehaviors([
             'adminPostEditor'      => BackendBehaviors::adminPostEditor(...),
             'ckeditorExtraPlugins' => BackendBehaviors::ckeditorExtraPlugins(...),
         ]);

@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcUtils;
 use Dotclear\App;
+use Dotclear\Helper\Html\Html;
 
 class FrontendBehaviors
 {
@@ -42,7 +42,7 @@ class FrontendBehaviors
             }
             echo
             My::cssLoad('public.css') .
-            dcUtils::cssLoad($css);
+            App::plugins()->cssLoad($css);
         }
 
         return '';
@@ -53,7 +53,7 @@ class FrontendBehaviors
         $settings = My::settings();
         if ($settings->active) {
             echo
-            dcUtils::jsJson('hljs_config', [
+            Html::jsJson('hljs_config', [
                 'path'      => urldecode(App::blog()->getPF(My::id() . '/js/')),
                 'mode'      => $settings->mode ?? '',
                 'show_line' => $settings->hide_gutter ? 0 : 1,

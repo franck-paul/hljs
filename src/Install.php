@@ -14,8 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcCore;
-use dcNamespace;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Exception;
 
@@ -35,18 +34,18 @@ class Install extends Process
         try {
             // Init
             $settings = My::settings();
-            $settings->put('active', false, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('mode', '', dcNamespace::NS_STRING, '', false, true);
-            $settings->put('theme', '', dcNamespace::NS_STRING, '', false, true);
-            $settings->put('custom_css', '', dcNamespace::NS_STRING, '', false, true);
-            $settings->put('hide_gutter', false, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('web_worker', false, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('yash', true, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('syntaxehl', false, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('code', true, dcNamespace::NS_BOOL, '', false, true);
-            $settings->put('badge', false, dcNamespace::NS_BOOL, '', false, true);
+            $settings->put('active', false, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('mode', '', App::blogWorkspace()::NS_STRING, '', false, true);
+            $settings->put('theme', '', App::blogWorkspace()::NS_STRING, '', false, true);
+            $settings->put('custom_css', '', App::blogWorkspace()::NS_STRING, '', false, true);
+            $settings->put('hide_gutter', false, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('web_worker', false, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('yash', true, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('syntaxehl', false, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('code', true, App::blogWorkspace()::NS_BOOL, '', false, true);
+            $settings->put('badge', false, App::blogWorkspace()::NS_BOOL, '', false, true);
         } catch (Exception $e) {
-            dcCore::app()->error->add($e->getMessage());
+            App::error()->add($e->getMessage());
         }
 
         return true;

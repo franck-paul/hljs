@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\hljs;
 
 use ArrayObject;
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Page;
 
 class BackendBehaviors
@@ -31,12 +31,12 @@ class BackendBehaviors
             Page::jsJson('hljs_editor', [
                 'title'    => __('Highlighted Code'),
                 'icon'     => urldecode(Page::getPF(My::id() . '/icon.svg')),
-                'open_url' => dcCore::app()->adminurl->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
+                'open_url' => App::backend()->url()->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
             ]) .
             My::jsLoad('post.js');
         }
 
-        $url = dcCore::app()->adminurl->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
+        $url = App::backend()->url()->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
         $url = urldecode($url);
 
         return

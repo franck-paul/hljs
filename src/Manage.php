@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\hljs;
 
-use dcCore;
-use dcNamespace;
 use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
@@ -67,23 +65,23 @@ class Manage extends Process
 
                 $settings = My::settings();
 
-                $settings->put('active', $active, dcNamespace::NS_BOOL);
-                $settings->put('mode', $mode, dcNamespace::NS_STRING);
-                $settings->put('theme', $theme, dcNamespace::NS_STRING);
-                $settings->put('custom_css', $custom_css, dcNamespace::NS_STRING);
-                $settings->put('hide_gutter', $hide_gutter, dcNamespace::NS_BOOL);
-                $settings->put('web_worker', $web_worker, dcNamespace::NS_BOOL);
-                $settings->put('yash', $yash, dcNamespace::NS_BOOL);
-                $settings->put('syntaxehl', $syntaxehl, dcNamespace::NS_BOOL);
-                $settings->put('code', $code, dcNamespace::NS_BOOL);
-                $settings->put('badge', $badge, dcNamespace::NS_BOOL);
+                $settings->put('active', $active, App::blogWorkspace()::NS_BOOL);
+                $settings->put('mode', $mode, App::blogWorkspace()::NS_STRING);
+                $settings->put('theme', $theme, App::blogWorkspace()::NS_STRING);
+                $settings->put('custom_css', $custom_css, App::blogWorkspace()::NS_STRING);
+                $settings->put('hide_gutter', $hide_gutter, App::blogWorkspace()::NS_BOOL);
+                $settings->put('web_worker', $web_worker, App::blogWorkspace()::NS_BOOL);
+                $settings->put('yash', $yash, App::blogWorkspace()::NS_BOOL);
+                $settings->put('syntaxehl', $syntaxehl, App::blogWorkspace()::NS_BOOL);
+                $settings->put('code', $code, App::blogWorkspace()::NS_BOOL);
+                $settings->put('badge', $badge, App::blogWorkspace()::NS_BOOL);
 
                 App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Configuration successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                My::redirect();
             } catch (Exception $e) {
-                dcCore::app()->error->add($e->getMessage());
+                App::error()->add($e->getMessage());
             }
         }
 
@@ -137,7 +135,7 @@ class Manage extends Process
 
             echo
             (new Form('hljs-form'))
-                ->action(dcCore::app()->admin->getPageURL() . '&amp;popup=1')
+                ->action(App::backend()->getPageURL() . '&amp;popup=1')
                 ->method('get')
                 ->fields([
                     (new Para())
@@ -232,7 +230,7 @@ class Manage extends Process
         // Form
         echo
         (new Form('hljs_options'))
-            ->action(dcCore::app()->admin->getPageURL())
+            ->action(App::backend()->getPageURL())
             ->method('post')
             ->fields([
                 (new Para())->items([
