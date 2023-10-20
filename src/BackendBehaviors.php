@@ -56,7 +56,7 @@ class BackendBehaviors
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
-            'url'    => urldecode(DC_ADMIN_URL . Page::getPF(My::id() . '/cke-addon/')),
+            'url'    => urldecode(App::config()->adminUrl() . Page::getPF(My::id() . '/cke-addon/')),
         ];
 
         return '';
