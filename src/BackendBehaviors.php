@@ -30,19 +30,16 @@ class BackendBehaviors
             return
             Page::jsJson('hljs_editor', [
                 'title'    => __('Highlighted Code'),
-                'icon'     => urldecode(Page::getPF(My::id() . '/icon.svg')),
-                'open_url' => App::backend()->url()->get('admin.plugin.' . My::id(), ['popup' => 1], '&'),
+                'icon'     => urldecode(My::fileURL('/icon.svg')),
+                'open_url' => urldecode(My::manageUrl(['popup' => 1], '&')),
             ]) .
             My::jsLoad('post.js');
         }
 
-        $url = App::backend()->url()->get('admin.plugin.hljs', ['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&');
-        $url = urldecode($url);
-
         return
             Page::jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
-                'popup_url' => $url,
+                'popup_url' => urldecode(My::manageUrl(['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&')),
             ]);
     }
 
