@@ -40,6 +40,7 @@ class FrontendBehaviors
                     $css = App::blog()->getPF(My::id() . '/js/lib/css/' . $theme . '.css');
                 }
             }
+
             echo
             My::cssLoad('public.css') .
             App::plugins()->cssLoad($css);

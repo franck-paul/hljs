@@ -44,8 +44,8 @@ class Install extends Process
             $settings->put('syntaxehl', false, App::blogWorkspace()::NS_BOOL, '', false, true);
             $settings->put('code', true, App::blogWorkspace()::NS_BOOL, '', false, true);
             $settings->put('badge', false, App::blogWorkspace()::NS_BOOL, '', false, true);
-        } catch (Exception $e) {
-            App::error()->add($e->getMessage());
+        } catch (Exception $exception) {
+            App::error()->add($exception->getMessage());
         }
 
         return true;

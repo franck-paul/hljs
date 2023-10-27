@@ -52,16 +52,16 @@ class Manage extends Process
 
         if (!empty($_POST['saveconfig'])) {
             try {
-                $active      = (empty($_POST['active'])) ? false : true;
+                $active      = !empty($_POST['active']);
                 $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
                 $theme       = (empty($_POST['theme'])) ? '' : $_POST['theme'];
                 $custom_css  = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
-                $hide_gutter = (empty($_POST['hide_gutter'])) ? false : true;
-                $web_worker  = (empty($_POST['web_worker'])) ? false : true;
-                $yash        = (empty($_POST['yash'])) ? false : true;
-                $syntaxehl   = (empty($_POST['syntaxehl'])) ? false : true;
-                $code        = (empty($_POST['code'])) ? false : true;
-                $badge       = (empty($_POST['badge'])) ? false : true;
+                $hide_gutter = !empty($_POST['hide_gutter']);
+                $web_worker  = !empty($_POST['web_worker']);
+                $yash        = !empty($_POST['yash']);
+                $syntaxehl   = !empty($_POST['syntaxehl']);
+                $code        = !empty($_POST['code']);
+                $badge       = !empty($_POST['badge']);
 
                 $settings = My::settings();
 
@@ -177,18 +177,17 @@ class Manage extends Process
         // Populate theme list
         $themes_list = [];
         $themes_root = My::path() . '/js/lib/css/';
-        if (is_dir($themes_root) && is_readable($themes_root)) {
-            if (($d = @dir($themes_root)) !== false) {
-                while (($entry = $d->read()) !== false) {
-                    if ($entry != '.' && $entry != '..' && substr($entry, 0, 1) != '.' && is_readable($themes_root . '/' . $entry)) {
-                        if (substr($entry, -4) == '.css') {
-                            $themes_list[] = substr($entry, 0, -4); // remove .css extension
-                        }
-                    }
+        if (is_dir($themes_root) && is_readable($themes_root) && ($d = @dir($themes_root)) !== false) {
+            while (($entry = $d->read()) !== false) {
+                if ($entry != '.' && $entry != '..' && !str_starts_with($entry, '.') && is_readable($themes_root . '/' . $entry) && str_ends_with($entry, '.css')) {
+                    $themes_list[] = substr($entry, 0, -4);
+                    // remove .css extension
                 }
-                sort($themes_list);
             }
+
+            sort($themes_list);
         }
+
         foreach ($themes_list as $theme_id) {
             if ($theme_id != 'default') {
                 // Capitalize each word, replace dash by space, add a space before numbers
