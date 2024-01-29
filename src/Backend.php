@@ -35,10 +35,13 @@ class Backend extends Process
 
         My::addBackendMenuItem(App::backend()->menus()::MENU_BLOG);
 
-        App::behavior()->addBehaviors([
-            'adminPostEditor'      => BackendBehaviors::adminPostEditor(...),
-            'ckeditorExtraPlugins' => BackendBehaviors::ckeditorExtraPlugins(...),
-        ]);
+        $settings = My::settings();
+        if ($settings->active) {
+            App::behavior()->addBehaviors([
+                'adminPostEditor'      => BackendBehaviors::adminPostEditor(...),
+                'ckeditorExtraPlugins' => BackendBehaviors::ckeditorExtraPlugins(...),
+            ]);
+        }
 
         return true;
     }

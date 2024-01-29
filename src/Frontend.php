@@ -32,7 +32,7 @@ class Frontend extends Process
 
         // Don't do things in frontend if plugin disabled
         $settings = My::settings();
-        if (!(bool) $settings->active) {
+        if (!$settings->active) {
             return false;
         }
 

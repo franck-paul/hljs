@@ -21,20 +21,22 @@ class CoreBehaviors
     public static function coreInitWikiPost(WikiToHtml $wiki): string
     {
         $settings = My::settings();
-        $wiki->registerFunction('macro:hljs', static::transform(...));
-        if ((bool) $settings->code) {
-            $wiki->registerFunction('macro:code', static::transform(...));
-        }
+        if ($settings->active) {
+            $wiki->registerFunction('macro:hljs', static::transform(...));
+            if ((bool) $settings->code) {
+                $wiki->registerFunction('macro:code', static::transform(...));
+            }
 
-        if ((bool) $settings->yash) {
-            // Add Yash compatibility macro
-            $wiki->registerFunction('macro:yash', static::transformYash(...));
-        }
+            if ((bool) $settings->yash) {
+                // Add Yash compatibility macro
+                $wiki->registerFunction('macro:yash', static::transformYash(...));
+            }
 
-        if ((bool) $settings->syntaxehl) {
-            // Add syntaxehl compatibility macros
-            foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
-                $wiki->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
+            if ((bool) $settings->syntaxehl) {
+                // Add syntaxehl compatibility macros
+                foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
+                    $wiki->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
+                }
             }
         }
 
