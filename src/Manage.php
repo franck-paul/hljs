@@ -152,7 +152,7 @@ class Manage extends Process
                             ->value(__('Cancel')),
                         (new Submit('hljs-ok'))
                             ->value(__('Ok')),
-                        ... My::hiddenFields([
+                        ...My::hiddenFields([
                             'popup' => '1',
                         ]),
                     ]),
@@ -291,7 +291,7 @@ class Manage extends Process
                             ->label((new Label(__('Use custom CSS:'), Label::INSIDE_TEXT_BEFORE))),
                     ]),
                     (new Para())->class('info')->items([
-                        (new Text(null, __('You can use a custom CSS by providing its location.') . '<br />' . __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'))),
+                        (new Text(null, __('You can use a custom CSS by providing its location.') . '<br>' . __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'))),
                     ]),
                 ]),
 
@@ -304,7 +304,7 @@ class Manage extends Process
                             ->label((new Label(__('Yash compatibility mode'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->class('info')->items([
-                        (new Text(null, __('Will be applied on future edition of posts containing YASH macros (///yash …///).') . '<br />' . __('Some of YASH languages are not supported by Code highlight (see documentation).'))),
+                        (new Text(null, __('Will be applied on future edition of posts containing YASH macros (///yash …///).') . '<br>' . __('Some of YASH languages are not supported by Code highlight (see documentation).'))),
                     ]),
                     (new Para())->items([
                         (new Checkbox('syntaxehl', $syntaxehl))
@@ -312,7 +312,7 @@ class Manage extends Process
                             ->label((new Label(__('SyntaxeHL compatibility mode'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->class('info')->items([
-                        (new Text(null, __('Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///).') . '<br />' . __('All SyntaxeHL languages are not supported by Code highlight (see documentation).'))),
+                        (new Text(null, __('Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///).') . '<br>' . __('All SyntaxeHL languages are not supported by Code highlight (see documentation).'))),
                     ]),
                     (new Para())->items([
                         (new Checkbox('code', $code))
@@ -327,7 +327,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['saveconfig'], __('Save configuration')))
                         ->accesskey('s'),
-                    ... My::hiddenFields(),
+                    ...My::hiddenFields(),
                 ]),
             ])
         ->render();

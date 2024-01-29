@@ -40,7 +40,7 @@ dotclear.hljs_config.listLanguages = (init) => {
       } else {
         list = ll.join(', ');
       }
-      document.getElementById('syntaxes').innerHTML = list ? `<br />${list}` : '';
+      document.getElementById('syntaxes').innerHTML = list ? `<br>${list}` : '';
       if (init) {
         // Store current list choosen
         dotclear.hljs_config.list = ll;
@@ -49,7 +49,7 @@ dotclear.hljs_config.listLanguages = (init) => {
     document.getElementsByTagName('head')[0].appendChild(sce);
   };
   document.getElementsByTagName('head')[0].appendChild(sc);
-}
+};
 // Update list of languages
 dotclear.hljs_config.selectMode = () => {
   const input = document.getElementById('mode');
