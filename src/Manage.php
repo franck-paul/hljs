@@ -18,6 +18,7 @@ use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
+use Dotclear\Helper\Html\Form\Button;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
@@ -148,7 +149,7 @@ class Manage extends Process
                     (new Para())
                     ->separator(' ')
                     ->items([
-                        (new Submit('hljs-cancel'))
+                        (new Button('hljs-cancel'))
                             ->value(__('Cancel')),
                         (new Submit('hljs-ok'))
                             ->value(__('Ok')),
