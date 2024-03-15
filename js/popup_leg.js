@@ -3,26 +3,27 @@
 
 $(() => {
   // Cancel button fired
-  $('#hljs-cancel').on('click', () => {
+  const btn_cancel = document.getElementById('hljs-cancel');
+  btn_cancel?.addEventListener('click', () => {
     window.close();
     return false;
   });
 
   // Ok button fired
-  $('#hljs-ok').on('click', () => {
+  const btn_ok = document.getElementById('hljs-ok');
+  btn_ok?.addEventListener('click', () => {
     sendClose();
     window.close();
     return false;
   });
 
   function sendClose() {
-    const insert_form = $('#hljs-form').get(0);
-    if (insert_form == undefined) {
-      return;
+    const insert_form = document.getElementById('hljs-form');
+    if (insert_form) {
+      const tb = window.opener.the_toolbar;
+      const { data } = tb.elements.hljs;
+      data.syntax = insert_form.syntax.value;
+      tb.elements.hljs.fncall[tb.mode].call(tb);
     }
-    const tb = window.opener.the_toolbar;
-    const { data } = tb.elements.hljs;
-    data.syntax = insert_form.syntax.value;
-    tb.elements.hljs.fncall[tb.mode].call(tb);
   }
 });

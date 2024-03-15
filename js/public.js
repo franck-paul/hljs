@@ -39,32 +39,34 @@ function hljsDataLanguage(element, syntax) {
 
 // highlight.js script loader
 const hljsLoad = () => {
-  if (!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww) {
-    // Load highlight[-mode].js script → loaded in hljs object
-    const hljs_sc = document.createElement('script');
-    hljs_sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
-      dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
-    }.pack.js`; // URL
-    hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc.async !== 'undefined') {
-      hljs_sc.async = true;
-    }
-    document.getElementsByTagName('head')[0].appendChild(hljs_sc);
+  if (!(!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww)) {
+    return;
   }
+  // Load highlight[-mode].js script → loaded in hljs object
+  const hljs_sc = document.createElement('script');
+  hljs_sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
+    dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
+  }.pack.js`; // URL
+  hljs_sc.type = 'text/javascript';
+  if (typeof hljs_sc.async !== 'undefined') {
+    hljs_sc.async = true;
+  }
+  document.getElementsByTagName('head')[0].appendChild(hljs_sc);
 };
 
 // highlight.js extensions script loader
 const hljsLoadExtensions = () => {
-  if (!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww) {
-    // Load highlight[-mode].js script → loaded in hljs object
-    const hljs_sc = document.createElement('script');
-    hljs_sc.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
-    hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc.async !== 'undefined') {
-      hljs_sc.async = true;
-    }
-    document.getElementsByTagName('head')[0].appendChild(hljs_sc);
+  if (!(!dotclear.hljs_config.ww || !dotclear.hljs_config.use_ww)) {
+    return;
   }
+  // Load highlight[-mode].js script → loaded in hljs object
+  const hljs_sc = document.createElement('script');
+  hljs_sc.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
+  hljs_sc.type = 'text/javascript';
+  if (typeof hljs_sc.async !== 'undefined') {
+    hljs_sc.async = true;
+  }
+  document.getElementsByTagName('head')[0].appendChild(hljs_sc);
 };
 
 // highlight.js script runner
@@ -112,10 +114,10 @@ const hljsRun = () => {
       // Get specified syntax if any
       cls = block.className;
       // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
-      brush = cls.match(/\blanguage\-(\w*)\b/);
+      brush = cls.match(/\blanguage-(\w*)\b/);
       if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
-        brush = cls.match(/\bbrush\:(\w*)\b/);
+        brush = cls.match(/\bbrush:(\w*)\b/);
       }
       if (brush && brush.length == 2) {
         syntax =
@@ -154,7 +156,7 @@ const hljsRun = () => {
     let yash = false;
     if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
       // Yash mode (<pre brush:<syntax>…</pre>)
-      brush = cls.match(/\bbrush\:(\w*)\b/);
+      brush = cls.match(/\bbrush:(\w*)\b/);
       if (brush && brush.length == 2) {
         yash = true;
       }
