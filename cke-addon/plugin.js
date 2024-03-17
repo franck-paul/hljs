@@ -21,7 +21,7 @@ CKEDITOR.plugins.add('hljs', {
     editor.ui.addButton('hljs', {
       label: hljs_editor.title,
       command: 'hljsCommand',
-      icon: `${this.path}icons/icon.png`,
+      icon: `${this.path}icons/icon.svg`,
     });
   },
 });
