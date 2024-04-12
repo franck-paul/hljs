@@ -14,7 +14,7 @@ $this->registerModule(
     'Code highlight',
     'highlight.js for Dotclear',
     'Franck Paul',
-    '4.5',
+    '5.0',
     [
         'requires'    => [['core', '2.29']],
         'permissions' => 'My',
