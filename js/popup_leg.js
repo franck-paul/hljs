@@ -1,7 +1,6 @@
-/*global $ */
 'use strict';
 
-$(() => {
+dotclear.ready(() => {
   // Cancel button fired
   const btn_cancel = document.getElementById('hljs-cancel');
   btn_cancel?.addEventListener('click', () => {

@@ -1,7 +1,7 @@
-/*global dotclear, $, hljs, hljsExtentCbtpl */
+/*global dotclear, hljs, hljsExtentCbtpl */
 'use strict';
 
-$(() => {
+dotclear.ready(() => {
   // Cope with enter key in popup
   dotclear.enterKeyInForm('#hljs-form', '#hljs-ok', '#hljs-cancel');
 

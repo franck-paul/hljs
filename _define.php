@@ -16,7 +16,7 @@ $this->registerModule(
     'Franck Paul',
     '4.5',
     [
-        'requires'    => [['core', '2.28']],
+        'requires'    => [['core', '2.29']],
         'permissions' => 'My',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)
         'type'        => 'plugin',

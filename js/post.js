@@ -1,7 +1,7 @@
 /*global jsToolBar, dotclear */
 'use strict';
 
-$(() => {
+dotclear.ready(() => {
   const data = dotclear.getData('hljs_editor', false);
 
   jsToolBar.prototype.elements.hljsSpace = {

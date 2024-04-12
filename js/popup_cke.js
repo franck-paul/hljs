@@ -1,7 +1,7 @@
 /*global $ */
 'use strict';
 
-$(() => {
+dotclear.ready(() => {
   // Cancel button fired
   $('#hljs-cancel').on('click', () => {
     window.close();

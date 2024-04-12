@@ -77,7 +77,7 @@ dotclear.hljs_config.nextTheme = (forward = true) => {
   dotclear.hljs_config.selectTheme();
 };
 
-$(() => {
+dotclear.ready(() => {
   dotclear.hljs_config.listLanguages(true);
   $('#theme').on('change', dotclear.hljs_config.selectTheme);
   $('#mode').on('change', dotclear.hljs_config.selectMode);
