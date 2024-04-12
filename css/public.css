@@ -26,6 +26,17 @@
   background-color: #d54e21;
 }
 
+.hljs::after {
+  content: 'copy';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: smaller;
+  padding: 0.1em 0.6em 0.1em 0.6em;
+  color: #fff;
+  background-color: blueviolet;
+}
+
 /* No line numbers */
 
 .hljs-no-gutter {

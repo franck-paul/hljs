@@ -197,8 +197,78 @@ const hljsRun = () => {
   });
 };
 
+// Cope with copy to clipboard pseudo button
+const hljsCopy = () => {
+  if (!dotclear.hljs_config.show_copy) {
+    // Hide :after pseudo button
+    document.styleSheets[0].insertRule(`.hljs::after { display: none !important; }`, 0);
+
+    return;
+  }
+
+  navigator.permissions.query({ name: 'write-on-clipboard' }).then((result) => {
+    if (!(result.state == 'granted' || result.state == 'prompt')) {
+      // Hide :after pseudo button
+      document.styleSheets[0].insertRule(`.hljs::after { display: none !important; }`, 0);
+    }
+  });
+
+  // Set correct content for copy buttons
+  document.styleSheets[0].insertRule(`.hljs::after { content: '${dotclear.hljs_config.copy}' !important; }`, 0);
+
+  const copy = document.querySelectorAll('.hljs');
+  if (copy.length) {
+    copy.forEach((elt) => {
+      // Add clik handler
+      elt.addEventListener('click', (e) => {
+        // First we get the pseudo-elements style
+        const target = e.currentTarget || e.target;
+        const after = getComputedStyle(target, ':after');
+        if (!after) {
+          return;
+        }
+        // Then we parse out the dimensions
+        const atop = Number(after.getPropertyValue('top').slice(0, -2));
+        const aheight = Number(after.getPropertyValue('height').slice(0, -2));
+        const aleft = Number(after.getPropertyValue('left').slice(0, -2));
+        const awidth = Number(after.getPropertyValue('width').slice(0, -2));
+        // And get the mouse position
+        const ex = e.layerX;
+        const ey = e.layerY;
+        // Finally we do a bounds check (Is the mouse inside of the after element)
+        if (!(ex > aleft && ex < aleft + awidth && ey > atop && ey < atop + aheight)) {
+          return;
+        }
+        const text = [];
+        target.childNodes.forEach(function check(child) {
+          if (
+            child.nodeType !== Node.ELEMENT_NODE ||
+            child.tagName.toLowerCase() !== 'span' ||
+            !child.classList.contains('hljs-line-number')
+          ) {
+            if (child.nodeType === Node.TEXT_NODE) {
+              text.push(child.nodeValue);
+            }
+            child.childNodes.forEach(check);
+          }
+        });
+        navigator.clipboard.writeText(text.join('').trim()).then(
+          () => {
+            console.log('Content copied to clipboard');
+          },
+          () => {
+            console.error('Failed to copy');
+          },
+        );
+      });
+    });
+  }
+};
+
 hljsLoad();
 hljsLoadExtensions();
-addEventListener('load', () => {
+
+dotclear.ready(() => {
   hljsRun();
+  hljsCopy();
 });

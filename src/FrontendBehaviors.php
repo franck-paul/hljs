@@ -61,6 +61,8 @@ class FrontendBehaviors
                 'badge'     => $settings->badge ? 1 : 0,
                 'use_ww'    => $settings->web_worker ? 1 : 0,
                 'yash'      => $settings->yash ? 1 : 0,
+                'show_copy' => $settings->hide_copy ? 0 : 1,
+                'copy'      => __('copy'),
             ]);
             echo
             My::jsLoad('public.js');

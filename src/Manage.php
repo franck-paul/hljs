@@ -63,6 +63,7 @@ class Manage extends Process
                 $syntaxehl   = !empty($_POST['syntaxehl']);
                 $code        = !empty($_POST['code']);
                 $badge       = !empty($_POST['badge']);
+                $hide_copy   = !empty($_POST['hide_copy']);
 
                 $settings = My::settings();
 
@@ -76,6 +77,7 @@ class Manage extends Process
                 $settings->put('syntaxehl', $syntaxehl, App::blogWorkspace()::NS_BOOL);
                 $settings->put('code', $code, App::blogWorkspace()::NS_BOOL);
                 $settings->put('badge', $badge, App::blogWorkspace()::NS_BOOL);
+                $settings->put('hide_copy', $hide_copy, App::blogWorkspace()::NS_BOOL);
 
                 App::blog()->triggerBlog();
 
@@ -112,6 +114,7 @@ class Manage extends Process
         $syntaxehl   = (bool) $settings->syntaxehl;
         $code        = (bool) $settings->code;
         $badge       = (bool) $settings->badge;
+        $hide_copy   = (bool) $settings->hide_copy;
 
         if (!empty($_REQUEST['popup'])) {
             $hljs_brushes = [
@@ -211,6 +214,8 @@ class Manage extends Process
             'yash'           => $yash ? 1 : 0,
             'theme'          => $theme ?: 'default',
             'previous_theme' => $theme ?: 'default',
+            'show_copy'      => $hide_copy ? 0 : 1,
+            'copy'           => __('copy'),
         ]) .
         My::jsLoad('public.js') .
         My::jsLoad('admin.js');
@@ -267,14 +272,19 @@ class Manage extends Process
                 ->legend((new Legend(__('Options'))))
                 ->fields([
                     (new Para())->items([
+                        (new Checkbox('badge', $badge))
+                            ->value(1)
+                            ->label((new Label(__('Show syntax badge'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                    (new Para())->items([
                         (new Checkbox('hide_gutter', $hide_gutter))
                             ->value(1)
                             ->label((new Label(__('Hide gutter with line numbers'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->items([
-                        (new Checkbox('badge', $badge))
+                        (new Checkbox('hide_copy', $hide_copy))
                             ->value(1)
-                            ->label((new Label(__('Show syntax badge'), Label::INSIDE_TEXT_AFTER))),
+                            ->label((new Label(__('Hide copy button'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->items([
                         (new Checkbox('web_worker', $web_worker))

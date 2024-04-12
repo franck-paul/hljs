@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-27 18:04+0200\n"
+"POT-Creation-Date: 2024-04-12 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,148 +16,157 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/hljs/src/Backend.php:26
-#: ../git-plugins/hljs/src/Manage.php:224
+#: ../git-plugins/hljs/src/Backend.php:25
+#: ../git-plugins/hljs/src/Manage.php:228
 msgid "Code highlight"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Backend.php:26
+#: ../git-plugins/hljs/src/Backend.php:25
 msgid "highlight.js for Dotclear"
 msgstr ""
 
 #: ../git-plugins/hljs/src/BackendBehaviors.php:32
-#: ../git-plugins/hljs/src/BackendBehaviors.php:44
+#: ../git-plugins/hljs/src/BackendBehaviors.php:41
 msgid "Highlighted Code"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:120
+#: ../git-plugins/hljs/src/FrontendBehaviors.php:65
+#: ../git-plugins/hljs/src/Manage.php:218
+msgid "copy"
+msgstr ""
+
+#: ../git-plugins/hljs/src/Manage.php:123
 msgid "Automatic"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:121
+#: ../git-plugins/hljs/src/Manage.php:124
 msgid "Plain Text"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:135
+#: ../git-plugins/hljs/src/Manage.php:138
 msgid "Syntax Selector"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:147
+#: ../git-plugins/hljs/src/Manage.php:150
 msgid "Select the primary syntax of your code snippet:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:153
+#: ../git-plugins/hljs/src/Manage.php:156
 msgid "Cancel"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:155
+#: ../git-plugins/hljs/src/Manage.php:158
 msgid "Ok"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:169
+#: ../git-plugins/hljs/src/Manage.php:172
 msgid "Minimum (23 languages, 53 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:170
+#: ../git-plugins/hljs/src/Manage.php:173
 msgid "Default (46 languages, 93 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:171
+#: ../git-plugins/hljs/src/Manage.php:174
 msgid "Common (92 languages, 284 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:172
+#: ../git-plugins/hljs/src/Manage.php:175
 msgid "Full (185 languages, 731 Kb)"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:176
+#: ../git-plugins/hljs/src/Manage.php:179
 msgid "Default"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:240
+#: ../git-plugins/hljs/src/Manage.php:244
 msgid "Enable Code highlight"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:244
+#: ../git-plugins/hljs/src/Manage.php:248
 msgid "Presentation"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:250
+#: ../git-plugins/hljs/src/Manage.php:254
 msgid "Theme:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:259
+#: ../git-plugins/hljs/src/Manage.php:263
 msgid "Set of languages:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:262
+#: ../git-plugins/hljs/src/Manage.php:266
 msgid "List of languages:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:268
+#: ../git-plugins/hljs/src/Manage.php:272
 msgid "Options"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:273
-msgid "Hide gutter with line numbers"
-msgstr ""
-
-#: ../git-plugins/hljs/src/Manage.php:278
+#: ../git-plugins/hljs/src/Manage.php:277
 msgid "Show syntax badge"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:283
+#: ../git-plugins/hljs/src/Manage.php:282
+msgid "Hide gutter with line numbers"
+msgstr ""
+
+#: ../git-plugins/hljs/src/Manage.php:287
+msgid "Hide copy button"
+msgstr ""
+
+#: ../git-plugins/hljs/src/Manage.php:292
 msgid "Use web workers"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:286
+#: ../git-plugins/hljs/src/Manage.php:295
 msgid "Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:293
+#: ../git-plugins/hljs/src/Manage.php:302
 msgid "Use custom CSS:"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:296
+#: ../git-plugins/hljs/src/Manage.php:305
 msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:296
+#: ../git-plugins/hljs/src/Manage.php:305
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:301
+#: ../git-plugins/hljs/src/Manage.php:310
 msgid "Compatibiliy"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:306
+#: ../git-plugins/hljs/src/Manage.php:315
 msgid "Yash compatibility mode"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:309
+#: ../git-plugins/hljs/src/Manage.php:318
 msgid "Some of YASH languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:309
+#: ../git-plugins/hljs/src/Manage.php:318
 msgid "Will be applied on future edition of posts containing YASH macros (///yash …///)."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:314
+#: ../git-plugins/hljs/src/Manage.php:323
 msgid "SyntaxeHL compatibility mode"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:317
+#: ../git-plugins/hljs/src/Manage.php:326
 msgid "All SyntaxeHL languages are not supported by Code highlight (see documentation)."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:317
+#: ../git-plugins/hljs/src/Manage.php:326
 msgid "Will be applied on future edition of posts containing SyntaxeHL macros (///[language]…///)."
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:322
+#: ../git-plugins/hljs/src/Manage.php:331
 msgid "Generic code compatibility mode"
 msgstr ""
 
-#: ../git-plugins/hljs/src/Manage.php:325
+#: ../git-plugins/hljs/src/Manage.php:334
 msgid "Will be applied on future edition of posts containing generic code macros (///code [language]…///)."
 msgstr ""
