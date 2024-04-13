@@ -83,17 +83,53 @@ dotclear.hljs = {
     const sel = 'pre code:not(.nohighlight)';
     const blocks = document.querySelectorAll(sel);
 
-    blocks.forEach((block) => {
-      // Utility function to display line numbers
-      const showLineNumber = (e) => {
-        e.innerHTML = `<span class="hljs-line-number"></span>\n${e.innerHTML}\n<span class="hljs-cl"></span>`;
-        const num = e.innerHTML.split(/\n/).length;
-        for (let j = 0; j < num; j++) {
-          const line_num = e.getElementsByTagName('span')[0];
-          line_num.innerHTML += `<span>${j == 0 || j == num - 1 ? '&nbsp;' : j}</span>`;
-        }
-      };
+    // Utility function to display line numbers
+    const showLineNumber = (e) => {
+      e.innerHTML = `<span class="hljs-line-number"></span>\n${e.innerHTML}\n<span class="hljs-cl"></span>`;
+      const num = e.innerHTML.split(/\n/).length;
+      for (let j = 0; j < num; j++) {
+        const line_num = e.getElementsByTagName('span')[0];
+        line_num.innerHTML += `<span>${j == 0 || j == num - 1 ? '&nbsp;' : j}</span>`;
+      }
+    };
 
+    // Utility function to cope with copy button
+    const copyButtonTemplate = new DOMParser().parseFromString(
+      `<button class="hljs-copy-button">${dotclear.hljs_config.copy}</button>`,
+      'text/html',
+    ).body.firstChild;
+    async function writeClipboardText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    const createCopyButton = (block) => {
+      const button = copyButtonTemplate.cloneNode(true);
+      block.appendChild(button);
+      // Cope click event on button
+      button.addEventListener('click', () => {
+        const text = [];
+        block.childNodes.forEach(function check(child) {
+          if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'button')
+          ; // Ignore copy button
+          else if (
+            child.nodeType !== Node.ELEMENT_NODE ||
+            child.tagName.toLowerCase() !== 'span' ||
+            !child.classList.contains('hljs-line-number')
+          ) {
+            if (child.nodeType === Node.TEXT_NODE) {
+              text.push(child.nodeValue);
+            }
+            child.childNodes.forEach(check);
+          }
+        });
+        writeClipboardText(text.join('').trim());
+      });
+    };
+
+    blocks.forEach((block) => {
       // Ensure that hljs class is set
       dotclear.hljs.hljsAddClass(block, 'hljs');
       // Add wrapper class to parent
@@ -137,6 +173,8 @@ dotclear.hljs = {
           if (dotclear.hljs_config.show_line) {
             showLineNumber(block);
           }
+          // Creation bouton
+          if (dotclear.hljs_config.show_copy) createCopyButton(block);
         };
         // Run web worker
         worker.postMessage([block.textContent, dotclear.hljs_config.path, dotclear.hljs_config.mode, syntax]);
@@ -195,6 +233,8 @@ dotclear.hljs = {
           }
         });
       }
+      // Creation bouton
+      if (dotclear.hljs_config.show_copy) createCopyButton(block);
     });
   },
 
@@ -265,5 +305,5 @@ dotclear.hljs.hljsLoadExtensions();
 
 dotclear.ready(() => {
   dotclear.hljs.hljsRun();
-  dotclear.hljs.hljsCopy();
+  //  dotclear.hljs.hljsCopy();
 });
