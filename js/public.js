@@ -112,9 +112,9 @@ dotclear.hljs = {
       button.addEventListener('click', () => {
         const text = [];
         block.childNodes.forEach(function check(child) {
-          if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'button')
-          ; // Ignore copy button
-          else if (
+          if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'button') {
+            // Will ignore copy button text child
+          } else if (
             child.nodeType !== Node.ELEMENT_NODE ||
             child.tagName.toLowerCase() !== 'span' ||
             !child.classList.contains('hljs-line-number')
@@ -126,9 +126,14 @@ dotclear.hljs = {
           }
         });
         writeClipboardText(text.join('').trim());
+        button.textContent = dotclear.hljs_config.copied;
+      });
+      button.addEventListener('focusout', () => {
+        if (button.textContent !== dotclear.hljs_config.copy) button.textContent = dotclear.hljs_config.copy;
       });
     };
 
+    // Main loop
     blocks.forEach((block) => {
       // Ensure that hljs class is set
       dotclear.hljs.hljsAddClass(block, 'hljs');
@@ -237,67 +242,6 @@ dotclear.hljs = {
       if (dotclear.hljs_config.show_copy) createCopyButton(block);
     });
   },
-
-  // Cope with copy to clipboard pseudo button
-  hljsCopy: () => {
-    if (!dotclear.hljs_config.show_copy) {
-      // Hide :after pseudo button
-      document.styleSheets[0].insertRule(`.hljs::after { display: none !important; }`, 0);
-
-      return;
-    }
-
-    // Set correct content for copy buttons
-    document.styleSheets[0].insertRule(`.hljs::after { content: '${dotclear.hljs_config.copy}' !important; }`, 0);
-
-    const copy = document.querySelectorAll('.hljs');
-    if (copy.length) {
-      copy.forEach((elt) => {
-        // Add clik handler
-        elt.addEventListener('click', (e) => {
-          // First we get the pseudo-elements style
-          const target = e.currentTarget || e.target;
-          const after = getComputedStyle(target, ':after');
-          if (!after) {
-            return;
-          }
-          // Then we parse out the dimensions
-          const atop = Number(after.getPropertyValue('top').slice(0, -2));
-          const aheight = Number(after.getPropertyValue('height').slice(0, -2));
-          const aleft = Number(after.getPropertyValue('left').slice(0, -2));
-          const awidth = Number(after.getPropertyValue('width').slice(0, -2));
-          // And get the mouse position
-          const ex = e.layerX;
-          const ey = e.layerY;
-          // Finally we do a bounds check (Is the mouse inside of the after element)
-          if (!(ex > aleft && ex < aleft + awidth && ey > atop && ey < atop + aheight)) {
-            return;
-          }
-          const text = [];
-          target.childNodes.forEach(function check(child) {
-            if (
-              child.nodeType !== Node.ELEMENT_NODE ||
-              child.tagName.toLowerCase() !== 'span' ||
-              !child.classList.contains('hljs-line-number')
-            ) {
-              if (child.nodeType === Node.TEXT_NODE) {
-                text.push(child.nodeValue);
-              }
-              child.childNodes.forEach(check);
-            }
-          });
-          navigator.clipboard.writeText(text.join('').trim()).then(
-            () => {
-              console.log('Content copied to clipboard');
-            },
-            () => {
-              console.error('Failed to copy');
-            },
-          );
-        });
-      });
-    }
-  },
 };
 
 dotclear.hljs.hljsLoad();
@@ -305,5 +249,4 @@ dotclear.hljs.hljsLoadExtensions();
 
 dotclear.ready(() => {
   dotclear.hljs.hljsRun();
-  //  dotclear.hljs.hljsCopy();
 });
