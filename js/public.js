@@ -10,6 +10,8 @@ dotclear.hljs_config.show_line = dotclear.hljs_config.show_line && true; // Show
 dotclear.hljs_config.badge = dotclear.hljs_config.badge || false; // Use or not web workers
 dotclear.hljs_config.use_ww = dotclear.hljs_config.use_ww || false; // Use or not web workers
 dotclear.hljs_config.yash = dotclear.hljs_config.yash && true; // Yash compatibility
+dotclear.hljs_config.copy = dotclear.hljs_config.copy || 'copy';
+dotclear.hljs_config.copied = dotclear.hljs_config.copied || 'copied';
 
 // Test browser support of web workers
 dotclear.hljs_config.ww = !!window.Worker;
