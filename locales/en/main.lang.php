@@ -14,6 +14,7 @@ L10n::$locales['Code highlight'] = '';
 L10n::$locales['highlight.js for Dotclear'] = '';
 L10n::$locales['Highlighted Code'] = '';
 L10n::$locales['copy'] = '';
+L10n::$locales['copied'] = '';
 L10n::$locales['Automatic'] = '';
 L10n::$locales['Plain Text'] = '';
 L10n::$locales['Syntax Selector'] = '';

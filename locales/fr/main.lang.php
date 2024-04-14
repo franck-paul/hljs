@@ -14,6 +14,7 @@ L10n::$locales['Code highlight'] = 'Coloration syntaxique';
 L10n::$locales['highlight.js for Dotclear'] = 'highlight.js pour Dotclear';
 L10n::$locales['Highlighted Code'] = 'Coloration syntaxique';
 L10n::$locales['copy'] = 'copier';
+L10n::$locales['copied'] = 'copié';
 L10n::$locales['Automatic'] = 'Automatique';
 L10n::$locales['Plain Text'] = 'Texte simple';
 L10n::$locales['Syntax Selector'] = 'Sélecteur de syntaxe';
