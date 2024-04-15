@@ -289,10 +289,10 @@ class Manage extends Process
                     (new Para())->items([
                         (new Checkbox('web_worker', $web_worker))
                             ->value(1)
-                            ->label((new Label(__('Use web workers'), Label::INSIDE_TEXT_AFTER))),
+                            ->label((new Label(__('Use parallel processing (web workers)'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->class('info')->items([
-                        (new Text(null, __('Will use web workers if the browser supports them and provide faster treatment of code snippets but may consume lot more memory.'))),
+                        (new Text(null, __('The use of parallel processing (web workers), if supported by the browser, enables faster processing of code extracts, but can consume much more memory.'))),
                     ]),
                     (new Para())->items([
                         (new Input('custom_css'))
