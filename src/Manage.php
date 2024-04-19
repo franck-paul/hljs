@@ -51,7 +51,7 @@ class Manage extends Process
             return false;
         }
 
-        if (!empty($_POST['saveconfig'])) {
+        if (isset($_POST['active'])) {
             try {
                 $active      = !empty($_POST['active']);
                 $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
