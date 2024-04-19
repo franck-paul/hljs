@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 hljs module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 09:50+0200\n"
+"POT-Creation-Date: 2024-04-19 18:24+0200\n"
 "PO-Revision-Date: 2023-06-06 13:31+0000\n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>, 2024\n"
 "Language-Team: French (https://app.transifex.com/open-time/teams/109573/fr/)\n"
@@ -67,6 +67,12 @@ msgstr "Complet (185 syntaxes, 731 Kb)"
 
 msgid "Default"
 msgstr "Défaut"
+
+msgid "Light themes"
+msgstr "Thèmes clairs"
+
+msgid "Dark themes"
+msgstr "Thèmes sombres"
 
 msgid "Enable Code highlight"
 msgstr "Activer la coloration syntaxique du code"
