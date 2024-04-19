@@ -51,6 +51,10 @@ class Manage extends Process
             return false;
         }
 
+        /*
+         * Note: when jQuery submit the form, the submit button is not provided in the $_POST array
+         */
+
         if (isset($_POST['active'])) {
             try {
                 $active      = !empty($_POST['active']);
