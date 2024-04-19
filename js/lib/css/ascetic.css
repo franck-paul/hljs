@@ -8,8 +8,8 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: white;
-  color: black;
+  background: #fff;
+  color: #000;
 }
 
 .hljs-string,

@@ -178,14 +178,53 @@ class Manage extends Process
         $combo_theme = [
             __('Default') => '',
         ];
+        $combo_theme_dark = [
+        ];
+        $combo_theme_light = [
+        ];
         // Populate theme list
-        $themes_list = [];
+        $themes_list       = [];
+        $themes_list_dark  = [];
+        $themes_list_light = [];
+
         $themes_root = My::path() . '/js/lib/css/';
         if (is_dir($themes_root) && is_readable($themes_root) && ($d = @dir($themes_root)) !== false) {
             while (($entry = $d->read()) !== false) {
-                if ($entry != '.' && $entry != '..' && !str_starts_with($entry, '.') && is_readable($themes_root . '/' . $entry) && str_ends_with($entry, '.css')) {
-                    $themes_list[] = substr($entry, 0, -4);
+                if ($entry    != '.'
+                    && $entry != '..'
+                    && !str_starts_with($entry, '.')
+                    && is_readable($themes_root . DIRECTORY_SEPARATOR . $entry)
+                    && str_ends_with($entry, '.css')) {
                     // remove .css extension
+                    $name          = substr($entry, 0, -4);
+                    $themes_list[] = $name;
+
+                    // get background color to determine if it is a dark or light theme
+                    $buffer = file_get_contents($themes_root . DIRECTORY_SEPARATOR . $entry);
+                    if ($buffer) {
+                        // Find .hljs {…} declaration
+                        $css_hljs = [];
+                        if (preg_match('/(?:\s)*\.hljs {((?:[^}])*)}/m', $buffer, $css_hljs)) {
+                            if (isset($css_hljs[1])) {
+                                // Find background color in .hljs {…} declaration
+                                $css_background = [];
+                                if (preg_match('/(?:\s)*background(?:-color)*:\s#([0-9a-f]{3,6})/m', $css_hljs[1], $css_background)) {
+                                    if (isset($css_background[1])) {
+                                        $color = $css_background[1];
+                                        if (strlen($color) === 3) {
+                                            $color .= $color;
+                                        }
+                                        // Check if background color is dark or light
+                                        if (hexdec($color) > 0xffffff / 2) {
+                                            $themes_list_light[] = $name;
+                                        } else {
+                                            $themes_list_dark[] = $name;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -195,9 +234,24 @@ class Manage extends Process
         foreach ($themes_list as $theme_id) {
             if ($theme_id != 'default') {
                 // Capitalize each word, replace dash by space, add a space before numbers
-                $theme_name               = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
-                $combo_theme[$theme_name] = $theme_id;
+                $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
+                // Add color scheme if known
+                if (in_array($theme_id, $themes_list_dark)) {
+                    $combo_theme_dark[$theme_name] = $theme_id;
+                } elseif (in_array($theme_id, $themes_list_light)) {
+                    $combo_theme_light[$theme_name] = $theme_id;
+                } else {
+                    $combo_theme[$theme_name] = $theme_id;
+                }
+
+                // Find if theme is dark or light
             }
+        }
+        if (count($combo_theme_light) > 0) {
+            $combo_theme[__('Light themes')] = $combo_theme_light;
+        }
+        if (count($combo_theme_dark) > 0) {
+            $combo_theme[__('Dark themes')] = $combo_theme_dark;
         }
 
         $head = My::cssLoad('public.css') .
