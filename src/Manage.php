@@ -209,22 +209,18 @@ class Manage extends Process
                         // Find .hljs {…} declaration
                         $css_hljs = [];
                         if (preg_match('/(?:\s)*\.hljs {((?:[^}])*)}/m', $buffer, $css_hljs)) {
-                            if (isset($css_hljs[1])) {
-                                // Find background color in .hljs {…} declaration
-                                $css_background = [];
-                                if (preg_match('/(?:\s)*background(?:-color)*:\s#([0-9a-f]{3,6})/m', $css_hljs[1], $css_background)) {
-                                    if (isset($css_background[1])) {
-                                        $color = $css_background[1];
-                                        if (strlen($color) === 3) {
-                                            $color .= $color;
-                                        }
-                                        // Check if background color is dark or light
-                                        if (hexdec($color) > 0xffffff / 2) {
-                                            $themes_list_light[] = $name;
-                                        } else {
-                                            $themes_list_dark[] = $name;
-                                        }
-                                    }
+                            // Find background color in .hljs {…} declaration
+                            $css_background = [];
+                            if (preg_match('/(?:\s)*background(?:-color)*:\s#([0-9a-f]{3,6})/m', $css_hljs[1], $css_background)) {
+                                $color = $css_background[1];
+                                if (strlen($color) === 3) {
+                                    $color .= $color;
+                                }
+                                // Check if background color is dark or light
+                                if (hexdec($color) > 0xffffff / 2) {
+                                    $themes_list_light[] = $name;
+                                } else {
+                                    $themes_list_dark[] = $name;
                                 }
                             }
                         }
