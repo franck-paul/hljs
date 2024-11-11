@@ -55,7 +55,7 @@ class Manage extends Process
          * Note: when jQuery submit the form, the submit button is not provided in the $_POST array
          */
 
-        if (isset($_POST['active'])) {
+        if (isset($_POST['custom_css'])) {
             try {
                 $active      = !empty($_POST['active']);
                 $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
