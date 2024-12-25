@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief hljs, a plugin for Dotclear 2
  *
@@ -303,7 +304,7 @@ class Manage extends Process
                 ->fields([
                     (new Para())->items([
                         (new Select('theme'))
-                            ->items($combo_theme)
+                            ->items($combo_theme)   // @phpstan-ignore-line
                             ->default($theme)
                             ->label((new Label(__('Theme:'), Label::INSIDE_TEXT_BEFORE))),
                     ]),

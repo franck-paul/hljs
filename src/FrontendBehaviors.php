@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief hljs, a plugin for Dotclear 2
  *
@@ -55,7 +56,7 @@ class FrontendBehaviors
         if ($settings->active) {
             echo
             Html::jsJson('hljs_config', [
-                'path'      => urldecode(App::blog()->getPF(My::id() . '/js/')),
+                'path'      => urldecode((string) App::blog()->getPF(My::id() . '/js/')),
                 'mode'      => $settings->mode ?? '',
                 'show_line' => $settings->hide_gutter ? 0 : 1,
                 'badge'     => $settings->badge ? 1 : 0,
