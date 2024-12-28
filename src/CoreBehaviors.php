@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief hljs, a plugin for Dotclear 2
  *
@@ -48,12 +49,10 @@ class CoreBehaviors
      *
      * @param      string       $text   The text
      * @param      string       $args   The arguments
-     *
-     * @return     string
      */
     public static function transform(string $text, string $args): string
     {
-        $text      = trim((string) $text);
+        $text      = trim($text);
         $real_args = explode(' ', $args);
         $class     = empty($real_args[1]) ? '' : ' class="language-' . $real_args[1] . '"';
 
@@ -65,16 +64,14 @@ class CoreBehaviors
      *
      * @param      string       $text   The text
      * @param      string       $args   The arguments
-     *
-     * @return     string
      */
     public static function transformYash(string $text, string $args): string
     {
         // Try to find a supported language, if not do not add class and let highlight engine doing syntax recognition
-        $text      = trim((string) $text);
+        $text      = trim($text);
         $real_args = explode(' ', $args);
         $syntax    = empty($real_args[1]) ? 'plain' : $real_args[1];
-        $class     = array_key_exists($syntax, self::$yash_brushes) && self::$yash_brushes[$syntax] != '' ?
+        $class     = array_key_exists($syntax, self::$yash_brushes) && self::$yash_brushes[$syntax] !== '' ?
         ' class="language-' . self::$yash_brushes[$syntax] . '"' :
         '';
 
@@ -86,15 +83,13 @@ class CoreBehaviors
      *
      * @param      string       $text   The text
      * @param      string       $args   The arguments
-     *
-     * @return     string
      */
     public static function transformSyntaxehl(string $text, string $args): string
     {
         // Try to find a supported language, if not set original
-        $text      = trim((string) $text);
-        $real_args = (string) preg_replace('/^(\[(.*)\]$)/', '$2', (string) $args);
-        $class     = array_key_exists($real_args, self::$syntaxehl_brushes) && self::$syntaxehl_brushes[$real_args] != '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
+        $text      = trim($text);
+        $real_args = (string) preg_replace('/^(\[(.*)\]$)/', '$2', $args);
+        $class     = array_key_exists($real_args, self::$syntaxehl_brushes) && self::$syntaxehl_brushes[$real_args] !== '' ? self::$syntaxehl_brushes[$real_args] : $real_args;
 
         return '<pre><code class="language-' . $class . '">' . htmlspecialchars($text) . '</code></pre>';
     }

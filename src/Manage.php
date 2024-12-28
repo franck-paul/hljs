@@ -233,7 +233,7 @@ class Manage extends Process
         }
 
         foreach ($themes_list as $theme_id) {
-            if ($theme_id != 'default') {
+            if ($theme_id !== 'default') {
                 // Capitalize each word, replace dash by space, add a space before numbers
                 $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
                 // Add color scheme if known
@@ -248,10 +248,10 @@ class Manage extends Process
                 // Find if theme is dark or light
             }
         }
-        if (count($combo_theme_light) > 0) {
+        if ($combo_theme_light !== []) {
             $combo_theme[__('Light themes')] = $combo_theme_light;
         }
-        if (count($combo_theme_dark) > 0) {
+        if ($combo_theme_dark !== []) {
             $combo_theme[__('Dark themes')] = $combo_theme_dark;
         }
 

@@ -35,7 +35,7 @@ class FrontendBehaviors
                 }
             } else {
                 $theme = (string) $settings->theme;
-                if ($theme == '') {
+                if ($theme === '') {
                     $css = App::blog()->getPF(My::id() . '/js/lib/css/default.css');
                 } else {
                     $css = App::blog()->getPF(My::id() . '/js/lib/css/' . $theme . '.css');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief hljs, a plugin for Dotclear 2
  *
@@ -22,31 +23,25 @@ class BackendBehaviors
 {
     public static function adminPostEditor(string $editor = ''): string
     {
-        if ($editor != 'dcLegacyEditor' && $editor != 'dcCKEditor') {
-            return '';
-        }
-
-        if ($editor == 'dcLegacyEditor') {
-            return
-            Page::jsJson('hljs_editor', [
+        return match ($editor) {
+            'dcLegacyEditor' => Page::jsJson('hljs_editor', [
                 'title'    => __('Highlighted Code'),
                 'icon'     => urldecode(My::fileURL('/icon.svg')),
                 'open_url' => urldecode(My::manageUrl(['popup' => 1], '&')),
             ]) .
-            My::jsLoad('post.js');
-        }
+            My::jsLoad('post.js'),
 
-        return
-            Page::jsJson('hljs_editor', [
+            'dcCKEditor' => Page::jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
                 'popup_url' => urldecode(My::manageUrl(['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&')),
-            ]);
+            ]),
+
+            default => '',
+        };
     }
 
     /**
      * @param      ArrayObject<int, mixed>  $extraPlugins  The extra plugins
-     *
-     * @return     string
      */
     public static function ckeditorExtraPlugins(ArrayObject $extraPlugins): string
     {
