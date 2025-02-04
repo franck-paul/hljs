@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief hljs, a plugin for Dotclear 2
  *
@@ -16,6 +17,7 @@ $this->registerModule(
     'Franck Paul',
     '5.6.1',
     [
+        'date'        => '2003-08-13T13:42:00+0100',
         'requires'    => [['core', '2.29']],
         'permissions' => 'My',
         'priority'    => 1001, // Must be higher than dcLegacyEditor priority (ie 1000)

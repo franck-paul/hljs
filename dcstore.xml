@@ -4,6 +4,7 @@
     <version>5.6.1</version>
     <author>Franck Paul</author>
     <desc>highlight.js for Dotclear</desc>
+    <date>2003-08-13T13:42:00+0100</date>
     <file>https://github.com/franck-paul/hljs/releases/download/5.6.1/plugin-hljs-5.6.1.zip</file>
     <da:dcmin>2.29</da:dcmin>
     <da:details>https://open-time.net/docs/plugins/hljs/</da:details>
