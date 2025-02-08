@@ -1,94 +1,99 @@
-/*global $, hljs, hljsExtentCbtpl, dotclear */
+/*global hljs, hljsExtentCbtpl, dotclear */
 'use strict';
 
-// Show list of languages
-dotclear.hljs_config.listLanguages = (init) => {
-  const sc = document.createElement('script');
-  sc.src = `${dotclear.hljs_config.path}lib/js/highlight${
-    dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
-  }.pack.js`; // URL
-  sc.type = 'text/javascript';
-  sc.onload = () => {
-    // Load extension
-    const sce = document.createElement('script');
-    sce.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
-    sce.type = 'text/javascript';
-    sce.onload = () => {
-      // Register extensions
-      hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
+dotclear.ready(() => {
+  // Show list of languages
+  const listLanguages = (init) => {
+    const script = document.createElement('script');
+    const suffix = dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : '';
+    script.src = `${dotclear.hljs_config.path}lib/js/highlight${suffix}.pack.js`; // URL
+    script.type = 'text/javascript';
+    script.onload = () => {
+      // Load extension if necessary
+      const scriptExtension = document.createElement('script');
+      scriptExtension.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
+      scriptExtension.type = 'text/javascript';
+      scriptExtension.onload = () => {
+        // Register extensions
+        hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
+      };
+      document.getElementsByTagName('head')[0].appendChild(scriptExtension);
+
       // Get languages list
-      const ll = hljs.listLanguages().sort();
+      const languages = hljs.listLanguages().sort();
       let list = '';
       if (!init) {
         // Show diff between current choosen list and the selected one
-        let full = ll.concat(dotclear.hljs_config.list.filter((item) => !ll.includes(item)));
-        full = full.sort();
-        full.forEach((e) => {
+        let allLanguages = languages.concat(dotclear.hljs_config.list.filter((item) => !languages.includes(item)));
+        allLanguages = allLanguages.sort();
+        for (const language of allLanguages) {
           if (list !== '') {
             list = `${list}, `;
           }
-          if (!dotclear.hljs_config.list.includes(e)) {
+          if (!dotclear.hljs_config.list.includes(language)) {
             // Language added
-            list = `${list}<ins>${e}</ins>`;
-          } else if (!ll.includes(e)) {
+            list = `${list}<ins>${language}</ins>`;
+          } else if (!languages.includes(language)) {
             // Language removed
-            list = `${list}<del>${e}</del>`;
+            list = `${list}<del>${language}</del>`;
           } else {
-            list += e;
+            list += language;
           }
-        });
+        }
       } else {
-        list = ll.join(', ');
+        list = languages.join(', ');
       }
       document.getElementById('syntaxes').innerHTML = list ? `<br>${list}` : '';
       if (init) {
         // Store current list choosen
-        dotclear.hljs_config.list = ll;
+        dotclear.hljs_config.list = languages;
       }
     };
-    document.getElementsByTagName('head')[0].appendChild(sce);
+    document.getElementsByTagName('head')[0].appendChild(script);
   };
-  document.getElementsByTagName('head')[0].appendChild(sc);
-};
-// Update list of languages
-dotclear.hljs_config.selectMode = () => {
-  const input = document.getElementById('mode');
-  dotclear.hljs_config.mode = input.options[input.selectedIndex].value;
-  dotclear.hljs_config.listLanguages(false);
-  dotclear.hljs_config.current_mode = dotclear.hljs_config.mode;
-};
-// Change theme CSS of code sample
-dotclear.hljs_config.selectTheme = () => {
-  const input = document.getElementById('theme');
-  let theme = input.options[input.selectedIndex].value;
-  if (theme == '') {
-    theme = 'default';
-  }
-  const $css = $(`link[href^="${dotclear.hljs_config.path}lib/css/${dotclear.hljs_config.previous_theme}.css"]`);
-  $css.attr('href', `${dotclear.hljs_config.path}lib/css/${theme}.css`);
-  dotclear.hljs_config.previous_theme = theme;
-};
-// Change theme CSS of code sample on arrow key
-dotclear.hljs_config.nextTheme = (forward = true) => {
-  const e = document.getElementById('theme');
-  let next = e.selectedIndex;
-  next = (forward ? ++next : --next + e.options.length) % e.options.length;
-  e.value = e.options[next].value;
-  dotclear.hljs_config.selectTheme();
-};
 
-dotclear.ready(() => {
-  dotclear.hljs_config.listLanguages(true);
-  $('#theme').on('change', dotclear.hljs_config.selectTheme);
-  $('#mode').on('change', dotclear.hljs_config.selectMode);
-  $('#theme').on('keydown', (e) => {
-    if (e.which === 39) {
+  // Update list of languages
+  const selectMode = () => {
+    const input = document.getElementById('mode');
+    dotclear.hljs_config.mode = input.options[input.selectedIndex].value;
+    listLanguages(false);
+    dotclear.hljs_config.current_mode = dotclear.hljs_config.mode;
+  };
+
+  // Change theme CSS of code sample
+  const selectTheme = () => {
+    const input = document.getElementById('theme');
+    const theme = input.options[input.selectedIndex].value || 'default';
+    const css = document.querySelector(
+      `link[href^="${dotclear.hljs_config.path}lib/css/${dotclear.hljs_config.previous_theme}.css"]`,
+    );
+    if (css) css.href = `${dotclear.hljs_config.path}lib/css/${theme}.css`;
+    dotclear.hljs_config.previous_theme = theme;
+  };
+
+  // Change theme CSS of code sample on arrow key
+  const nextTheme = (forward = true) => {
+    const theme = document.getElementById('theme');
+    let next = theme.selectedIndex;
+    next = (forward ? ++next : --next + theme.options.length) % theme.options.length;
+    theme.value = theme.options[next].value;
+    selectTheme();
+  };
+
+  listLanguages(true);
+
+  document.getElementById('theme')?.addEventListener('change', selectTheme);
+  document.getElementById('mode')?.addEventListener('change', selectMode);
+
+  document.getElementById('theme')?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
       // Right arrow
-      dotclear.hljs_config.nextTheme(true);
+      nextTheme(true);
       return false;
-    } else if (e.which === 37) {
+    }
+    if (event.key === 'ArrowLeft') {
       // Left arrow
-      dotclear.hljs_config.nextTheme(false);
+      nextTheme(false);
       return false;
     }
   });

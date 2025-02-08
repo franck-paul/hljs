@@ -1,16 +1,15 @@
+/*global dotclear */
 'use strict';
 
 dotclear.ready(() => {
   // Cancel button fired
-  const btn_cancel = document.getElementById('hljs-cancel');
-  btn_cancel?.addEventListener('click', () => {
+  document.getElementById('hljs-cancel')?.addEventListener('click', () => {
     window.close();
     return false;
   });
 
   // Ok button fired
-  const btn_ok = document.getElementById('hljs-ok');
-  btn_ok?.addEventListener('click', () => {
+  document.getElementById('hljs-ok')?.addEventListener('click', () => {
     sendClose();
     window.close();
     return false;

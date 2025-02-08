@@ -8,36 +8,35 @@ dotclear.ready(() => {
   const hljs_config = dotclear.getData('hljs_config');
 
   // Populate language list combo
-  const sc = document.createElement('script');
-  sc.src = `${hljs_config.path}lib/js/highlight${hljs_config.mode ? `-${hljs_config.mode}` : ''}.pack.js`; // URL
-  sc.type = 'text/javascript';
-  sc.onload = () => {
+  const script = document.createElement('script');
+  const suffix = hljs_config.mode ? `-${hljs_config.mode}` : '';
+  script.src = `${hljs_config.path}lib/js/highlight${suffix}.pack.js`; // URL
+  script.type = 'text/javascript';
+  script.onload = () => {
     // Load extension
-    const sce = document.createElement('script');
-    sce.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
-    sce.type = 'text/javascript';
-    sce.onload = () => {
+    const scriptExtension = document.createElement('script');
+    scriptExtension.src = `${hljs_config.path}lib/js/cbtpl.js`; // URL
+    scriptExtension.type = 'text/javascript';
+    scriptExtension.onload = () => {
       // Register extensions
       hljs.registerLanguage('cbtpl', hljsExtentCbtpl);
       // Get languages list
       const input = document.getElementById('syntax');
-      const ll = hljs.listLanguages().sort();
-      let l = null;
-      let t = null;
-      ll.forEach((e) => {
-        l = hljs.getLanguage(e);
-        t = e;
-        if (typeof l.aliases !== 'undefined') {
-          t = `${t}, ${l.aliases.join(', ')}`;
+      const languages = hljs.listLanguages().sort();
+      for (const language of languages) {
+        const languageDefinition = hljs.getLanguage(language);
+        let languageLabel = language;
+        if (typeof languageDefinition.aliases !== 'undefined') {
+          languageLabel = `${languageLabel}, ${languageDefinition.aliases.join(', ')}`;
         }
-        // Add new option to input combolist (value = e, label = t)
+        // Add new option to input combolist
         const option = document.createElement('option');
-        option.text = t;
-        option.value = e;
+        option.text = languageLabel;
+        option.value = language;
         input.add(option, null);
-      });
+      }
     };
-    document.getElementsByTagName('head')[0].appendChild(sce);
+    document.getElementsByTagName('head')[0].appendChild(scriptExtension);
   };
-  document.getElementsByTagName('head')[0].appendChild(sc);
+  document.getElementsByTagName('head')[0].appendChild(script);
 });

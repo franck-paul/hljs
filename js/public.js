@@ -6,10 +6,10 @@ dotclear.hljs_config = dotclear.getData('hljs_config');
 // Set defaults
 dotclear.hljs_config.path = dotclear.hljs_config.path || ''; // Path URL of js
 dotclear.hljs_config.mode = dotclear.hljs_config.mode || ''; // '' → std, 'mini', 'common', 'full'
-dotclear.hljs_config.show_line = dotclear.hljs_config.show_line && true; // Show/Hide line numbers
+dotclear.hljs_config.show_line = !!dotclear.hljs_config.show_line; // Show/Hide line numbers
 dotclear.hljs_config.badge = dotclear.hljs_config.badge || false; // Use or not web workers
 dotclear.hljs_config.use_ww = dotclear.hljs_config.use_ww || false; // Use or not web workers
-dotclear.hljs_config.yash = dotclear.hljs_config.yash && true; // Yash compatibility
+dotclear.hljs_config.yash = !!dotclear.hljs_config.yash; // Yash compatibility
 dotclear.hljs_config.copy = dotclear.hljs_config.copy || 'copy';
 dotclear.hljs_config.copied = dotclear.hljs_config.copied || 'copied';
 
@@ -17,6 +17,8 @@ dotclear.hljs_config.copied = dotclear.hljs_config.copied || 'copied';
 dotclear.hljs_config.ww = !!window.Worker;
 
 dotclear.hljs = {
+  hljsIsPlain: (syntax) => ['plain', 'plaintext', 'txt', 'text'].includes(syntax),
+
   // Utility function: hljsAddClass()
   hljsAddClass: (element, classname) => {
     const currentClassList = (element.className || '').split(/\s+/);
@@ -26,15 +28,7 @@ dotclear.hljs = {
 
   // Utility function: hljsDataLanguage()
   hljsDataLanguage: (element, syntax) => {
-    if (
-      dotclear.hljs_config.badge &&
-      syntax !== undefined &&
-      syntax !== 'undefined' &&
-      syntax !== 'plain' &&
-      syntax !== 'plaintext' &&
-      syntax !== 'txt' &&
-      syntax !== 'text'
-    ) {
+    if (dotclear.hljs_config.badge && syntax !== undefined && syntax !== 'undefined' && !dotclear.hljs.hljsIsPlain(syntax)) {
       element.dataset.language = syntax;
     }
     return element.dataset.language;
@@ -76,10 +70,10 @@ dotclear.hljs = {
   hljsRun: () => {
     if (dotclear.hljs_config.yash) {
       // Encapsulate <pre class="brush:…" ></pre> content in <code></code> tag
-      const yb = document.querySelectorAll('pre[class^="brush:"]');
-      yb.forEach((block) => {
-        block.innerHTML = `<code class="${block.className}">${block.innerHTML.trim()}</code>`;
-      });
+      const yashBlocks = document.querySelectorAll('pre[class^="brush:"]');
+      for (const yashBlock of yashBlocks) {
+        yashBlock.innerHTML = `<code class="${yashBlock.className}">${yashBlock.innerHTML.trim()}</code>`;
+      }
     }
 
     const sel = 'pre code:not(.nohighlight)';
@@ -91,7 +85,7 @@ dotclear.hljs = {
       const num = e.innerHTML.split(/\n/).length;
       for (let j = 0; j < num; j++) {
         const line_num = e.getElementsByTagName('span')[0];
-        line_num.innerHTML += `<span>${j == 0 || j == num - 1 ? '&nbsp;' : j}</span>`;
+        line_num.innerHTML += `<span>${j === 0 || j === num - 1 ? '&nbsp;' : j}</span>`;
       }
     };
 
@@ -113,20 +107,21 @@ dotclear.hljs = {
       // Cope click event on button
       button.addEventListener('click', () => {
         const text = [];
-        block.childNodes.forEach(function check(child) {
-          if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'button') {
+        const copy = (node) => {
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === 'button') {
             // Will ignore copy button text child
           } else if (
-            child.nodeType !== Node.ELEMENT_NODE ||
-            child.tagName.toLowerCase() !== 'span' ||
-            !child.classList.contains('hljs-line-number')
+            node.nodeType !== Node.ELEMENT_NODE ||
+            node.tagName.toLowerCase() !== 'span' ||
+            !node.classList.contains('hljs-line-number')
           ) {
-            if (child.nodeType === Node.TEXT_NODE) {
-              text.push(child.nodeValue);
+            if (node.nodeType === Node.TEXT_NODE) {
+              text.push(node.nodeValue);
             }
-            child.childNodes.forEach(check);
+            node.childNodes.forEach(copy);
           }
-        });
+        };
+        block.childNodes.forEach(copy);
         writeClipboardText(text.join('').trim());
         button.textContent = dotclear.hljs_config.copied;
       });
@@ -136,7 +131,7 @@ dotclear.hljs = {
     };
 
     // Main loop
-    blocks.forEach((block) => {
+    for (const block of blocks) {
       // Ensure that hljs class is set
       dotclear.hljs.hljsAddClass(block, 'hljs');
       // Add wrapper class to parent
@@ -163,9 +158,8 @@ dotclear.hljs = {
           // Yash mode (<pre brush:<syntax>…</pre>)
           brush = cls.match(/\bbrush:(\w*)\b/);
         }
-        if (brush && brush.length == 2) {
-          syntax =
-            brush[1] == 'plain' || brush[1] == 'txt' || brush[1] == 'text' || brush[1] == 'plaintext' ? 'plaintext' : brush[1];
+        if (brush && brush.length === 2) {
+          syntax = dotclear.hljs.hljsIsPlain(brush[1]) ? 'plaintext' : brush[1];
         }
 
         // Create web worker
@@ -185,7 +179,8 @@ dotclear.hljs = {
         };
         // Run web worker
         worker.postMessage([block.textContent, dotclear.hljs_config.path, dotclear.hljs_config.mode, syntax]);
-        return;
+        // Loop on next block
+        continue;
       }
       // Standard mode
       // Register extensions
@@ -203,19 +198,11 @@ dotclear.hljs = {
       if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush:(\w*)\b/);
-        if (brush && brush.length == 2) {
+        if (brush && brush.length === 2) {
           yash = true;
         }
       }
-      if (
-        brush &&
-        brush.length == 2 &&
-        brush[1] != 'plain' &&
-        brush[1] != 'plaintext' &&
-        brush[1] != 'txt' &&
-        brush[1] != 'text' &&
-        hljs.getLanguage(brush[1])
-      ) {
+      if (brush && brush.length === 2 && !dotclear.hljs.hljsIsPlain(brush[1]) && hljs.getLanguage(brush[1])) {
         syntax = brush[1];
       }
       // Set class : will be used by highlight.js
@@ -234,15 +221,15 @@ dotclear.hljs = {
       }
       if (dotclear.hljs.hljsDataLanguage(block) === undefined) {
         cls = block.className.split(' ');
-        cls.forEach((syntax) => {
+        for (const syntax of cls) {
           if (hljs.getLanguage(syntax)) {
             dotclear.hljs.hljsDataLanguage(block, syntax);
           }
-        });
+        }
       }
       // Creation bouton
       if (dotclear.hljs_config.show_copy) createCopyButton(block);
-    });
+    }
   },
 };
 
