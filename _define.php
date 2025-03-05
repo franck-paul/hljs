@@ -15,9 +15,9 @@ $this->registerModule(
     'Code highlight',
     'highlight.js for Dotclear',
     'Franck Paul',
-    '5.7',
+    '5.8',
     [
-        'date'        => '2025-02-08T15:10:04+0100',
+        'date'        => '2025-03-05T01:18:04+0100',
         'requires'    => [['core', '2.29']],
         'permissions' => 'My',
         'priority'    => 1010,  // Must be higher than dcLegacyEditor/dcCKEditor priority (ie 1000)
