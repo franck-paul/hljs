@@ -28,6 +28,8 @@ use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Legend;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Select;
+use Dotclear\Helper\Html\Form\Single;
+use Dotclear\Helper\Html\Form\Span;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
@@ -318,8 +320,9 @@ class Manage extends Process
                             ->label((new Label(__('Set of languages:'), Label::INSIDE_TEXT_BEFORE))),
                     ]),
                     (new Para())->class('info')->items([
-                        (new Text(null, __('List of languages:') . '<br >')),
-                        (new Text('span'))->id('syntaxes'),
+                        (new Text(null, __('List of languages:'))),
+                        (new Single('br')),
+                        (new Span())->id('syntaxes'),
                     ]),
                 ]),
 
