@@ -25,9 +25,10 @@ class BackendBehaviors
     {
         return match ($editor) {
             'dcLegacyEditor' => Page::jsJson('hljs_editor', [
-                'title'    => __('Highlighted Code'),
-                'icon'     => urldecode(My::fileURL('/icon-editor.svg')),
-                'open_url' => urldecode(My::manageUrl(['popup' => 1], '&')),
+                'title'     => __('Highlighted Code'),
+                'icon'      => urldecode(My::fileURL('/icon-editor.svg')),
+                'icon_dark' => urldecode(My::fileURL('/icon-editor-dark.svg')),
+                'open_url'  => urldecode(My::manageUrl(['popup' => 1], '&')),
             ]) .
             My::jsLoad('post.js'),
 

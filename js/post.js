@@ -19,6 +19,7 @@ dotclear.ready(() => {
     title: 'Highlighted Code',
     context: 'post',
     icon: data.icon,
+    icon_dark: data.icon_dark,
     shortkey: 'KeyJ',
     shortkey_name: 'J',
     fn: {},
