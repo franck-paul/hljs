@@ -21,6 +21,7 @@ use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Button;
 use Dotclear\Helper\Html\Form\Checkbox;
+use Dotclear\Helper\Html\Form\Div;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
@@ -287,7 +288,10 @@ class Manage extends Process
         );
         echo Notices::getNotices();
 
-        $sample = self::sample();
+        $sampleJS   = Html::escapeHTML(self::sampleJS());
+        $sampleHTML = Html::escapeHTML(self::sampleHTML());
+        $sampleCSS  = Html::escapeHTML(self::sampleCSS());
+        $samplePHP  = Html::escapeHTML(self::samplePHP());
 
         // Form
         echo
@@ -310,9 +314,62 @@ class Manage extends Process
                             ->default($theme)
                             ->label((new Label(__('Theme:'), Label::INSIDE_TEXT_BEFORE))),
                     ]),
-                    (new Para(null, 'pre'))->items([
-                        (new Text(null, $sample)),
-                    ]),
+                    (new Div())
+                        ->class('two-cols')
+                        ->items([
+                            (new Div())
+                                ->class('col')
+                                ->items([
+                                    (new Para(null, 'pre'))
+                                        ->items([
+                                            (new Para(['hljs_sample'], 'code'))
+                                                ->class('language-js')
+                                                ->items([
+                                                    (new Text(null, $sampleJS)),
+                                                ]),
+                                        ]),
+                                ]),
+                            (new Div())
+                                ->class('col')
+                                ->items([
+                                    (new Para(null, 'pre'))
+                                        ->items([
+                                            (new Para(['hljs_sample'], 'code'))
+                                                ->class('language-css')
+                                                ->items([
+                                                    (new Text(null, $sampleCSS)),
+                                                ]),
+                                        ]),
+                                ]),
+                        ]),
+                    (new Div())
+                        ->class('two-cols')
+                        ->items([
+                            (new Div())
+                                ->class('col')
+                                ->items([
+                                    (new Para(null, 'pre'))
+                                        ->items([
+                                            (new Para(['hljs_sample'], 'code'))
+                                                ->class('language-html')
+                                                ->items([
+                                                    (new Text(null, $sampleHTML)),
+                                                ]),
+                                        ]),
+                                ]),
+                            (new Div())
+                                ->class('col')
+                                ->items([
+                                    (new Para(null, 'pre'))
+                                        ->items([
+                                            (new Para(['hljs_sample'], 'code'))
+                                                ->class('language-php')
+                                                ->items([
+                                                    (new Text(null, $samplePHP)),
+                                                ]),
+                                        ]),
+                                ]),
+                        ]),
                     (new Para())->items([
                         (new Select('mode'))
                             ->items($combo_mode)
@@ -404,24 +461,96 @@ class Manage extends Process
         Page::closeModule();
     }
 
-    private static function sample(): string
+    private static function sampleJS(): string
     {
         // Tricky code to avoid xgettext bug on indented end heredoc identifier (see https://savannah.gnu.org/bugs/?62158)
         // Warning: don't use <<< if there is some __() l10n calls after as xgettext will not find them
-        return <<<EOT
-            <code id="hljs-sample">function findSequence(goal) {
-                // Local scope find function
-                function find(start, history) {
-                if (start == goal)
-                  return history;
-                else if (start > goal)
-                  return null;
-                else
-                  return find(start + 5, "(" + history + " + 5)") ||
-                         find(start * 3, "(" + history + " * 3)");
+        return <<<EOTJS
+            function \$initHighlight(block, cls) {
+              try {
+                if (cls.search(/\bno\-highlight\b/) != -1)
+                  return process(block, true, 0x0F) +
+                         ` class="\${cls}"`;
+              } catch (e) {
+                /* handle exception */
+              }
+              for (var i = 0 / 2; i < classes.length; i++) {
+                if (checkCondition(classes[i]) === undefined)
+                  console.log('undefined');
+              }
+
+              return (
+                <div>
+                  <web-component>{block}</web-component>
+                </div>
+              )
+            }
+            EOTJS;
+    }
+
+    private static function sampleHTML(): string
+    {
+        // Tricky code to avoid xgettext bug on indented end heredoc identifier (see https://savannah.gnu.org/bugs/?62158)
+        // Warning: don't use <<< if there is some __() l10n calls after as xgettext will not find them
+        return <<<EOTHTML
+            <!DOCTYPE html>
+            <title>Title</title>
+
+            <style>body {width: 500px;}</style>
+
+            <script type="application/javascript">
+              function \$init() {return true;}
+            </script>
+
+            <body>
+              <p checked class="title" id='title'>Title</p>
+              <!-- here goes the rest of the page -->
+            </body>
+            EOTHTML;
+    }
+
+    private static function sampleCSS(): string
+    {
+        // Tricky code to avoid xgettext bug on indented end heredoc identifier (see https://savannah.gnu.org/bugs/?62158)
+        // Warning: don't use <<< if there is some __() l10n calls after as xgettext will not find them
+        return <<<EOTCSS
+            @font-face {
+              font-family: Chunkfive; src: url('Chunkfive.otf');
+            }
+
+            body, .usertext {
+              color: #F0F0F0; background: #600;
+              font-family: Chunkfive, sans;
+              --heading-1: 30px/32px Helvetica, sans-serif;
+            }
+
+            @import url(print.css);
+            @media print {
+              a[href^=http]::after {
+                content: attr(href)
+              }
+            }
+            EOTCSS;
+    }
+
+    private static function samplePHP(): string
+    {
+        // Tricky code to avoid xgettext bug on indented end heredoc identifier (see https://savannah.gnu.org/bugs/?62158)
+        // Warning: don't use <<< if there is some __() l10n calls after as xgettext will not find them
+        return <<<EOTPHP
+            <?php
+            class Car {
+                function Car() {
+                    \$this->model = "Lunar";
                 }
-                return find(1, "1");
-            }</code>
-            EOT;
+            }
+
+            // create an object
+            \$Lightning = new Car();
+
+            // show object properties
+            echo \$Lightning->model;
+            ?>
+            EOTPHP;
     }
 }

@@ -11,10 +11,15 @@
 
 /* Code sample */
 
-.hljs-wrapper {
-  border: 1px solid;
-}
-
 .hljs {
-  font-size: 1.5ex;
+  font-size: 1.625ex !important;
+  position: relative;
+}
+.hljs-copy-button {
+  line-height: 2 !important;
+  border-radius: 0;
+}
+.hljs[data-language]::before {
+  font-size: 1.625ex !important;
+  line-height: 1.5;
 }
