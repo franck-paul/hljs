@@ -45,7 +45,9 @@ class Manage
      */
     public static function init(): bool
     {
-        return self::status(My::checkContext(My::MANAGE));
+        return empty($_REQUEST['popup']) ?
+            self::status(My::checkContext(My::MANAGE)) :
+            self::status(My::checkContext(My::BACKEND));
     }
 
     /**
