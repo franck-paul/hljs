@@ -5,6 +5,7 @@ dotclear.ready(() => {
   const data = dotclear.getData('hljs_editor', false);
 
   jsToolBar.prototype.elements.hljs = {
+    group: 'block',
     type: 'button',
     title: 'Highlighted Code',
     context: 'post',
