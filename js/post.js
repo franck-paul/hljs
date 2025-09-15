@@ -4,16 +4,6 @@
 dotclear.ready(() => {
   const data = dotclear.getData('hljs_editor', false);
 
-  jsToolBar.prototype.elements.hljsSpace = {
-    type: 'space',
-    format: {
-      wysiwyg: true,
-      wiki: true,
-      xhtml: true,
-      markdown: true,
-    },
-  };
-
   jsToolBar.prototype.elements.hljs = {
     type: 'button',
     title: 'Highlighted Code',
