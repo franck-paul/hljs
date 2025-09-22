@@ -17,14 +17,13 @@ namespace Dotclear\Plugin\hljs;
 
 use ArrayObject;
 use Dotclear\App;
-use Dotclear\Core\Backend\Page;
 
 class BackendBehaviors
 {
     public static function adminPostEditor(string $editor = ''): string
     {
         return match ($editor) {
-            'dcLegacyEditor' => Page::jsJson('hljs_editor', [
+            'dcLegacyEditor' => App::backend()->page()->jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
                 'icon'      => urldecode(My::fileURL('/icon-editor.svg')),
                 'icon_dark' => urldecode(My::fileURL('/icon-editor-dark.svg')),
@@ -32,7 +31,7 @@ class BackendBehaviors
             ]) .
             My::jsLoad('post.js'),
 
-            'dcCKEditor' => Page::jsJson('hljs_editor', [
+            'dcCKEditor' => App::backend()->page()->jsJson('hljs_editor', [
                 'title'     => __('Highlighted Code'),
                 'popup_url' => urldecode(My::manageUrl(['popup' => 1, 'plugin_id' => 'dcCKEditor'], '&')),
             ]),
@@ -49,7 +48,7 @@ class BackendBehaviors
         $extraPlugins[] = [
             'name'   => 'hljs',
             'button' => 'hljs',
-            'url'    => urldecode(App::config()->adminUrl() . Page::getPF(My::id() . '/cke-addon/')),
+            'url'    => urldecode(App::config()->adminUrl() . App::backend()->page()->getPF(My::id() . '/cke-addon/')),
         ];
 
         return '';

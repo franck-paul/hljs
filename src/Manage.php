@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\hljs;
 
 use Dotclear\App;
-use Dotclear\Core\Backend\Notices;
-use Dotclear\Core\Backend\Page;
 use Dotclear\Helper\Html\Form\Button;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Div;
@@ -93,7 +91,7 @@ class Manage
 
                 App::blog()->triggerBlog();
 
-                Notices::addSuccessNotice(__('Configuration successfully updated.'));
+                App::backend()->notices()->addSuccessNotice(__('Configuration successfully updated.'));
                 My::redirect();
             } catch (Exception $e) {
                 App::error()->add($e->getMessage());
@@ -136,8 +134,8 @@ class Manage
                 __('Plain Text') => 'plain',
             ];
 
-            $head = Page::jsJson('hljs_config', [
-                'path' => Page::getPF('hljs/js/'),
+            $head = App::backend()->page()->jsJson('hljs_config', [
+                'path' => App::backend()->page()->getPF('hljs/js/'),
                 'mode' => $mode,
             ]) .
             My::jsLoad('popup.js');
@@ -147,7 +145,7 @@ class Manage
                 $head .= My::jsLoad('popup_leg.js');
             }
 
-            Page::openModule(My::name() . ' - ' . __('Syntax Selector'), $head);
+            App::backend()->page()->openModule(My::name() . ' - ' . __('Syntax Selector'), $head);
 
             echo
             (new Form('hljs-form'))
@@ -175,7 +173,7 @@ class Manage
                 ])
             ->render();
 
-            Page::closeModule();
+            App::backend()->page()->closeModule();
 
             return;
         }
@@ -265,8 +263,8 @@ class Manage
         $head = My::cssLoad('public.css') .
         My::cssLoad('admin.css') .
         My::cssLoad('/js/lib/css/' . ($theme ?: 'default') . '.css') .
-        Page::jsJson('hljs_config', [
-            'path'           => urldecode(Page::getPF(My::id() . '/js/')),
+        App::backend()->page()->jsJson('hljs_config', [
+            'path'           => urldecode((string) App::backend()->page()->getPF(My::id() . '/js/')),
             'mode'           => $mode,
             'current_mode'   => $mode,
             'list'           => [],
@@ -282,15 +280,15 @@ class Manage
         My::jsLoad('public.js') .
         My::jsLoad('admin.js');
 
-        Page::openModule(My::name(), $head);
+        App::backend()->page()->openModule(My::name(), $head);
 
-        echo Page::breadcrumb(
+        echo App::backend()->page()->breadcrumb(
             [
                 Html::escapeHTML(App::blog()->name()) => '',
                 __('Code highlight')                  => '',
             ]
         );
-        echo Notices::getNotices();
+        echo App::backend()->notices()->getNotices();
 
         $sampleJS   = Html::escapeHTML(self::sampleJS());
         $sampleHTML = Html::escapeHTML(self::sampleHTML());
@@ -462,7 +460,7 @@ class Manage
             ])
         ->render();
 
-        Page::closeModule();
+        App::backend()->page()->closeModule();
     }
 
     private static function sampleJS(): string
