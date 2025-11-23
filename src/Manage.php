@@ -207,8 +207,8 @@ class Manage
         $themes_root = My::path() . '/js/lib/css/';
         if (is_dir($themes_root) && is_readable($themes_root) && ($d = @dir($themes_root)) !== false) {
             while (($entry = $d->read()) !== false) {
-                if ($entry    != '.'
-                    && $entry != '..'
+                if ($entry    !== '.'
+                    && $entry !== '..'
                     && !str_starts_with($entry, '.')
                     && is_readable($themes_root . DIRECTORY_SEPARATOR . $entry)
                     && str_ends_with($entry, '.css')) {
@@ -248,13 +248,15 @@ class Manage
             if ($theme_id !== 'default') {
                 // Capitalize each word, replace dash by space, add a space before numbers
                 $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
-                // Add color scheme if known
-                if (in_array($theme_id, $themes_list_dark)) {
-                    $combo_theme_dark[$theme_name] = $theme_id;
-                } elseif (in_array($theme_id, $themes_list_light)) {
-                    $combo_theme_light[$theme_name] = $theme_id;
-                } else {
-                    $combo_theme[$theme_name] = $theme_id;
+                if (is_string($theme_name)) {
+                    // Add color scheme if known
+                    if (in_array($theme_id, $themes_list_dark)) {
+                        $combo_theme_dark[$theme_name] = $theme_id;
+                    } elseif (in_array($theme_id, $themes_list_light)) {
+                        $combo_theme_light[$theme_name] = $theme_id;
+                    } else {
+                        $combo_theme[$theme_name] = $theme_id;
+                    }
                 }
 
                 // Find if theme is dark or light
