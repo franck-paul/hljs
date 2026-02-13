@@ -12,7 +12,6 @@ dotclear.ready(() => {
     icon: data.icon,
     icon_dark: data.icon_dark,
     key: 'j',
-    shortkey: 'KeyJ',
     shortkey_name: 'J',
     fn: {},
     fncall: {},
