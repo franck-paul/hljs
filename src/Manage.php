@@ -62,32 +62,24 @@ class Manage
          */
 
         if (isset($_POST['custom_css'])) {
-            try {
-                $active      = !empty($_POST['active']);
-                $mode        = (empty($_POST['mode'])) ? '' : $_POST['mode'];
-                $theme       = (empty($_POST['theme'])) ? '' : $_POST['theme'];
-                $custom_css  = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
-                $hide_gutter = !empty($_POST['hide_gutter']);
-                $web_worker  = !empty($_POST['web_worker']);
-                $yash        = !empty($_POST['yash']);
-                $syntaxehl   = !empty($_POST['syntaxehl']);
-                $code        = !empty($_POST['code']);
-                $badge       = !empty($_POST['badge']);
-                $hide_copy   = !empty($_POST['hide_copy']);
+            // Post data helpers
+            $_Bool = fn (string $name): bool => !empty($_POST[$name]);
+            $_Str  = fn (string $name, string $default = ''): string => isset($_POST[$name]) && is_string($val = $_POST[$name]) ? $val : $default;
 
+            try {
                 $settings = My::settings();
 
-                $settings->put('active', $active, App::blogWorkspace()::NS_BOOL);
-                $settings->put('mode', $mode, App::blogWorkspace()::NS_STRING);
-                $settings->put('theme', $theme, App::blogWorkspace()::NS_STRING);
-                $settings->put('custom_css', $custom_css, App::blogWorkspace()::NS_STRING);
-                $settings->put('hide_gutter', $hide_gutter, App::blogWorkspace()::NS_BOOL);
-                $settings->put('web_worker', $web_worker, App::blogWorkspace()::NS_BOOL);
-                $settings->put('yash', $yash, App::blogWorkspace()::NS_BOOL);
-                $settings->put('syntaxehl', $syntaxehl, App::blogWorkspace()::NS_BOOL);
-                $settings->put('code', $code, App::blogWorkspace()::NS_BOOL);
-                $settings->put('badge', $badge, App::blogWorkspace()::NS_BOOL);
-                $settings->put('hide_copy', $hide_copy, App::blogWorkspace()::NS_BOOL);
+                $settings->put('active', $_Bool('active'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('mode', $_Str('mode'), App::blogWorkspace()::NS_STRING);
+                $settings->put('theme', $_Str('theme'), App::blogWorkspace()::NS_STRING);
+                $settings->put('custom_css', Html::sanitizeURL($_Str('custom_css')), App::blogWorkspace()::NS_STRING);
+                $settings->put('hide_gutter', $_Bool('hide_gutter'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('web_worker', $_Bool('web_worker'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('yash', $_Bool('yash'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('syntaxehl', $_Bool('syntaxehl'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('code', $_Bool('code'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('badge', $_Bool('badge'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('hide_copy', $_Bool('copy'), App::blogWorkspace()::NS_BOOL);
 
                 App::blog()->triggerBlog();
 
@@ -114,17 +106,21 @@ class Manage
 
         $settings = My::settings();
 
-        $active      = (bool) $settings->active;
-        $mode        = (string) $settings->mode;
-        $theme       = (string) $settings->theme;
-        $custom_css  = (string) $settings->custom_css;
-        $hide_gutter = (bool) $settings->hide_gutter;
-        $web_worker  = (bool) $settings->web_worker;
-        $yash        = (bool) $settings->yash;
-        $syntaxehl   = (bool) $settings->syntaxehl;
-        $code        = (bool) $settings->code;
-        $badge       = (bool) $settings->badge;
-        $hide_copy   = (bool) $settings->hide_copy;
+        // Variable data helpers
+        $_Bool = fn (mixed $var): bool => (bool) $var;
+        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
+
+        $active      = $_Bool($settings->active);
+        $mode        = $_Str($settings->mode);
+        $theme       = $_Str($settings->theme);
+        $custom_css  = $_Str($settings->custom_css);
+        $hide_gutter = $_Bool($settings->hide_gutter);
+        $web_worker  = $_Bool($settings->web_worker);
+        $yash        = $_Bool($settings->yash);
+        $syntaxehl   = $_Bool($settings->syntaxehl);
+        $code        = $_Bool($settings->code);
+        $badge       = $_Bool($settings->badge);
+        $hide_copy   = $_Bool($settings->hide_copy);
 
         if (!empty($_REQUEST['popup'])) {
             $hljs_brushes = [
