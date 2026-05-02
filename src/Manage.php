@@ -262,9 +262,9 @@ class Manage
                 $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
                 if (is_string($theme_name)) {
                     // Add color scheme if known
-                    if (in_array($theme_id, $themes_list_dark)) {
+                    if (in_array($theme_id, $themes_list_dark, true)) {
                         $combo_theme_dark[$theme_name] = $theme_id;
-                    } elseif (in_array($theme_id, $themes_list_light)) {
+                    } elseif (in_array($theme_id, $themes_list_light, true)) {
                         $combo_theme_light[$theme_name] = $theme_id;
                     } else {
                         $combo_theme[$theme_name] = $theme_id;
@@ -272,9 +272,11 @@ class Manage
                 }
             }
         }
+
         if ($combo_theme_light !== []) {
             $combo_theme[__('Light themes')] = $combo_theme_light;
         }
+
         if ($combo_theme_dark !== []) {
             $combo_theme[__('Dark themes')] = $combo_theme_dark;
         }
