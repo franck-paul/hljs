@@ -22,7 +22,9 @@ dotclear.ready(() => {
       // Get languages list
       const languages = hljs.listLanguages().sort();
       let list = '';
-      if (!init) {
+      if (init) {
+        list = languages.join(', ');
+      } else {
         // Show diff between current choosen list and the selected one
         let allLanguages = languages.concat(dotclear.hljs_config.list.filter((item) => !languages.includes(item)));
         allLanguages = allLanguages.sort();
@@ -33,15 +35,13 @@ dotclear.ready(() => {
           if (!dotclear.hljs_config.list.includes(language)) {
             // Language added
             list = `${list}<ins>${language}</ins>`;
-          } else if (!languages.includes(language)) {
+          } else if (languages.includes(language)) {
+            list += language;
+          } else {
             // Language removed
             list = `${list}<del>${language}</del>`;
-          } else {
-            list += language;
           }
         }
-      } else {
-        list = languages.join(', ');
       }
       document.getElementById('syntaxes').innerHTML = list ? `<br>${list}` : '';
       if (init) {

@@ -45,7 +45,7 @@ dotclear.hljs = {
       dotclear.hljs_config.mode ? `-${dotclear.hljs_config.mode}` : ''
     }.pack.js`; // URL
     hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc.async !== 'undefined') {
+    if (hljs_sc.async !== undefined) {
       hljs_sc.async = true;
     }
     document.getElementsByTagName('head')[0].appendChild(hljs_sc);
@@ -60,7 +60,7 @@ dotclear.hljs = {
     const hljs_sc = document.createElement('script');
     hljs_sc.src = `${dotclear.hljs_config.path}lib/js/cbtpl.js`; // URL
     hljs_sc.type = 'text/javascript';
-    if (typeof hljs_sc.async !== 'undefined') {
+    if (hljs_sc.async !== undefined) {
       hljs_sc.async = true;
     }
     document.getElementsByTagName('head')[0].appendChild(hljs_sc);
@@ -154,11 +154,11 @@ dotclear.hljs = {
         cls = block.className;
         // Standard mode (<pre><code [class=language-<syntax>]>…</code></pre>)
         brush = cls.match(/\blanguage-(\w*)\b/);
-        if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
+        if (dotclear.hljs_config.yash && (brush?.length !== 2)) {
           // Yash mode (<pre brush:<syntax>…</pre>)
           brush = cls.match(/\bbrush:(\w*)\b/);
         }
-        if (brush && brush.length === 2) {
+        if (brush?.length === 2) {
           syntax = dotclear.hljs.hljsIsPlain(brush[1]) ? 'plaintext' : brush[1];
         }
 
@@ -195,14 +195,14 @@ dotclear.hljs = {
       syntax = 'plain';
       brush = cls.match(/\blanguage-(\w*)\b/);
       let yash = false;
-      if (dotclear.hljs_config.yash && (!brush || brush.length !== 2)) {
+      if (dotclear.hljs_config.yash && (brush?.length !== 2)) {
         // Yash mode (<pre brush:<syntax>…</pre>)
         brush = cls.match(/\bbrush:(\w*)\b/);
-        if (brush && brush.length === 2) {
+        if (brush?.length === 2) {
           yash = true;
         }
       }
-      if (brush && brush.length === 2 && !dotclear.hljs.hljsIsPlain(brush[1]) && hljs.getLanguage(brush[1])) {
+      if (brush?.length === 2 && !dotclear.hljs.hljsIsPlain(brush[1]) && hljs.getLanguage(brush[1])) {
         syntax = brush[1];
       }
       // Set class : will be used by highlight.js

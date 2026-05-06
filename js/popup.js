@@ -26,7 +26,7 @@ dotclear.ready(() => {
       for (const language of languages) {
         const languageDefinition = hljs.getLanguage(language);
         let languageLabel = language;
-        if (typeof languageDefinition.aliases !== 'undefined') {
+        if (languageDefinition.aliases !== undefined) {
           languageLabel = `${languageLabel}, ${languageDefinition.aliases.join(', ')}`;
         }
         // Add new option to input combolist
