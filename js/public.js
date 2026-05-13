@@ -14,7 +14,7 @@ dotclear.hljs_config.copy = dotclear.hljs_config.copy || 'copy';
 dotclear.hljs_config.copied = dotclear.hljs_config.copied || 'copied';
 
 // Test browser support of web workers
-dotclear.hljs_config.ww = !!window.Worker;
+dotclear.hljs_config.ww = !!globalThis.Worker;
 
 dotclear.hljs = {
   hljsIsPlain: (syntax) => ['plain', 'plaintext', 'txt', 'text'].includes(syntax),

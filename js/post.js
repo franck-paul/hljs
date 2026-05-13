@@ -1,10 +1,10 @@
-/*global jsToolBar, dotclear */
+/*global dotclear */
 'use strict';
 
 dotclear.ready(() => {
   const data = dotclear.getData('hljs_editor', false);
 
-  jsToolBar.prototype.elements.hljs = {
+  dotclear.ToolBar.prototype.elements.hljs = {
     group: 'block',
     type: 'button',
     title: 'Highlighted Code',
@@ -18,7 +18,7 @@ dotclear.ready(() => {
     open_url: data.open_url,
     data: {},
     popup() {
-      window.the_toolbar = this;
+      globalThis.the_toolbar = this;
       this.elements.hljs.data = {};
 
       window.open(
@@ -29,29 +29,29 @@ dotclear.ready(() => {
     },
   };
 
-  jsToolBar.prototype.elements.hljs.title = data.title;
+  dotclear.ToolBar.prototype.elements.hljs.title = data.title;
 
-  jsToolBar.prototype.elements.hljs.fn.wiki = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fn.wiki = function () {
     this.elements.hljs.popup.call(this);
   };
-  jsToolBar.prototype.elements.hljs.fn.xhtml = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fn.xhtml = function () {
     this.elements.hljs.popup.call(this);
   };
-  jsToolBar.prototype.elements.hljs.fn.markdown = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fn.markdown = function () {
     this.elements.hljs.popup.call(this);
   };
 
-  jsToolBar.prototype.elements.hljs.fncall.wiki = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fncall.wiki = function () {
     const stag = `\n///hljs ${this.elements.hljs.data.syntax}\n`;
     const etag = '\n///\n';
     this.encloseSelection(stag, etag);
   };
-  jsToolBar.prototype.elements.hljs.fncall.xhtml = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fncall.xhtml = function () {
     const stag = `<pre><code class="language-${this.elements.hljs.data.syntax}">\n`;
     const etag = '\n</code></pre>\n';
     this.encloseSelection(stag, etag);
   };
-  jsToolBar.prototype.elements.hljs.fncall.markdown = function () {
+  dotclear.ToolBar.prototype.elements.hljs.fncall.markdown = function () {
     const stag = `\`\`\`language-${this.elements.hljs.data.syntax}\n`;
     const etag = '\n```\n';
     this.encloseSelection(stag, etag);
