@@ -35,7 +35,7 @@ class Frontend
 
         // Don't do things in frontend if plugin disabled
         $settings = My::settings();
-        if (!$settings->active) {
+        if (!$settings->getBool('active')) {
             return false;
         }
 

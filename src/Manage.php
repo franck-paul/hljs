@@ -106,21 +106,17 @@ class Manage
 
         $settings = My::settings();
 
-        // Variable data helpers
-        $_Bool = fn (mixed $var): bool => (bool) $var;
-        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
-
-        $active      = $_Bool($settings->active);
-        $mode        = $_Str($settings->mode);
-        $theme       = $_Str($settings->theme);
-        $custom_css  = $_Str($settings->custom_css);
-        $hide_gutter = $_Bool($settings->hide_gutter);
-        $web_worker  = $_Bool($settings->web_worker);
-        $yash        = $_Bool($settings->yash);
-        $syntaxehl   = $_Bool($settings->syntaxehl);
-        $code        = $_Bool($settings->code);
-        $badge       = $_Bool($settings->badge);
-        $hide_copy   = $_Bool($settings->hide_copy);
+        $active      = $settings->getBool('active', false);
+        $mode        = $settings->getStr('mode', false);
+        $theme       = $settings->getStr('theme', false);
+        $custom_css  = $settings->getStr('custom_css', false);
+        $hide_gutter = $settings->getBool('hide_gutter', false);
+        $web_worker  = $settings->getBool('web_worker', false);
+        $yash        = $settings->getBool('yash', false);
+        $syntaxehl   = $settings->getBool('syntaxehl', false);
+        $code        = $settings->getBool('code', false);
+        $badge       = $settings->getBool('badge', false);
+        $hide_copy   = $settings->getBool('hide_copy', false);
 
         if (!empty($_REQUEST['popup'])) {
             $hljs_brushes = [

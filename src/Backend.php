@@ -41,7 +41,7 @@ class Backend
         My::addBackendMenuItem(Menus::MENU_BLOG);
 
         $settings = My::settings();
-        if ($settings->active) {
+        if ($settings->getBool('active')) {
             App::behavior()->addBehaviors([
                 'adminPostEditor'      => BackendBehaviors::adminPostEditor(...),
                 'ckeditorExtraPlugins' => BackendBehaviors::ckeditorExtraPlugins(...),

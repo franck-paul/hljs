@@ -23,22 +23,22 @@ class FrontendBehaviors
     public static function publicHeadContent(): string
     {
         $settings = My::settings();
-        if ($settings->active) {
+        if ($settings->getBool('active')) {
             $css = '';
 
-            $custom_css = is_string($custom_css = $settings->custom_css) ? $custom_css : '';
+            $custom_css = $settings->getStr('custom_css', false);
             if ($custom_css !== '') {
                 if (str_starts_with($custom_css, '/')) {
                     $css = $custom_css;
                 } else {
-                    $theme_url = is_string($theme_url = App::blog()->settings()->system->themes_url) ? $theme_url : '';
-                    $theme     = is_string($theme = App::blog()->settings()->system->theme) ? $theme : '';
+                    $theme_url = App::blog()->settings()->get('system')->getStr('themes_url', false);
+                    $theme     = App::blog()->settings()->get('system')->getStr('theme', false);
                     if ($theme_url !== '' && $theme !== '') {
                         $css = $theme_url . '/' . $theme . '/' . $custom_css;
                     }
                 }
             } else {
-                $theme = is_string($theme = $settings->theme) ? $theme : 'default';
+                $theme = $settings->getStr('theme', false) ?: 'default';
                 $css   = App::blog()->getPF(My::id() . '/js/lib/css/' . $theme . '.css');
             }
 
@@ -57,16 +57,16 @@ class FrontendBehaviors
     public static function publicFooterContent(): string
     {
         $settings = My::settings();
-        if ($settings->active) {
+        if ($settings->getBool('active')) {
             echo
             Html::jsJson('hljs_config', [
                 'path'      => urldecode((string) App::blog()->getPF(My::id() . '/js/')),
-                'mode'      => $settings->mode ?? '',
-                'show_line' => $settings->hide_gutter ? 0 : 1,
-                'badge'     => $settings->badge ? 1 : 0,
-                'use_ww'    => $settings->web_worker ? 1 : 0,
-                'yash'      => $settings->yash ? 1 : 0,
-                'show_copy' => $settings->hide_copy ? 0 : 1,
+                'mode'      => $settings->getStr('mode', false),
+                'show_line' => (int) $settings->getBool('hide_gutter', false),
+                'badge'     => (int) $settings->getBool('badge', false),
+                'use_ww'    => (int) $settings->getBool('web_worker', false),
+                'yash'      => (int) $settings->getBool('yash', false),
+                'show_copy' => (int) $settings->getBool('hide_copy', false),
                 'copy'      => __('copy'),
                 'copied'    => __('copied'),
             ]);
