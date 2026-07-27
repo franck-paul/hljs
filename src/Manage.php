@@ -197,7 +197,10 @@ class Manage
         $themes_list_light = [];
 
         $themes_root = My::path() . '/js/lib/css/';
-        if (is_dir($themes_root) && is_readable($themes_root) && ($d = @dir($themes_root)) !== false) {
+        if (is_dir($themes_root)
+            && is_readable($themes_root)
+            && ($d = @dir($themes_root)) !== false
+        ) {
             $isBrightColor = function (
                 string $color,  // Must be in hexadecimal form (ex: #ab65c3), with or without # prefix ; may be shorten (ex: #fff)
             ): bool {
