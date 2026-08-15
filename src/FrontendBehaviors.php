@@ -62,11 +62,11 @@ class FrontendBehaviors
             Html::jsJson('hljs_config', [
                 'path'      => urldecode((string) App::blog()->getPF(My::id() . '/js/')),
                 'mode'      => $settings->getStr('mode', false),
-                'show_line' => (int) $settings->getBool('hide_gutter', false),
+                'show_line' => (int) !$settings->getBool('hide_gutter', false),
                 'badge'     => (int) $settings->getBool('badge', false),
                 'use_ww'    => (int) $settings->getBool('web_worker', false),
                 'yash'      => (int) $settings->getBool('yash', false),
-                'show_copy' => (int) $settings->getBool('hide_copy', false),
+                'show_copy' => (int) !$settings->getBool('hide_copy', false),
                 'copy'      => __('copy'),
                 'copied'    => __('copied'),
             ]);
