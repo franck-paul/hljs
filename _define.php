@@ -18,9 +18,9 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'Code highlight',
         'highlight.js for Dotclear',
         'Franck Paul',
-        '9.0.1',
+        '9.1',
         [
-            'date'        => '2026-08-15T18:38:22+0200',
+            'date'        => '2026-08-31T10:00:47+0200',
             'requires'    => [['core', '2.39']],
             'permissions' => 'My',
             'priority'    => 1010,  // Must be higher than dcLegacyEditor/dcCKEditor priority (ie 1000)
