@@ -19,24 +19,24 @@ use Dotclear\Helper\Html\WikiToHtml;
 
 class CoreBehaviors
 {
-    public static function coreInitWikiPost(WikiToHtml $wiki): string
+    public static function coreInitWikiPost(WikiToHtml $wikiToHtml): string
     {
         $settings = My::settings();
         if ($settings->getBool('active')) {
-            $wiki->registerFunction('macro:hljs', static::transform(...));
+            $wikiToHtml->registerFunction('macro:hljs', static::transform(...));
             if ($settings->getBool('code')) {
-                $wiki->registerFunction('macro:code', static::transform(...));
+                $wikiToHtml->registerFunction('macro:code', static::transform(...));
             }
 
             if ($settings->getBool('yash')) {
                 // Add Yash compatibility macro
-                $wiki->registerFunction('macro:yash', static::transformYash(...));
+                $wikiToHtml->registerFunction('macro:yash', static::transformYash(...));
             }
 
             if ($settings->getBool('syntaxehl')) {
                 // Add syntaxehl compatibility macros
                 foreach (array_keys(self::$syntaxehl_brushes) as $brush) {
-                    $wiki->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
+                    $wikiToHtml->registerFunction('macro:[' . $brush . ']', static::transformSyntaxehl(...));
                 }
             }
         }

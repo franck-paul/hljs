@@ -255,18 +255,18 @@ class Manage
             sort($themes_list);
         }
 
-        foreach ($themes_list as $theme_id) {
-            if ($theme_id !== 'default') {
+        foreach ($themes_list as $theme_list) {
+            if ($theme_list !== 'default') {
                 // Capitalize each word, replace dash by space, add a space before numbers
-                $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_id)));
+                $theme_name = preg_replace('/(\d+)/', ' $1', ucwords(str_replace(['-', '.', '_'], ' ', $theme_list)));
                 if (is_string($theme_name)) {
                     // Add color scheme if known
-                    if (in_array($theme_id, $themes_list_dark, true)) {
-                        $combo_theme_dark[$theme_name] = $theme_id;
-                    } elseif (in_array($theme_id, $themes_list_light, true)) {
-                        $combo_theme_light[$theme_name] = $theme_id;
+                    if (in_array($theme_list, $themes_list_dark, true)) {
+                        $combo_theme_dark[$theme_name] = $theme_list;
+                    } elseif (in_array($theme_list, $themes_list_light, true)) {
+                        $combo_theme_light[$theme_name] = $theme_list;
                     } else {
-                        $combo_theme[$theme_name] = $theme_id;
+                        $combo_theme[$theme_name] = $theme_list;
                     }
                 }
             }
