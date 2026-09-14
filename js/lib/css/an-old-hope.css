@@ -1,4 +1,4 @@
-/* 
+/*
 
 An Old Hope – Star Wars Syntax (c) Gustavo Costa <gusbemacbe@gmail.com>
 Original theme - Ocean Dark Theme – by https://github.com/gavsiu
@@ -64,7 +64,7 @@ Based on Jesse Leite's Atom syntax theme 'An Old Hope' – https://github.com/Je
 /* Millenium Falcon */
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   background: #1c1d21;
   color: #c0c5ce;
   padding: 0.5em;

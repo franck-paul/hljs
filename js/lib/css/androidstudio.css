@@ -7,7 +7,7 @@ Author: Pedro Oliveira <kanytu@gmail . com>
   color: #a9b7c6;
   background: #282b2e;
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
 }
 

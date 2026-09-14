@@ -6,7 +6,7 @@ Lightfair style (c) Tristian Kelly <tristian.kelly560@gmail.com>
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
   background: #fff;
 }

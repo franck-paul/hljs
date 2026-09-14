@@ -8,7 +8,7 @@
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   /* Custom font is optional */
   /* font-family: 'Operator Mono', 'Fira Code', 'Menlo', 'Monaco', 'Courier New', 'monospace';  */
   padding: 0.5em;

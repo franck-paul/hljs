@@ -6,7 +6,7 @@ ISBL Editor style dark color scheme (c) Dmitriy Tarasov <dimatar@gmail.com>
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
   background: #404040;
   color: #f0f0f0;

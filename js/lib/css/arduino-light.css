@@ -6,7 +6,7 @@ Arduino® Light Theme - Stefania Mellai <s.mellai@arduino.cc>
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
   background: #ffffff;
 }

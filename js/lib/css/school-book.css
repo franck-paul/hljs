@@ -6,13 +6,16 @@ School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
 
 .hljs {
   display: block;
-  overflow-x: auto;
-  padding: 15px 0.5em 0.5em 30px;
+  overflow-inline: auto;
+  padding-block-start: 15px;
+  padding-block-end: 0.5em;
+  padding-inline-start: 30px;
+  padding-inline-end: 0.5em;
   font-size: 11px;
   line-height: 16px;
   background: #f6f6ae url(./school-book.png);
-  border-top: solid 2px #d2e8b9;
-  border-bottom: solid 1px #d2e8b9;
+  border-block-start: solid 2px #d2e8b9;
+  border-block-end: solid 1px #d2e8b9;
 }
 
 .hljs-keyword,

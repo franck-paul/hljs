@@ -8,7 +8,7 @@ Date: 2013-04-02
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
   background: #eee;
   color: black;

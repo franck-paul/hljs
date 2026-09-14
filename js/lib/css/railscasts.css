@@ -6,7 +6,7 @@ Railscasts-like style (c) Visoft, Inc. (Damien White)
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   padding: 0.5em;
   background: #232323;
   color: #e6e1dc;
@@ -74,14 +74,14 @@ Railscasts-like style (c) Visoft, Inc. (Damien White)
   background-color: #144212;
   color: #e6e1dc;
   display: inline-block;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .hljs-deletion {
   background-color: #600;
   color: #e6e1dc;
   display: inline-block;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .hljs-selector-class {

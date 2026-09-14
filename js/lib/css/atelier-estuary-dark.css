@@ -56,7 +56,7 @@
 .hljs-addition {
   color: #22221b;
   display: inline-block;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .hljs-deletion {
@@ -69,7 +69,7 @@
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   background: #22221b;
   color: #929181;
   padding: 0.5em;

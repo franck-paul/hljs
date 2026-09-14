@@ -54,7 +54,7 @@
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-inline: auto;
   background: #f5f7ff;
   color: #5e6687;
   padding: 0.5em;
