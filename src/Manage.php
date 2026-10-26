@@ -284,7 +284,7 @@ class Manage
         My::cssLoad('admin.css') .
         My::cssLoad('/js/lib/css/' . ($theme ?: 'default') . '.css') .
         App::backend()->page()->jsJson('hljs_config', [
-            'path'           => urldecode((string) App::backend()->page()->getPF(My::id() . '/js/')),
+            'path'           => urldecode(App::backend()->page()->getPF(My::id() . '/js/')),
             'mode'           => $mode,
             'current_mode'   => $mode,
             'list'           => [],

@@ -60,7 +60,7 @@ class FrontendBehaviors
         if ($settings->getBool('active')) {
             echo
             Html::jsJson('hljs_config', [
-                'path'      => urldecode((string) App::blog()->getPF(My::id() . '/js/')),
+                'path'      => urldecode(App::blog()->getPF(My::id() . '/js/')),
                 'mode'      => $settings->getStr('mode', false),
                 'show_line' => (int) !$settings->getBool('hide_gutter', false),
                 'badge'     => (int) $settings->getBool('badge', false),
