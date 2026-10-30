@@ -131,7 +131,7 @@ class Manage
                 'mode' => $mode,
             ]) .
             My::jsLoad('popup.js');
-            if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] == 'dcCKEditor')) {
+            if (!empty($_REQUEST['plugin_id']) && ($_REQUEST['plugin_id'] === 'dcCKEditor')) {
                 $head .= My::jsLoad('popup_cke.js');
             } else {
                 $head .= My::jsLoad('popup_leg.js');
